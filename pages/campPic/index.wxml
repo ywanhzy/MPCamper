@@ -1,0 +1,12 @@
+<view class="container">
+        <view class="title">
+                <text>共{{size}}张图片</text>
+        </view>
+        <view class="grid-img">
+                <view class="camp-pic-item" style="height:{{height}}px;" wx:for-items="{{campPic}}" wx:key="id" wx:for-item="item">
+                        <navigator url="/pages/cardetail/cardetail?id={{item}}">
+                                <image data-src="{{item}}" bindtap="previewImage" src="{{item}}" mode="widthFix" />
+                        </navigator>
+                </view>
+        </view>
+</view>
