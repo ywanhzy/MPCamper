@@ -6,7 +6,9 @@
                 "pages/my/index",
                 "pages/campDetail/index",
                 "pages/camperCarDetail/index",
-                "pages/campPic/index"
+                "pages/campPic/index",
+                "pages/login/index",
+                "pages/openLock/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",
@@ -34,7 +36,7 @@
                                 "selectedIconPath": "images/camp_select.png"
                         },
                         {
-                                "pagePath": "pages/index/index",
+                                "pagePath": "pages/openLock/index",
                                 "text": "开锁",
                                 "iconPath": "images/unlock.png",
                                 "selectedIconPath": "images/unlock_select.png"

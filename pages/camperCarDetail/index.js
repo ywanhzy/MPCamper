@@ -123,6 +123,20 @@ Page({
                         currentNavtab: e.detail.current
                 })
         },
+
+        goOrder: function (e) {
+                var token = wx.getStorageSync('token1')
+                console.log(token)
+                if(token==""){
+console.log("11")
+                        wx.navigateTo({
+                                url: '../login/index?id=1'
+                        })
+                }else{
+                        onsole.log("22")
+                }
+                
+         },  
         /**
          * 生命周期函数--监听页面初次渲染完成
          */

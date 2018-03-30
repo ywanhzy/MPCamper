@@ -66,6 +66,8 @@ Page({
                 var that=this
                 width=app.globalData.width
                 height=app.globalData.height
+                wx.setStorageSync('token', "abc")
+                wx.setStorageSync('memberid', "123")
                 
                 if (app.globalData.userInfo) {
                         this.setData({
@@ -96,10 +98,7 @@ Page({
 
                 //获取住房车列表
                 var url = CONFIG.API_URL.GET_CamperCarAll
-                var params = {
-                        memberguid: '',
-                        token: '',
-                }
+                var params = {}
                 request.GET(url, params, this, this.successFun, this.failFun)
 
         },

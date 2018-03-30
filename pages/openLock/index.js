@@ -1,4 +1,4 @@
-// pages/my/index.js
+// pages/openLock/index.js
 Page({
 
   /**
@@ -12,7 +12,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+          var token = wx.getStorageSync('token1')
+          console.log(token)
+          if (token == "") {
+                  wx.navigateTo({
+                          url: '../login/index?id=1'
+                  })
+          } else {
+                  // 只允许从相机扫码
+                  wx.scanCode({
+                          onlyFromCamera: true,
+                          success: (res) => {
+                                  console.log(res)
+                          }
+                  })
+          }
   },
 
   /**
@@ -27,6 +41,7 @@ Page({
    */
   onShow: function () {
           
+          console.error("onshow")
   },
 
   /**
