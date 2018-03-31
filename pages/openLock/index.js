@@ -12,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-          var token = wx.getStorageSync('token1')
+          var token = wx.getStorageSync('token')
           console.log(token)
           if (token == "") {
                   wx.navigateTo({

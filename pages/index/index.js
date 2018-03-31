@@ -66,8 +66,9 @@ Page({
                 var that=this
                 width=app.globalData.width
                 height=app.globalData.height
-                wx.setStorageSync('token', "abc")
-                wx.setStorageSync('memberid', "123")
+                
+                // wx.setStorageSync('token', "")
+                // wx.setStorageSync('memberid', "")
                 
                 if (app.globalData.userInfo) {
                         this.setData({
