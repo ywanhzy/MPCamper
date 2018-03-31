@@ -32,7 +32,6 @@ Page({
                         if (camp.length > 0) {
                                 for (var i = 0; i < camp.length; i++) {
                                         var obj = camp[i]
-
                                         obj.Img = util.spiltStr(obj.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
                                         obj.i = i;
                                         camps.push(obj);
@@ -59,10 +58,7 @@ Page({
 
                 //获取营地列表
                 var url = CONFIG.API_URL.GET_CampOwerData
-                var params = {
-                        memberguid: '',
-                        token: '',
-                }
+                var params = {}
                 request.GET(url, params, this, this.successFun, this.failFun)
         },
 

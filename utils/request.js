@@ -49,18 +49,19 @@ function requestApi(url, params, method, sourceObj, successFun, failFun, complet
                 var contentType = 'application/json'
         }
         var token = wx.getStorageSync('token')
-        var memberid = wx.getStorageSync('memberid')
+        var memberguid = wx.getStorageSync('memberguid')
         var a = {
                 "token": token,
-                "memberid": memberid,
+                "memberguid": memberguid,
         }
         //方法一
         // params = combin(a, params)
         //方法二
-        var str = '{"age":23,"name":"你"}'
-        var params1 = JSON.parse(str)
+        // var str = '{"age":23,"name":"你"}'
+        // var params1 = JSON.parse(str)
+
         params.token = token
-        params.memberid = memberid
+        params.memberguid = memberguid
         console.error(params)
         wx.request({
                 url: url,

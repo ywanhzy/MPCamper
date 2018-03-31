@@ -17,16 +17,16 @@ Page({
          */
         data: {
                 imgUrls: [],
-                current:0,
+                current: 0,
                 indicatorDots: true,
                 autoplay: true,
                 interval: 5000,
                 duration: 1000,
                 circular: !0,
                 mapSrc: null,
-                height:null,
+                height: null,
                 imgheights: [],
-                width:0,
+                width: 0,
                 camperCarDetail: {}
         },
         /**
@@ -40,7 +40,7 @@ Page({
                         var Imgs = util.spiltStr(camperCarDetail.CarImg);
 
                         for (var i = 0; i < Imgs.length; i++) {
-                                Imgs[i] = Imgs[i] + "_" + parseInt(width) + "X" + parseInt(width /2) + ".jpg";
+                                Imgs[i] = Imgs[i] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
                                 console.error(Imgs[i])
                         }
 
@@ -87,7 +87,9 @@ Page({
         onLoad: function (options) {
                 width = app.globalData.width;
                 height = app.globalData.height;
-
+                this.setData({
+                        width: width,
+                });
                 //获取营地列表
                 var url = CONFIG.API_URL.GET_CamperCarInfo
                 var params = {
@@ -101,42 +103,48 @@ Page({
         imageLoad: function (e) {
                 //获取图片真实宽度  
                 var imgwidth = e.detail.width,
-                        imgheight = e.detail.height,
+                 imgheight = e.detail.height,
                         //宽高比  
-                        ratio = imgwidth / imgheight;
-                //console.log(imgwidth, imgheight);
+                ratio = imgwidth / imgheight;
+                console.log(imgwidth, imgheight);
                 //计算的高度值  
 
                 var viewHeight = parseInt(this.data.width) / ratio;
+                console.log(viewHeight);
                 var imgheight = viewHeight.toFixed(0);
+                console.log(imgheight);
                 var imgheightarray = this.data.imgheights;
                 //把每一张图片的高度记录到数组里
                 imgheightarray.push(imgheight);
-
+                console.log(imgheightarray);
                 this.setData({
                         imgheights: imgheightarray,
                 });
-        }, 
-        swiperChange: function (e) {
-                //console.log(e.detail.current);    
-                this.setData({
-                        currentNavtab: e.detail.current
+        },
+        bindchange: function (e) {
+                console.log(e.detail.current)
+                this.setData({ current: e.detail.current })
+        },
+        previewImage: function (e) {
+                var current = e.currentTarget.dataset.src;
+                wx.previewImage({
+                        current: current, 
+                        urls: this.data.imgUrls 
                 })
         },
-
         goOrder: function (e) {
                 var token = wx.getStorageSync('token1')
                 console.log(token)
-                if(token==""){
-console.log("11")
+                if (token == "") {
+                        console.log("11")
                         wx.navigateTo({
                                 url: '../login/index?id=1'
                         })
-                }else{
+                } else {
                         onsole.log("22")
                 }
-                
-         },  
+
+        },
         /**
          * 生命周期函数--监听页面初次渲染完成
          */
