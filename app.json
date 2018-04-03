@@ -8,7 +8,9 @@
                 "pages/camperCarDetail/index",
                 "pages/campPic/index",
                 "pages/login/index",
-                "pages/openLock/index"
+                "pages/openLock/index",
+                "pages/myOrder/index",
+                "pages/setting/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",

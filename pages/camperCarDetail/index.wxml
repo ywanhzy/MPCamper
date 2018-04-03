@@ -1,15 +1,72 @@
 <view class="container">
-        <swiper class="swiper_box" indicator-active-color="#ff0000" indicator-color="#fff" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" bindchange="bindchange" style="height:{{imgheights[current]}}px;">
+        <swiper class="swiper_box" indicator-active-color="#ff0000" indicator-color="#fff" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" bindchange="bindchange"
+                style="height:{{imgheights[current]}}px;">
                 <block wx:for="{{ imgUrls }}" wx:key="id">
                         <swiper-item>
-                                <image src="{{ item }}" data-src="{{item}}" bindload="imageLoad"  bindtap="previewImage" style='height:{{imgheights[index]}}px;width:100%;' class="slide-image" mode='widthFix' />
+                                <image src="{{ item }}" data-src="{{item}}" bindload="imageLoad" bindtap="previewImage" style='height:{{imgheights[index]}}px;width:100%;' class="slide-image" mode='widthFix' />
                         </swiper-item>
                 </block>
         </swiper>
+        <text class="h1">{{camperCarDetail.CamperTypeName}}</text>
+        <view class="travel-title">
+                <view class='camp-text-left'>
+                        <text class="title">{{camperCarDetail.CampShortName}}</text>
+                        <text class="info"></text>
+                </view>
 
-        <view class="img_box">
-                <image src="{{mapSrc}}" bindtap="goOrder" mode='widthFif' />
+                <view class='camp-text-right'>
+                        <image style="width:50px; height:50px;border-radius: 50%;" src='{{camperCarDetail.Logo}}' mode='aspectFill'></image>
+                </view>
         </view>
 
+        <view class="top">
+                <view class="top_c color1">
+                        <image class="top_img" src="/images/people.png" />
+                        <text class="top_text">{{camperCarDetail.FitCheckNum}}位</text>
+                </view>
+                <view class="top_c color1">
+                        <image class="top_img" src="/images/room_num.png" />
+                        <text class="top_text">{{camperCarDetail.BedNum}}张床</text>
+                </view>
+                <view class="top_c color1">
+                        <image class="top_img" src="/images/toilet.png" />
+                        <text class="top_text">{{camperCarDetail.ToiletNum}}个卫生间</text>
+                </view>
+                <view class="top_c color2">
+                        <image class="top_img" src="/images/intelligent_lock.png" />
+                        <text class="top_text">智能门锁</text>
+                </view>
 
+        </view>
+
+        <text class="h2">房车介绍</text>
+
+        <text class="h3">便利设施{{height}}</text>
+
+        <text class="content">{{camperCarDetail.Facilities}}</text>
+        <view class="img_map">
+                <image src="{{mapSrc}}" mode='widthFix' />
+        </view>
+
+        <text class="h3">交易规则</text>
+
+        <text class="h4">定金</text>
+        <text class="content">确认订单后，在线支付房费100%作为定金</text>
+        <text class="h4">押金</text>
+        <text class="content">￥{{camperCarDetail.Deposit}}</text>
+
+        <text class="h4">入住</text>
+        <text class="content">进行入住登记后，扫码开锁即可入住</text>
+
+        <text class="h3">退订政策</text>
+        <text class="content">暂不支持退订！特性情况，请联系客服。</text>
+
+        <view class="btn-plus" bindtap="addCart">
+                <image class="icon" src="../../images/tel.png" />
+                <text>￥666/晚</text>
+                 <button class="weui-btn" type="primary" formType="submit">预定</button>
+                 <view class="button-sp-area">
+                        <button class="weui-btn" type="primary" plain="true">按钮</button>
+                        </view>
+        </view>
 </view>

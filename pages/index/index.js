@@ -102,6 +102,29 @@ Page({
                 var params = {}
                 request.GET(url, params, this, this.successFun, this.failFun)
 
+
+
+                // var url = CONFIG.API_URL.GET_WxOpenId
+                // var params = {}
+                // request.GET(url, params, this, this.successFun, this.failFun)
+
+                
+                // wx.request({
+                //         url: 'https://api.weixin.qq.com/sns/jscode2session',
+                //         data: {
+                //                 appid: 'wx64e0ed63ac933aaa',
+                //                 secret: '38afc76beaea8ee4e2b090c474c8cb96',
+                //                 js_code: res.code,
+                //                 grant_type: 'authorization_code'
+                //         },
+                //         success: function (res) {
+                //                 //res.data.openid  用户唯一标识  res.data.session_key 会话密钥   unionid	用户在开放平台的唯一标识符
+                //                 console.log(res.data)
+
+                //                 GET_WxOpenId
+                //         }
+                // })
+
         },
 
         getUserInfo: function (e) {

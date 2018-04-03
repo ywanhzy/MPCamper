@@ -27,7 +27,8 @@ Page({
                 height: null,
                 imgheights: [],
                 width: 0,
-                camperCarDetail: {}
+                camperCarDetail: {},
+                moenyDesc:[]
         },
         /**
                 * 接口调用成功处理
@@ -46,6 +47,7 @@ Page({
 
 
                         campOwerTel = camperCarDetail.CampOwerTel;
+                        // console.error(camperCarDetail.MoenyDesc.length)
 
                         //高德静态地图
                         var key = CONFIG.APP_KEY.AmapKey;
@@ -70,6 +72,7 @@ Page({
 
                         selfObj.setData({
                                 camperCarDetail: camperCarDetail,
+                                moenyDesc:camperCarDetail.MoenyDesc,
                                 imgUrls: Imgs,
                                 height: parseInt(width / 2)
                         })
@@ -132,8 +135,24 @@ Page({
                         urls: this.data.imgUrls 
                 })
         },
+        submitForm(e) {
+                const params = e.detail.value
+
+		console.log(params)
+
+		// if (!this.WxValidate.checkForm(e)) {
+                //         const error = this.WxValidate.errorList[0]
+                //         this.showToptips(error)
+                //         return false
+                // }
+
+                // $wuxToptips.success({
+                //         hidden: !0,
+                //         text: '提交成功',
+                // })
+	},
         goOrder: function (e) {
-                var token = wx.getStorageSync('token1')
+                var token = wx.getStorageSync('token')
                 console.log(token)
                 if (token == "") {
                         console.log("11")

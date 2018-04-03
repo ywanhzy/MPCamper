@@ -1,4 +1,7 @@
-var API_BASE = 'http://iklch.ezagoo.com:16111/';
+//var API_BASE = 'http://iklch.ezagoo.com:16111/'; //正式环境
+
+var API_BASE = 'http://cs.ezagoo.net:8002/';  //测试环境
+
 
 //http://iklch.ezagoo.com:16111/home/getRecommonendData.ashx?pageIndex=1&pageSize=10
 
@@ -57,8 +60,28 @@ const CONFIG = {
                 GET_CamperRecommend: API_BASE + 'motorHomesCar/getCamperRecommend.ashx',
                 GET_RecommonendData: API_BASE + 'home/getRecommonendData.ashx',
                 GET_TravelGuideDetail: API_BASE + 'detail/travelguide_detail.ashx',
+
+
+                GET_WxOpenId: API_BASE + 'wechat/getWxOpenId.ashx',
+                // flag: 0：微信网页版 1 小程序
+                // code：微信授权码
+
+                GET_MemberInfoByOpenId: API_BASE + 'wechat/getMemberInfoByOpenId.ashx',
+                // flag: 0：微信网页版 1 小程序
+                // openid：
+
+                GET_BindWxPhone: API_BASE + 'wechat/bindWxPhone.ashx',
+                // flag: 0：微信网页版 1 小程序
+                // openid：
+                // unionid 
+                // mobile 手机号
+                // code 验证码
+
+
+
                 GET_ARTICLE: API_BASE + '&p=',
                 GET_CATEGORY: API_BASE + '&cat='
+          
         },
 
         //文字提示

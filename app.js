@@ -2,7 +2,7 @@
 App({
         onLaunch: function () {
                 // 展示本地存储能力
-                var that=this
+                var that = this
                 var logs = wx.getStorageSync('logs') || []
                 logs.unshift(Date.now())
                 wx.setStorageSync('logs', logs)
@@ -11,30 +11,33 @@ App({
                 wx.login({
                         success: function (res) {
                                 if (res.code) {
-                                        //发起网络请求
-                                        //https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
-                                        wx.request({
-                                                url: 'https://api.weixin.qq.com/sns/jscode2session',
-                                                data: {
-                                                        appid: 'wx64e0ed63ac933aaa',
-                                                        secret: '38afc76beaea8ee4e2b090c474c8cb96',
-                                                        js_code: res.code,
-                                                        grant_type: 'authorization_code'
-                                                },
-                                                success: function (res) {
-                                                        //res.data.openid  用户唯一标识  res.data.session_key 会话密钥   unionid	用户在开放平台的唯一标识符
-                                                        console.log(res.data)
-                                                }
-                                        })
 
-                                        
+                                        console.error("code:"+res.code)
+
+                                        wx.setStorageSync('wx_code', res.code)
+                                        //小程序已绑定了开放平台 就可以直接获取unionid 发起网络请求
+                                        // https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
+                                        // wx.request({
+                                        //         url: 'https://api.weixin.qq.com/sns/jscode2session',
+                                        //         data: {
+                                        //                 appid: 'wx64e0ed63ac933aaa',
+                                        //                 secret: '38afc76beaea8ee4e2b090c474c8cb96',
+                                        //                 js_code: res.code,
+                                        //                 grant_type: 'authorization_code'
+                                        //         },
+                                        //         success: function (res) {
+                                        //                 //res.data.openid  用户唯一标识  res.data.session_key 会话密钥   unionid	用户在开放平台的唯一标识符
+                                        //                 console.log(res.data)                                                       
+                                        //         }
+                                        // })
+
                                 } else {
                                         console.log('获取用户登录态失败！' + res.errMsg)
                                 }
                                 // wx.getUserInfo({
                                 //         success: res => {
                                 //                 //     this.globalData.userInfo = res.userInfo
-                                //                 //     console.log(res.userInfo)
+                                //                     console.log(res.userInfo)
                                 //         }
                                 // })
                         },
@@ -47,22 +50,35 @@ App({
                 wx.getSetting({
                         success: res => {
                                 if (res.authSetting['scope.userInfo']) {
+                                        wx.setStorageSync('wx_authorize', true)
                                         console.log("已经授权")
                                         // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
                                         wx.getUserInfo({
                                                 success: res => {
                                                         // 可以将 res 发送给后台解码出 unionId
                                                         this.globalData.userInfo = res.userInfo
-                                                        console.log(res.encryptedData)
-                                                        
+                                                        res.code = wx.getStorageSync('code')
+                                                        // console.log("encryptedData:" + res.encryptedData)
+                                                        // console.log("iv:" + res.iv)
                                                         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
                                                         // 所以此处加入 callback 以防止这种情况
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }
+                                                        console.error(res)
+
+                                                        wx.request({
+                                                                url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
+                                                                data: {
+                                                                        jsonData: res
+                                                                },
+                                                                success: function (res) {
+                                                                        console.log(res.data)
+                                                                }
+                                                        })
                                                 }
                                         })
-                                }else{
+                                } else {
                                         console.log("wei授权")
                                         wx.getUserInfo({
                                                 success: res => {
@@ -75,6 +91,11 @@ App({
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }
+                                                }, fail: function (res) {
+                                                        wx.setStorageSync('wx_authorize', false)
+                                                        console.log("fail")
+                                                },complete: function(){
+                                                        console.log("complete")
                                                 }
                                         })
                                 }
@@ -128,7 +149,7 @@ App({
                 var telNum;
                 if (phoneNumber != null && phoneNumber != undefined && phoneNumber != '') {
                         telNum = phoneNumber;
-                }else{
+                } else {
                         telNum = that.globalData.phoneNumber;
                 }
                 wx.makePhoneCall({
@@ -141,7 +162,7 @@ App({
         // scale: 缩放比例，范围5~18，默认为18
         // name：位置名
         // address：地址
-        map: function (latitude, longitude, scale, name, address){
+        map: function (latitude, longitude, scale, name, address) {
                 wx.openLocation({
                         latitude: latitude,
                         longitude: longitude,
@@ -153,8 +174,8 @@ App({
         globalData: {
                 userInfo: null,
                 phoneNumber: '4000-155-105',
-                width:null,//屏幕宽
-                height:null//屏幕高
+                width: null,//屏幕宽
+                height: null//屏幕高
         }
 })
 
