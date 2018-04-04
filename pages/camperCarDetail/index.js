@@ -10,6 +10,7 @@ var width;
 var height;
 var campOwerTel;
 var myAmapFun;
+
 Page({
 
         /**
@@ -135,34 +136,23 @@ Page({
                         urls: this.data.imgUrls 
                 })
         },
-        submitForm(e) {
-                const params = e.detail.value
-
-		console.log(params)
-
-		// if (!this.WxValidate.checkForm(e)) {
-                //         const error = this.WxValidate.errorList[0]
-                //         this.showToptips(error)
-                //         return false
-                // }
-
-                // $wuxToptips.success({
-                //         hidden: !0,
-                //         text: '提交成功',
-                // })
-	},
         goOrder: function (e) {
+                console.error("goorder")
                 var token = wx.getStorageSync('token')
-                console.log(token)
-                if (token == "") {
-                        console.log("11")
-                        wx.navigateTo({
-                                url: '../login/index?id=1'
-                        })
-                } else {
-                        onsole.log("22")
+                var wx_authorize = wx.getStorageSync('wx_authorize')
+                if (wx_authorize){
+                        console.log(token)
+                        if (token == "") {
+                                console.log("11")
+                                wx.navigateTo({
+                                        url: '../login/index?id=1'
+                                })
+                        } else {
+                                onsole.log("22")
+                        }
+                }else{
+                        app.wxAuthorize()
                 }
-
         },
         /**
          * 生命周期函数--监听页面初次渲染完成

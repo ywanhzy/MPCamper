@@ -1,5 +1,5 @@
 <view class="container">
-        <swiper class="swiper_box" indicator-active-color="#ff0000" indicator-color="#fff" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" bindchange="bindchange"
+        <swiper class="swiper_box" indicator-active-color="#ff0000" indicator-color="#fff" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" 
                 style="height:{{imgheights[current]}}px;">
                 <block wx:for="{{ imgUrls }}" wx:key="id">
                         <swiper-item>
@@ -61,12 +61,10 @@
         <text class="h3">退订政策</text>
         <text class="content">暂不支持退订！特性情况，请联系客服。</text>
 
-        <view class="btn-plus" bindtap="addCart">
+        <view class="btn-plus" bindtap="goOrder">
                 <image class="icon" src="../../images/tel.png" />
                 <text>￥666/晚</text>
-                 <button class="weui-btn" type="primary" formType="submit">预定</button>
-                 <view class="button-sp-area">
-                        <button class="weui-btn" type="primary" plain="true">按钮</button>
-                        </view>
+                 <button class="weui-btn"  type="warn"  >预定</button>
+             
         </view>
 </view>
