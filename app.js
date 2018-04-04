@@ -11,9 +11,7 @@ App({
                 wx.login({
                         success: function (res) {
                                 if (res.code) {
-
                                         console.error("code:"+res.code)
-
                                         wx.setStorageSync('wx_code', res.code)
                                         //小程序已绑定了开放平台 就可以直接获取unionid 发起网络请求
                                         // https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
@@ -27,19 +25,14 @@ App({
                                         //         },
                                         //         success: function (res) {
                                         //                 //res.data.openid  用户唯一标识  res.data.session_key 会话密钥   unionid	用户在开放平台的唯一标识符
-                                        //                 console.log(res.data)                                                       
+                                        //                 console.log(res.data)        
                                         //         }
                                         // })
 
                                 } else {
                                         console.log('获取用户登录态失败！' + res.errMsg)
                                 }
-                                // wx.getUserInfo({
-                                //         success: res => {
-                                //                 //     this.globalData.userInfo = res.userInfo
-                                //                     console.log(res.userInfo)
-                                //         }
-                                // })
+                                
                         },
                         fail: function (res) {
                                 console.log('login-fail')
@@ -56,8 +49,9 @@ App({
                                         wx.getUserInfo({
                                                 success: res => {
                                                         // 可以将 res 发送给后台解码出 unionId
+                                                        console.log("res:" + res)
                                                         this.globalData.userInfo = res.userInfo
-                                                        res.code = wx.getStorageSync('code')
+                                                        res.code = wx.getStorageSync('wx_code')
                                                         // console.log("encryptedData:" + res.encryptedData)
                                                         // console.log("iv:" + res.iv)
                                                         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -66,7 +60,6 @@ App({
                                                                 this.userInfoReadyCallback(res)
                                                         }
                                                         console.error(res)
-
                                                         wx.request({
                                                                 url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
                                                                 data: {
@@ -74,6 +67,13 @@ App({
                                                                 },
                                                                 success: function (res) {
                                                                         console.log(res.data)
+                                                                       
+                                                                        that.globalData.eUserInfo = res.data.data;
+                                                                        console.log(that.globalData.eUserInfo)
+
+                                                                        wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                        wx.setStorageSync('token', res.data.data.token)
+                                                                        wx.setStorageSync('memberguid', res.data.data.GUID)
                                                                 }
                                                         })
                                                 }
@@ -84,13 +84,27 @@ App({
                                                 success: res => {
                                                         // 可以将 res 发送给后台解码出 unionId
                                                         this.globalData.userInfo = res.userInfo
-                                                        console.log(this.globalData.userInfo)
-                                                        console.log(res.encryptedData)
+                                                        res.code = wx.getStorageSync('wx_code')
+                                                        // console.log(this.globalData.userInfo)
+                                                        // console.log(res.encryptedData)
                                                         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
                                                         // 所以此处加入 callback 以防止这种情况
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }
+                                                        wx.request({
+                                                                url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
+                                                                data: {
+                                                                        jsonData: res
+                                                                },
+                                                                success: function (res) {
+                                                                        console.log(res.data)
+                                                                        that.globalData.eUserInfo = res.data;
+                                                                        wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                        wx.setStorageSync('token', res.data.data.token)
+                                                                        wx.setStorageSync('memberguid', res.data.data.GUID)
+                                                                }
+                                                        })
                                                 }, fail: function (res) {
                                                         wx.setStorageSync('wx_authorize', false)
                                                         console.log("fail")
@@ -171,8 +185,60 @@ App({
                         address: address
                 })
         },
+        wxAuthorize: function(){
+                var that = this;
+                wx.login({
+                        success: function (res) {
+                                if (res.code) {
+                                        console.error("wxAuthorize_code:" + res.code)
+                                        wx.setStorageSync('wx_code', res.code)               
+                                } else {
+                                        console.log('wxAuthorize获取用户登录态失败！' + res.errMsg)
+                                }
+                        },
+                        fail: function (res) {
+                                console.log('wxAuthorize-fail')
+                        }
+                });
+                wx.openSetting({
+                        success: (res) => {
+                                if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
+                                        wx.getUserInfo({
+                                                success: res => {
+                                                        wx.setStorageSync('wx_authorize', true)
+                                                        // 可以将 res 发送给后台解码出 unionId
+                                                        this.globalData.userInfo = res.userInfo
+                                                        console.log(this.globalData.userInfo)
+                                                        res.code = wx.getStorageSync('wx_code')
+                                                        console.log(res)
+                                                        if (this.userInfoReadyCallback) {
+                                                                this.userInfoReadyCallback(res)
+                                                        }
+                                                        wx.request({
+                                                                url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
+                                                                data: {
+                                                                        jsonData: res
+                                                                },
+                                                                success: function (res) {
+                                                                        that.globalData.eUserInfo = res.data.data;
+                                                                        console.log("unionid:" + res.data.data.unionid)
+                                                                        wx.setStorageSync('wx_unionid',res.data.data.unionid)
+                                                                        wx.setStorageSync('token', res.data.data.token)
+                                                                        wx.setStorageSync('memberguid', res.data.data.GUID)
+                                                                    
+                                                                }
+                                                        })
+                                                }
+                                        })
+                                }
+                        }, fail: function (res) {
+
+                        }
+                })
+        },
         globalData: {
                 userInfo: null,
+                eUserInfo:null,
                 phoneNumber: '4000-155-105',
                 width: null,//屏幕宽
                 height: null//屏幕高

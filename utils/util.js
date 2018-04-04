@@ -22,7 +22,7 @@ function formatDistance(distance) {
         return distance < 1000 ? Math.round(distance) + 'm' : (distance / 1000).toFixed(1) + 'km';
 }
 function isPhoneNumber(num) {
-        return /^1\d{10}$/.test(num);
+        return /^1[34578]\d{9}$/.test(num);
 }
 
 //字符串分割成字符串数组

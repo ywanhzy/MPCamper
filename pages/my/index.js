@@ -33,26 +33,12 @@ Page({
 
         },
         toLogin: function (options) {
-                var that =this;
-                wx.openSetting({
-                        success: (res) => {
-                                if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
-                                        wx.getUserInfo({
-                                                success: function (res) {
-                                                        var userInfo = res.userInfo;
-                                                        that.setData({
-                                                                userInfo: userInfo,
-                                                        })
-                                                }
-                                        })
-                                }
-                        }, fail: function (res) {
-
-                        }
-                })
-
+                var that = this;
+                //未授权 去授权登录
+                app.wxAuthorize()
+                
         },
-        navigateTo: function(e) {
+        navigateTo: function (e) {
                 const index = e.currentTarget.dataset.index
                 const path = e.currentTarget.dataset.path
                 console.error(index + path)
@@ -64,7 +50,7 @@ Page({
                 })
                 // switch (index) {
                 //         case 0:
-                               
+
                 //                 break
                 //         default:
                 //                 wx.navigateTo({
@@ -86,7 +72,17 @@ Page({
          * 生命周期函数--监听页面显示
          */
         onShow: function () {
+                var that=this
                 console.log("onShow")
+                
+
+                setTimeout(function () {
+                        console.log("userInfo:" + app.globalData.userInfo)
+
+                        that.setData({
+                                userInfo: app.globalData.userInfo
+                        });
+                }, 1000);
         },
 
         /**

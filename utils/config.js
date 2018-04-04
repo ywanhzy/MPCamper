@@ -48,7 +48,14 @@ const CONFIG = {
                 GET_RegToThirdParty: API_BASE + 'account/reg.ashx',
 
                 //119、图形验证码获取 参数： mark = 1
-                GET_RegToThirdParty: API_BASE + 'SecurityCode.ashx',
+                GET_SecurityCode: API_BASE + 'SecurityCode.aspx',
+
+                //发送验证码 
+                 // phone = 18670339102 & mark=9
+                // mark 1  支付密码发送 2 第三方登陆授权注册获取验证码  3 商家注册/商家修改手机号修改第二步  4 微信注册 5商家修改手机号(第一步)  6找回密码发送验证码 9 微信版绑定
+                GET_SendPhoneCode: API_BASE + 'mydata/sendPhoneCode.ashx',
+
+               
 
                 //62、第三方登陆授权接口
                 // 传入参数：openid=第三方id  photo=头像  nickname=昵称  city=城市  province=省份  sex= 性别0 女 1男  unionid= 第三方unionid   country=国家
@@ -61,22 +68,27 @@ const CONFIG = {
                 GET_RecommonendData: API_BASE + 'home/getRecommonendData.ashx',
                 GET_TravelGuideDetail: API_BASE + 'detail/travelguide_detail.ashx',
 
-
+                //根据code获取openid
                 GET_WxOpenId: API_BASE + 'wechat/getWxOpenId.ashx',
                 // flag: 0：微信网页版 1 小程序
                 // code：微信授权码
 
-                GET_MemberInfoByOpenId: API_BASE + 'wechat/getMemberInfoByOpenId.ashx',
+                GET_MemberInfoByUnionid: API_BASE + 'wechat/getMemberInfoByUnionid.ashx',
                 // flag: 0：微信网页版 1 小程序
-                // openid：
+                // unionid
 
+
+                //152、根据微信用户信息 获取unionid及判断微信用户是否已绑定房车行账号
+                GET_WeChatLoginInfo: API_BASE + 'wechat/postWeChatLoginInfo.ashx',
+                //传入参数： jsonData：微信返回的数据
+
+                //绑定手机号
                 GET_BindWxPhone: API_BASE + 'wechat/bindWxPhone.ashx',
                 // flag: 0：微信网页版 1 小程序
                 // openid：
                 // unionid 
                 // mobile 手机号
                 // code 验证码
-
 
 
                 GET_ARTICLE: API_BASE + '&p=',
