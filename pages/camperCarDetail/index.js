@@ -143,14 +143,17 @@ Page({
                 if (wx_authorize){
                         console.log(token)
                         if (token == "") {
-                                console.log("11")
+                                //登录
+                                console.log("跳登录")
                                 wx.navigateTo({
                                         url: '../login/index?id=1'
                                 })
                         } else {
-                                onsole.log("22")
+                                //下一步
+                                console.log("22")
                         }
                 }else{
+                        //未授权 去授权登录
                         app.wxAuthorize()
                 }
         },

@@ -27,7 +27,7 @@
                                 <view class="weui-label">验证码</view>
                         </view>
                         <view class="weui-cell__bd">
-                                <input class="weui-input" name="code" value="{{ code }}" type="number"  maxlength="4"  bindinput="bindKeyInput" placeholder="请输入验证码" />
+                                <input class="weui-input" name="code" value="{{ code }}" type="number"  maxlength="4"  placeholder="请输入验证码" />
                         </view>
                         <view class="weui-cell__ft" style="text-align: left">
                                 <image class="weui-vcode-img" style="width: 120px; height: 40px;" src="{{codeImgUrl}}" bindtap="refurbishCode"></image>

@@ -59,7 +59,7 @@ App({
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }
-                                                        // console.error(res)
+                                                        console.error(res)
                                                         wx.request({
                                                                 url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
                                                                 data: {
@@ -67,8 +67,10 @@ App({
                                                                 },
                                                                 success: function (res) {
                                                                         console.log(res.data)
+                                                                       
                                                                         that.globalData.eUserInfo = res.data.data;
                                                                         console.log(that.globalData.eUserInfo)
+
                                                                         wx.setStorageSync('wx_unionid', res.data.data.unionid)
                                                                         wx.setStorageSync('token', res.data.data.token)
                                                                         wx.setStorageSync('memberguid', res.data.data.GUID)
@@ -185,6 +187,19 @@ App({
         },
         wxAuthorize: function(){
                 var that = this;
+                wx.login({
+                        success: function (res) {
+                                if (res.code) {
+                                        console.error("wxAuthorize_code:" + res.code)
+                                        wx.setStorageSync('wx_code', res.code)               
+                                } else {
+                                        console.log('wxAuthorize获取用户登录态失败！' + res.errMsg)
+                                }
+                        },
+                        fail: function (res) {
+                                console.log('wxAuthorize-fail')
+                        }
+                });
                 wx.openSetting({
                         success: (res) => {
                                 if (res.authSetting["scope.userInfo"]) {////如果用户重新同意了授权登录
@@ -193,7 +208,9 @@ App({
                                                         wx.setStorageSync('wx_authorize', true)
                                                         // 可以将 res 发送给后台解码出 unionId
                                                         this.globalData.userInfo = res.userInfo
+                                                        console.log(this.globalData.userInfo)
                                                         res.code = wx.getStorageSync('wx_code')
+                                                        console.log(res)
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }

@@ -3,8 +3,8 @@ const app = getApp()
 
 const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
-
-
+var util = require('../../utils/util.js')
+var phone
 Page({
 
         /**
@@ -21,11 +21,10 @@ Page({
         successFun: function (res, selfObj) {
                 var that = selfObj;
                 if (res.res_code == 200) {
-                        console.log(res.data)
-
-                        selfObj.setData({
-                                codeImgUrl: ""
-                        })
+                        console.log(res)
+                        wx.navigateTo({
+                                url: '/pages/loginTwo/index?phone=' + phone,
+                        }) 
                 }
         },
         /**
@@ -39,51 +38,46 @@ Page({
          */
         onLoad: function (options) {
                 //获取营地列表
-                var url = CONFIG.API_URL.GET_SecurityCode + "?mark=13789585258"
-
-                this.setData({
-                        codeImgUrl: url
-                })
-
-                var url = CONFIG.API_URL.GET_SendPhoneCode
-                var params = {
-                        phone : '',
-                        imgCode : '',
-                        mark: "13789585258"
-                }
-                request.GET(url, params, this, this.successFun, this.failFun)
+                app.globalData.me ="sdfd";
+                console.log(app.globalData.me)
         },
         bindKeyInput: function (e) {
-                console.log(e.detail.value)
+                console.log(e)
+                var tel=e.detail.value
+                if (util.isPhoneNumber(tel)){
+                        var url = CONFIG.API_URL.GET_SecurityCode + "?mark=" + tel
+                        this.setData({
+                                codeImgUrl: url
+                        })
+                }
                 this.setData({
-                        tel:e.detail.value
+                        tel: tel
                 })
         },
         submitForm(e) {
-
                 var that = this;
-                var tel = e.detail.value.tel;
+                phone = e.detail.value.tel;
                 var code = e.detail.value.code;
-
-                if (tel == "") {
-                        wx.showModal({
-                                title: '提示',
-                                content: '请填写手机号码',
-                                showCancel: false
+                if (phone == "") {
+                        wx.showToast({
+                                title: '请填写手机号码',
                         })
                         return
                 }
                 if (code == "") {
-                        wx.showModal({
-                                title: '提示',
-                                content: '请填写验证码',
-                                showCancel: false
+                        wx.showToast({
+                                title: '请填写验证码',
                         })
                         return
                 }
 
-
-
+                var url = CONFIG.API_URL.GET_SendPhoneCode
+                var params = {
+                        phone: phone,
+                        imgCode: code,
+                        mark: "9"
+                }
+                request.GET(url, params, this, this.successFun, this.failFun)
         },
         /**
          * 生命周期函数--监听页面初次渲染完成
