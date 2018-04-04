@@ -1,0 +1,30 @@
+/* pages/aboutUs/aboutUs.wxss */
+.container {
+  display: flex;
+        width: 100%;
+	flex-direction: column;
+	padding: 50rpx 0;
+	align-items: center;
+}
+
+.top-image {
+  width: 150rpx;
+	height: 150rpx;
+	margin: 20rpx;
+}
+
+.follow {
+  width: 180rpx;
+	height: 65rpx;
+	margin: 20rpx;
+  padding: 15rpx;
+  background-color: green;
+  color: white;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+.desc {
+  margin: 30rpx;
+  font-size: 30rpx;
+}
