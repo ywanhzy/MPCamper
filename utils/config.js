@@ -17,8 +17,8 @@ var ERROR_DATA_IS_NULL = "获取数据为空，请重试";
 
 const CONFIG = {
         //请求数据地址  必带参数 token   memberguid
-        APP_KEY:{
-                AmapKey:"580186a553d30b077a830ac2a9ca6ba7"
+        APP_KEY: {
+                AmapKey: "580186a553d30b077a830ac2a9ca6ba7"
         },
         API_URL: {
                 GET_INDEX: API_BASE,
@@ -28,13 +28,43 @@ const CONFIG = {
                 GET_CampOwerInfo: API_BASE + 'home/getCampOwerInfo.ashx', //营地详情
 
 
-                POST_CamperOrder: API_BASE + 'motorHomesCar/postCamperOrder.ashx',// 124、住房车提交订单
+                // 124、住房车提交订单
+                POST_CamperOrder: API_BASE + 'motorHomesCar/postCamperOrder.ashx',
+                // memberguid 会员id
+                // bookingPersonName 预定人
+                // bookingPersonPhone 预定人手机号
+                // carGuid 车型id
+                // bTime 预定开始日期2017- 09 - 22
+                // eTime  预定结束日期2017- 09 - 22
+                // currencyAmount-1 不用电子币支付抵扣
+                // totalMoney 总金额
+                // invoice  0 不需要邮费 1 需要邮费（不填默认为0）
 
                 GET_MyOrderData: API_BASE + 'motorHomesCar/getMyOrderData.ashx',// 125、住房车我的订单（我的）
                 GET_IsCamperOrder: API_BASE + 'motorHomesCar/IsCamperOrder.ashx',// 126、住房车订单验证是否可以支付（支付前调用）
                 GET_CamperOrderInfo: API_BASE + 'motorHomesCar/getCamperOrderInfo.ashx',// 127、住房车订单详情接口
 
-                GET_OpenMotorHomesCar: API_BASE + 'motorHomesCar/openMotorHomesCar.ashx',//  130、开锁接口  参数：  memberguid 会员id   deviceId  锁设备id（二维码中获取）
+                //  130、开锁接口  参数：  memberguid 会员id   deviceId  锁设备id（二维码中获取）
+                GET_OpenMotorHomesCar: API_BASE + 'motorHomesCar/openMotorHomesCar.ashx',
+
+
+                 GET_WxPay: API_BASE + 'mydata/postWxPay.ashx',
+
+                //126、住房车订单验证是否可以支付（支付前调用）memberguid 会员id           orderNo 订单号	
+                GET_IsCamperOrder: API_BASE + 'motorHomesCar/IsCamperOrder.ashx',
+
+                // 133、添加发票信息接口
+                GET_AddInvoiceInfo: API_BASE + 'motorHomesCar/AddInvoiceInfo.ashx',
+                // 传入参数：
+                // orderGuid 订单id 
+                // headerType   0 企业抬头 1 个人/非企业单位
+                // headerTitle   抬头
+                // number   纳锐人识别号
+                // invoiceFee  发票费用
+                // remarks  备注
+                // addressee  收件人
+                // contactNumber 联系电话
+                // detailedAddress 收件详细地址
 
 
                 //    3、注册（微信） 传入参数：
@@ -51,11 +81,12 @@ const CONFIG = {
                 GET_SecurityCode: API_BASE + 'SecurityCode.aspx',
 
                 //发送验证码 
-                 // phone = 18670339102 & mark=9
+                // phone = 18670339102 & mark=9
                 // mark 1  支付密码发送 2 第三方登陆授权注册获取验证码  3 商家注册/商家修改手机号修改第二步  4 微信注册 5商家修改手机号(第一步)  6找回密码发送验证码 9 微信版绑定
                 GET_SendPhoneCode: API_BASE + 'mydata/sendPhoneCode.ashx',
 
-               
+
+
 
                 //62、第三方登陆授权接口
                 // 传入参数：openid=第三方id  photo=头像  nickname=昵称  city=城市  province=省份  sex= 性别0 女 1男  unionid= 第三方unionid   country=国家
@@ -90,10 +121,18 @@ const CONFIG = {
                 // mobile 手机号
                 // code 验证码
 
+                //房车管理app开锁
+                GET_Unlock: API_BASE + 'fcxmanage/unlock.ashx',
+                //传入参数：
+                //         userid 用户id
+                // campid 营地id
+                // deviceId 锁设备id
+                // token
+
 
                 GET_ARTICLE: API_BASE + '&p=',
                 GET_CATEGORY: API_BASE + '&cat='
-          
+
         },
 
         //文字提示

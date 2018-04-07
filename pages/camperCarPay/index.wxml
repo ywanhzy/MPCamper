@@ -1,0 +1,23 @@
+<view class="container">
+        <view class="travel-title">
+                <view class='camp-text-left'>
+                        <text class="title">{{camperCarDetail.CampOwerName}}</text>
+                        <text class="info">{{camperCarDetail.CampOwerAddress}}</text>
+                </view>
+
+                <view class='camp-text-right'>
+                        <image style="width:30px; height:30px;border-radius: 50%;" src='{{camperCarDetail.Logo}}' mode='aspectFill'></image>
+                </view>
+        </view>
+ <view class="text-center">
+        	<view class="countdown">{{ c1 }}</view>
+        	<view class="countdown">{{ c3 }}</view>
+        </view>
+        
+        <view class="btn-plus" bindtap="orderPay">
+                <image class="icon" src="../../images/tel.png" />
+                <text>￥666/晚</text>
+                <button class="weui-btn" type="warn">立即支付</button>
+
+        </view>
+</view>

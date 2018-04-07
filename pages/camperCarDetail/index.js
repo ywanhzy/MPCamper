@@ -11,6 +11,11 @@ var height;
 var campOwerTel;
 var myAmapFun;
 
+var camperCarDetail;
+
+var camperCarDetailObject = new Object();
+var result;
+
 Page({
 
         /**
@@ -37,7 +42,39 @@ Page({
         successFun: function (res, selfObj) {
                 var that = selfObj;
                 if (res.res_code == 200) {
-                        var camperCarDetail = res.data[0];
+                        result=res.data;
+                        camperCarDetail = res.data[0];
+
+                        camperCarDetailObject.Deposit = camperCarDetail.Deposit;
+                        camperCarDetailObject.CarGuid = camperCarDetail.CarGuid;
+                        camperCarDetailObject.CampID = camperCarDetail.CampID;
+                        camperCarDetailObject.CamperTypeName = camperCarDetail.CamperTypeName;
+                        camperCarDetailObject.BedNum = camperCarDetail.BedNum;
+                        camperCarDetailObject.CarImg = camperCarDetail.CarImg;
+                        camperCarDetailObject.FitCheckNum = camperCarDetail.FitCheckNum;
+                        camperCarDetailObject.Introduce = camperCarDetail.Introduce;
+                        camperCarDetailObject.CamperImgs = camperCarDetail.CamperImgs;
+                        camperCarDetailObject.CampShortName = camperCarDetail.CampShortName;
+                        camperCarDetailObject.Logo = camperCarDetail.Logo;
+                        camperCarDetailObject.isCollection = camperCarDetail.isCollection;
+
+                        camperCarDetailObject.CampOwerTel = camperCarDetail.CampOwerTel;
+                        camperCarDetailObject.CampOwerName = camperCarDetail.CampOwerName;
+                        camperCarDetailObject.CampOwerAddress = camperCarDetail.CampOwerAddress;
+                        camperCarDetailObject.Longitude = camperCarDetail.Longitude;
+                        camperCarDetailObject.Latitude = camperCarDetail.Latitude;
+                        camperCarDetailObject.CheckOutTime = camperCarDetail.CheckOutTime;
+                        camperCarDetailObject.CheckInTime = camperCarDetail.CheckInTime;
+                        camperCarDetailObject.ToiletNum = camperCarDetail.ToiletNum;
+                        camperCarDetailObject.IsIntelligentLock = camperCarDetail.IsIntelligentLock;
+
+                        camperCarDetailObject.Facilities = camperCarDetail.Facilities;
+                        //camperCarDetailObject.ShareUrl = camperCarDetail.ShareUrl;
+                        camperCarDetailObject.currencyAmount = camperCarDetail.currencyAmount;
+                        camperCarDetailObject.deductibleAmount = camperCarDetail.deductibleAmount;
+                        camperCarDetailObject.DailyPrice = camperCarDetail.DailyPrice;
+                                                                       
+
                         //   campDetail.Img = util.spiltStr(camperCarDetail.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width * 3 / 5) + ".jpg";
                         var Imgs = util.spiltStr(camperCarDetail.CarImg);
 
@@ -110,23 +147,23 @@ Page({
                  imgheight = e.detail.height,
                         //宽高比  
                 ratio = imgwidth / imgheight;
-                console.log(imgwidth, imgheight);
+                // console.log(imgwidth, imgheight);
                 //计算的高度值  
 
                 var viewHeight = parseInt(this.data.width) / ratio;
-                console.log(viewHeight);
+                // console.log(viewHeight);
                 var imgheight = viewHeight.toFixed(0);
-                console.log(imgheight);
+                // console.log(imgheight);
                 var imgheightarray = this.data.imgheights;
                 //把每一张图片的高度记录到数组里
                 imgheightarray.push(imgheight);
-                console.log(imgheightarray);
+                // console.log(imgheightarray);
                 this.setData({
                         imgheights: imgheightarray,
                 });
         },
         bindchange: function (e) {
-                console.log(e.detail.current)
+                // console.log(e.detail.current)
                 this.setData({ current: e.detail.current })
         },
         previewImage: function (e) {
@@ -150,12 +187,22 @@ Page({
                                 })
                         } else {
                                 //下一步
-                                console.log("22")
+                                var moenyDescArray = JSON.stringify(camperCarDetail.MoenyDesc);
+                                var camperCarDetailObjects = JSON.stringify(camperCarDetailObject);
+                                
+                                console.log(camperCarDetailObjects)
+                                wx.navigateTo({
+                                        url: '/pages/camperCarSubmitOrder/index?moenyDesc=' + moenyDescArray + '&camperCarDetail=' + camperCarDetailObjects,
+                                }) 
                         }
                 }else{
                         //未授权 去授权登录
                         app.wxAuthorize()
                 }
+        },
+        goTel: function (e) {
+                var phone=camperCarDetail.CampOwerTel;
+                app.tel(phone);
         },
         /**
          * 生命周期函数--监听页面初次渲染完成
