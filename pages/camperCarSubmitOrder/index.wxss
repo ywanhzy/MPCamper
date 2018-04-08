@@ -205,3 +205,29 @@
 .weui-form-preview__btn_primary {
         color: #0bb20c;
 }
+
+
+.h3{
+        width: 100%;
+        font-size: 40rpx;
+        height: 60px;
+        line-height: 60px;
+        color: #484848;
+        text-align: left;
+        margin-left: 30rpx;
+}
+.h4{
+        width: 100%;
+        font-size: 34rpx;
+        color: #484848;
+        text-align: left;
+        margin-left: 30rpx;
+        font-weight: bold;
+}
+.content{
+        width: 100%;
+        font-size: 30rpx;
+        color: #484848;
+        text-align: left;
+        margin-left: 30rpx;
+}

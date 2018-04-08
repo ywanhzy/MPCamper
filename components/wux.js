@@ -2,7 +2,7 @@
 // import $wuxBackdrop from 'backdrop/backdrop'
 // import $wuxBarcode from 'barcode/barcode'
 // import $wuxButton from 'button/button'
-// import $wuxCalendar from 'calendar/calendar'
+import $wuxCalendar from 'calendar/calendar'
 import $wuxCountDown from 'countdown/countdown'
 // import $wuxCountUp from 'countup/countup'
 // import $wuxDialog from 'dialog/dialog'
@@ -17,7 +17,7 @@ import $wuxCountDown from 'countdown/countdown'
 // import $wuxQrcode from 'qrcode/qrcode'
 // import $wuxRater from 'rater/rater'
 // import $wuxRefresher from 'refresher/refresher'
-// import $wuxToast from 'toast/toast'
+import $wuxToast from 'toast/toast'
 // import $wuxToptips from 'toptips/toptips'
 // import $wuxVcode from 'vcode/vcode'
 // import $wuxXnumber from 'xnumber/xnumber'
@@ -27,7 +27,7 @@ export {
 //     $wuxBackdrop,
 //     $wuxBarcode,
 //     $wuxButton,
-//     $wuxCalendar,
+    $wuxCalendar,
     $wuxCountDown,
 //     $wuxCountUp,
 //     $wuxDialog,
@@ -42,7 +42,7 @@ export {
 //     $wuxQrcode,
 //     $wuxRater,
 //     $wuxRefresher,
-//     $wuxToast,
+    $wuxToast,
 //     $wuxToptips,
 //     $wuxVcode,
 //     $wuxXnumber,

@@ -14,7 +14,8 @@
                 "pages/loginTwo/index",
                 "pages/aboutUs/index",
                 "pages/camperCarSubmitOrder/index",
-                "pages/camperCarPay/index"
+                "pages/camperCarPay/index",
+                "pages/camperCarPayResult/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",
