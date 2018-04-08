@@ -80,7 +80,7 @@ Page({
 
                         for (var i = 0; i < Imgs.length; i++) {
                                 Imgs[i] = Imgs[i] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
-                                console.error(Imgs[i])
+                                // console.error(Imgs[i])
                         }
 
 
@@ -174,7 +174,6 @@ Page({
                 })
         },
         goOrder: function (e) {
-                console.error("goorder")
                 var token = wx.getStorageSync('token')
                 var wx_authorize = wx.getStorageSync('wx_authorize')
                 if (wx_authorize){
@@ -187,12 +186,12 @@ Page({
                                 })
                         } else {
                                 //下一步
-                                var moenyDescArray = JSON.stringify(camperCarDetail.MoenyDesc);
+                  
                                 var camperCarDetailObjects = JSON.stringify(camperCarDetailObject);
                                 
-                                console.log(camperCarDetailObjects)
+                                // console.log(camperCarDetailObjects)
                                 wx.navigateTo({
-                                        url: '/pages/camperCarSubmitOrder/index?moenyDesc=' + moenyDescArray + '&camperCarDetail=' + camperCarDetailObjects,
+                                        url: '/pages/camperCarSubmitOrder/index?moenyDesc=' + camperCarDetail.MoenyDesc + '&camperCarDetail=' + camperCarDetailObjects,
                                 }) 
                         }
                 }else{

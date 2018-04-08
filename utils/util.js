@@ -1,3 +1,4 @@
+
 const formatTime = date => {
         if (!date) {
                 date = new Date();
@@ -33,11 +34,32 @@ function spiltStr(str) {
                 ret.push(splits[i]);
         }
         return ret;
-};
+}
+
+//计算两个时间的相差天数
+//sDate1和sDate2是yyyy-month-day格式  
+function dateDifference(sDate1, sDate2) {
+        var dateSpan, tempDate, iDays;
+        sDate1 = Date.parse(sDate1);
+        sDate2 = Date.parse(sDate2);
+        dateSpan = sDate2 - sDate1;
+        // dateSpan = Math.abs(dateSpan);
+        iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+        return iDays
+}
+//判断是否为空
+function isEmpty(value) {
+        if (value == undefined || value == null || value == '' || value == 'null' || value == '[]' || value == '{}'){
+                return true
+        }
+        return false
+}
 
 module.exports = {
         formatTime: formatTime,
         isPhoneNumber: isPhoneNumber,
         formatDistance: isPhoneNumber,
-        spiltStr: spiltStr
+        spiltStr: spiltStr,
+        dateDifference: dateDifference,
+        isEmpty: isEmpty
 }

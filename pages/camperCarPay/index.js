@@ -6,21 +6,17 @@ const request = require('../../utils/request.js')
 const CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
 
-var camperCarOrder;
+var camperCarOrder, camperCarDetail, orderInfo;
 Page({
-
-        /**
-         * 页面的初始数据
-         */
         data: {
                 camperCarDetail: {},
-                camperCarOrder: {}
+                camperCarOrder: {},
+                orderInfo:{}
         },
         successFun: function (res, selfObj) {
                 if (res.res_code == 200) {
                         var wxPay = res.data;
                         console.log(wxPay)
-
                         wx.requestPayment({
                                 'timeStamp': wxPay.timeStamp,
                                 'nonceStr': wxPay.nonceStr,
@@ -29,12 +25,17 @@ Page({
                                 'paySign': wxPay.paySign,
                                 'success': function (res) {
                                         console.log("支付成功")
+                                        var camperCarOrders = JSON.stringify(camperCarOrder);
+                                        var camperCarDetails = JSON.stringify(camperCarDetail);
+                                        var orderInfos = JSON.stringify(orderInfo);
+                                        wx.navigateTo({
+                                                url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                        })
                                 },
                                 'fail': function (res) {
                                         console.log("支付失败")
                                 }
                         })
-
                 }
         },
         /**
@@ -48,11 +49,14 @@ Page({
          */
         onLoad: function (options) {
                 camperCarOrder = JSON.parse(options.camperCarOrder);
-                //   var camperCarDetail = JSON.parse(options.camperCarDetail);
-                //   this.setData({
-                //           camperCarDetail: camperCarDetail,
-                //         //   camperCarOrder: camperCarOrder
-                //   })
+                camperCarDetail = JSON.parse(options.camperCarDetail);
+                orderInfo = JSON.parse(options.orderInfo);
+
+                this.setData({
+                        camperCarDetail: camperCarDetail,
+                        camperCarOrder: camperCarOrder,
+                        orderInfo: orderInfo
+                })
                 this.c1 = new $wuxCountDown({
                         date: +(new Date) + 60 * 1000 * 60 * 24,
                         render(date) {
@@ -69,18 +73,13 @@ Page({
         },
         orderPay: function (e) {
                 var openid = wx.getStorageSync('wx_openid')
-
                 var url = CONFIG.API_URL.GET_WxPay
-
                 var params = {
                         orderno: camperCarOrder.orderNo,
                         openid: openid,
                         flag: "1"
                 }
                 request.GET(url, params, this, this.successFun, this.failFun)
-
-
-
         },
         /**
          * 生命周期函数--监听页面初次渲染完成

@@ -1,21 +1,23 @@
+<import src="../../components/calendar/calendar.wxml" />
+<import src="../../components/toast/toast.wxml"/>
+
+<template is="toast" data="{{ ...$wux.toast }}"/>
+<template is="calendar" data="{{ ...$wux.calendar.start }}" />
+<template is="calendar" data="{{ ...$wux.calendar.end }}" />
 <view class="container">
-
         <view class="page__bd">
-
                 <view class="weui-form-preview">
-
                         <view class="weui-form-preview__hd">
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview_columm__label">
                                                 <text class="title">{{camperCarDetail.CampOwerName}}</text>
-                                                <text class="info">{{camperCarDetail.CampOwerAddress}}</text>
+                                                <text class="info">{{camperCarDetail.BedNum}}张床 宜住{{camperCarDetail.FitCheckNum}}人</text>
                                         </view>
                                         <view class="weui-form-preview__value_in-hd">
                                                 <image style="width:40px; height:40px;border-radius: 50%;" src='{{camperCarDetail.Logo}}' mode='aspectFill'></image>
                                         </view>
                                 </view>
                         </view>
-
 
                         <view class="weui-form-preview__hd">
                                 <view class="weui-form-preview__item">
@@ -26,35 +28,41 @@
                         <view class="weui-form-preview__bd">
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label">日期</view>
-                                        <view class="weui-form-preview__value">2048-04-18至2048-04-20</view>
+                                        <view class="weui-form-preview__value" bindtap="openCalendarS">{{ start || '入住日期' }}</view>
+                                        <view class="weui-form-preview__value" bindtap="openCalendarE">{{ end || '退房日期' }}</view>
                                 </view>
                                 <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label">房费(2晚)</view>
-                                        <view class="weui-form-preview__value">￥1500</view>
+                                        <view class="weui-form-preview__label">预订人信息</view>
+                                        <view class="weui-form-preview__value"></view>
                                 </view>
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label">{{NickName}}</view>
+                                        <view class="weui-form-preview__value"></view>
+                                </view>
+
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label">房费({{day}}晚)</view>
+                                        <view class="weui-form-preview__value">￥{{roomPrice}}</view>
+                                </view>
+
+
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label">押金</view>
-                                        <view class="weui-form-preview__value">￥500</view>
+                                        <view class="weui-form-preview__value">￥{{foregift}}</view>
                                 </view>
-                        </view>
 
+                        </view>
+                        <text class="h3">退订政策</text>
+                        <text class="content">暂不支持退订！特性情况，请联系客服。</text>
                 </view>
 
         </view>
-
-        <view class="btn-plus" bindtap="submitOrder">
-                <text>实付款：</text>
-                <text>￥666</text>
-
-                <button class="weui-btn mini-btn" type="warn" size="mini">确认预订</button>
-        </view>
-
 
         <view class="content-b">
                 <view class="content-c ">
                         <view class='content-left'>
                                 <text class="title">实付款：</text>
-                                <text class="content-title">￥{{camperCarDetail.DailyPrice}}</text>
+                                <text class="content-title">￥{{totalPrice}}</text>
                         </view>
                         <view class='content-right' bindtap="submitOrder">
                                 <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn">确认预订</button>

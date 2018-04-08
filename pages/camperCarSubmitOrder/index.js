@@ -1,89 +1,105 @@
-// pages/camperCarSubmitOrder/index.js
+
+import { $wuxCalendar } from '../../components/wux'
+import { $wuxToast } from '../../components/wux'
 const app = getApp()
 
 const request = require('../../utils/request.js')
 const CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
 
-var camperCarDetail;
-
+var camperCarDetail = new Object();
+var moenyDesc =new Array;
+var startDay, endDay, foregift;
+var orderInfo = new Object();
 Page({
-
-        /**
-         * 页面的初始数据
-         */
         data: {
                 camperCarDetail: [],
+                start: '',//入住时间
+                end:'',  //离开时间
+                day:'0',//入住晚数
+                totalPrice:0.00, //所有费用
+                roomPrice: 0.00,//房车费用
+                foregift:0.00,
+                NickName:'',
+                Phone:'',
+
         },
-        /**
-                 * 接口调用成功处理
-                 */
         successFun: function (res, selfObj) {
                 if (res.res_code == 100) {
                         var camperCarOrder = res.data;
                         console.log(camperCarOrder)
-                        console.log(camperCarDetail)
+                        console.log(camperCarDetail)                       
+                        console.log(orderInfo)     
                         var camperCarOrder = JSON.stringify(camperCarOrder);
-                        //var camperCarDetail = JSON.stringify(camperCarDetail);
-                        
+                        var camperCarDetails = JSON.stringify(camperCarDetail);
+                        var orderInfos = JSON.stringify(orderInfo);
                         wx.navigateTo({
-                                url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrder + '&camperCarDetail=' + camperCarDetail,
+                                url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrder + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
                         })
                 }
 
-                //   "res_code": 100,
-                //           "res_msg": "提交成功",
-                //                   "orderNo": "7201804071106509206",
-                //                           "data": {
-                //           "orderGuid": "e4bc4484a6ca44a1b9776ad9cc0705c4",
-                //                   "payMoney": 0.01,
-                //                           "orderNo": "7201804071106509206"
-                //   }
-
         },
-        /**
-         * 接口调用失败处理
-         */
         failFun: function (res, selfObj) {
                 console.log('failFun', res)
         },
-        /**
-         * 生命周期函数--监听页面加载
-         */
         onLoad: function (options) {
-                var moenyDesc = JSON.parse(options.moenyDesc);
+                moenyDesc = JSON.parse(options.moenyDesc);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
+                foregift = camperCarDetail.Deposit;
                 this.setData({
-                        camperCarDetail: camperCarDetail
+                        camperCarDetail: camperCarDetail,
+                        NickName: app.globalData.eUserInfo.NickName,
+                        Phone: app.globalData.eUserInfo.Phone,
+                        foregift:camperCarDetail.Deposit
                 })
                 if (options.camperCarDetail == null) {
                         wx.showToast({
                                 title: '数据为空',
                         })
                 }
-                //   wx.chooseInvoiceTitle({
-                //           success(res) {
-                //                   console.log(res)
-                //                   res.type//抬头类型（0：单位，1：个人）
-                //                   res.title//抬头名称
-                //                   res.taxNumber//抬头税号
-                //                   res.companyAddress//单位地址
-                //                   res.telephone//手机号码
-                //                   res.bankName//银行名称
-                //                   res.bankAccount//银行账号
-                //                   res.errMsg//接口调用结果
-                //           },
-                //           complete(res) {// 接口调用失败 / 结束的回调函数
-                //   }
-                // })
-
         },
         submitOrder: function (e) {
-                console.error("goorder")
+                console.error(this.data.totalPrice)
+                if (this.data.start =='') {
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '请选择入住日期',
+                                success: () => console.log('文本提示')
+                        })
+                        return
+                }
+                if (this.data.end == '') {
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '请选择退房日期',
+                                success: () => console.log('文本提示')
+                        })
+                        return
+                }
+                if (this.data.totalPrice==0.00){
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '参数错误',
+                                success: () => console.log('文本提示')
+                        })
+                        return
+                }
+
+                orderInfo.start = startDay;
+                orderInfo.end = endDay;
+                orderInfo.nickName=app.globalData.eUserInfo.NickName
+                orderInfo.phone = app.globalData.eUserInfo.Phone
+                orderInfo.totalMoney=this.data.totalPrice
+                orderInfo.day = this.data.day
                 var token = wx.getStorageSync('token')
 
                 var url = CONFIG.API_URL.POST_CamperOrder
-                // memberguid 会员id
                 // bookingPersonName 预定人
                 // bookingPersonPhone 预定人手机号
                 // carGuid 车型id
@@ -96,13 +112,90 @@ Page({
                         bookingPersonName: app.globalData.eUserInfo.NickName,
                         bookingPersonPhone: app.globalData.eUserInfo.Phone,
                         carGuid: camperCarDetail.CarGuid,
-                        bTime: "2018-04-22",
-                        eTime: "2018-04-23",
+                        bTime: startDay,
+                        eTime: endDay,
                         currencyAmount: "-1",
-                        totalMoney: "0.01",
+                        totalMoney: this.data.totalPrice,
                         invoice: "0"
                 }
+                console.log(params)
                 request.GET(url, params, this, this.successFun, this.failFun)
+        },
+        openCalendarS() {
+                if (this.start) {
+                        return this.start.show()
+                }
+
+                this.start = $wuxCalendar.init('start', {
+                        // dateFormat: 'DD, MM dd, yyyy',
+                        dayMoney: moenyDesc,
+                        onChange(p, v, d) {
+                                console.error("start:"+d) 
+                                console.error("endDay:" + endDay) 
+                                if (!util.isEmpty(endDay) && !util.isEmpty(d)){
+                                        var dayNum = util.dateDifference(d, endDay)
+                                        console.error("相差：" + dayNum)
+                                        if (dayNum <= 0) {
+                                                $wuxToast.show({
+                                                        type: 'text',
+                                                        timer: 2000,
+                                                        color: '#fff',
+                                                        text: '退房日期不能小于等于入住日期',
+                                                        success: () => console.log('文本提示')
+                                                })
+                                        } else {
+                                                var roomPrice = dayNum * camperCarDetail.DailyPrice
+                                                var totalPrice = roomPrice + foregift;
+                                                this.setData({
+                                                        day: dayNum,
+                                                        totalPrice: totalPrice,
+                                                        roomPrice: roomPrice,
+                                                })
+                                        }
+                                }       
+                                
+                                this.setData({
+                                        start: d.join(', ')
+                                })
+                                startDay = d.join(', ')
+                        }
+                })
+        },
+        openCalendarE() {
+                if (this.end) {
+                        return this.end.show()
+                }
+                this.end = $wuxCalendar.init('end', {
+                        // dateFormat: 'DD, MM dd, yyyy',
+                        dayMoney: moenyDesc,
+                        onChange(p, v, d) {
+                                 if (!util.isEmpty(startDay) && !util.isEmpty(d)) {
+                                        var dayNum = util.dateDifference(startDay,d)
+                                        console.error("相差：" + dayNum)
+                                        if (dayNum<=0){
+                                                $wuxToast.show({
+                                                        type: 'text',
+                                                        timer: 2000,
+                                                        color: '#fff',
+                                                        text: '退房日期不能小于等于入住日期',
+                                                        success: () => console.log('文本提示')
+                                                })
+                                        }else{
+                                                var roomPrice = dayNum * camperCarDetail.DailyPrice
+                                                var totalPrice = roomPrice+ foregift;
+                                                this.setData({
+                                                        day: dayNum,
+                                                        totalPrice: totalPrice,
+                                                        roomPrice: roomPrice,
+                                                })
+                                        }
+                                }    
+                                this.setData({
+                                        end: d.join(', ')
+                                })
+                                endDay = d.join(', ')
+                        }
+                })
         },
         /**
          * 生命周期函数--监听页面初次渲染完成
@@ -153,3 +246,20 @@ Page({
 
         }
 })
+
+
+ //   wx.chooseInvoiceTitle({
+                //           success(res) {
+                //                   console.log(res)
+                //                   res.type//抬头类型（0：单位，1：个人）
+                //                   res.title//抬头名称
+                //                   res.taxNumber//抬头税号
+                //                   res.companyAddress//单位地址
+                //                   res.telephone//手机号码
+                //                   res.bankName//银行名称
+                //                   res.bankAccount//银行账号
+                //                   res.errMsg//接口调用结果
+                //           },
+                //           complete(res) {// 接口调用失败 / 结束的回调函数
+                //   }
+                // })
