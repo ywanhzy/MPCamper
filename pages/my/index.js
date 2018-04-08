@@ -42,24 +42,33 @@ Page({
                 const index = e.currentTarget.dataset.index
                 const path = e.currentTarget.dataset.path
                 console.error(index + path)
-                wx.navigateTo({
-                        url: path,
-                        success: function (res) { },
-                        fail: function (res) { },
-                        complete: function (res) { },
-                })
-                // switch (index) {
-                //         case 0:
-
-                //                 break
-                //         default:
-                //                 wx.navigateTo({
-                //                         url: path,
-                //                         success: function(res) {},
-                //                         fail: function(res) {},
-                //                         complete: function(res) {},
-                //                 })
-                // }
+                var my_authorize = wx.getStorageSync('wx_authorize')
+                var token = wx.getStorageSync('token')
+                switch (index) {
+                        case 0:
+                                if(my_authorize){
+                                    if(token==''){
+                                        wx.navigateTo({
+                                          url: '../login/index?id=1'
+                                        })
+                                    }else{
+                                        wx.navigateTo({
+                                          url: path
+                                        })
+                                    }
+                                    
+                                }else{
+                                    app.wxAuthorize();
+                                }
+                                break
+                        default:
+                                wx.navigateTo({
+                                        url: path,
+                                        success: function(res) {},
+                                        fail: function(res) {},
+                                        complete: function(res) {},
+                                })
+                }
         },
         /**
          * 生命周期函数--监听页面初次渲染完成

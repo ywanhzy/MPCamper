@@ -13,8 +13,8 @@ Page({
                   },
                   {
                           icon: '../../images/tel.png',
-                          text: '意见反馈',
-                          path: '/pages/setting/index'
+                          text: '建议反馈',
+                          path: '/pages/feedBack/index'
                   }
                   ,
                   {

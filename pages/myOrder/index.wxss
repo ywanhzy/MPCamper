@@ -1,1 +1,42 @@
 /* pages/myOrder/index.wxss */
+.page, 
+.page__bd, 
+.weui-tab__content {
+	height: 100%;
+	padding-bottom: 0;
+}
+
+.item{
+  width: 100%;
+  display: flex;  
+  flex-direction: row;
+  padding: 25rpx;  
+}
+
+.item-image{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.item-right{
+  display: flex;  
+  flex-direction: column;
+}
+
+.item-right-top{
+  display: flex;  
+  flex-direction: row;
+}
+
+.item-right-top-title{
+  flex: 3;
+
+}
+
+.item-right-top-status{
+  flex: 1;
+  float: right;
+  font-size: 25rpx;
+  text-align: right;
+  margin-right: 25rpx;
+}

@@ -2,7 +2,7 @@
 <view class='container'>
     <image class='top-image' src='../../images/success.png'></image>
     <text >当前版本 {{version}}</text>
-    <view class='follow' bindtap='followUs'>关注我们</view>
+    <button class='weui-btn' type="primary" bindtap='followUs'>关注我们</button>
     <view class='desc'>房车行是中国领先的房车旅游服务平台。平台以“快乐e家 游居天下”为口号，以房车、车房（移动别墅）、营地三大板块为支撑，目前经营范围主要包括开发、投资、租售、预订、托管、房车活动策划组织、房车专业服务。
 </view>
 </view>

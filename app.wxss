@@ -2,9 +2,10 @@
 @import 'assets/styles/weui.wxss';
 
 @import 'assets/styles/skyvow.wxss';
+@import 'components/wux.wxss';
 
 
-.container {
+ .container {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -34,4 +35,4 @@
 .tel-img{
         width: 100%;
         height: 100%;
-}
+} 
