@@ -30,13 +30,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "营地",
 					"pathName": "pages/camp/index",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "房车详情",
+					"pathName": "pages/camperCarDetail/index",
+					"query": "memberguid=42da3c7f67934eee911f26e33a87a02f&token=43b6a1ab62a64a47817c1edb5e661a59&carGuid=02b081a9b2284d559408c8e0a6f8c8b7"
 				}
 			]
 		}

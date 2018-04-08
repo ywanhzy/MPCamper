@@ -72,6 +72,7 @@ App({
                                                                         console.log(that.globalData.eUserInfo)
 
                                                                         wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                        wx.setStorageSync('wx_openid', res.data.data.Openid)
                                                                         wx.setStorageSync('token', res.data.data.token)
                                                                         wx.setStorageSync('memberguid', res.data.data.GUID)
                                                                 }
@@ -101,6 +102,7 @@ App({
                                                                         console.log(res.data)
                                                                         that.globalData.eUserInfo = res.data;
                                                                         wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                        wx.setStorageSync('wx_openid', res.data.data.Openid)
                                                                         wx.setStorageSync('token', res.data.data.token)
                                                                         wx.setStorageSync('memberguid', res.data.data.GUID)
                                                                 }
@@ -132,21 +134,21 @@ App({
                         }
                 });
 
-                //获取网络类型
-                wx.getNetworkType({
-                        success: function (res) {
-                                // 返回网络类型, 有效值：
-                                // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
-                                var networkType = res.networkType
-                                console.log('网络类型：' + res.networkType)
-                        }
-                });
-                //监听网络状态变化
-                wx.onNetworkStatusChange(function (res) {
-                        console.log(res.isConnected)
-                        console.log(res.networkType)
-                });
-                //获取定位
+                // //获取网络类型
+                // wx.getNetworkType({
+                //         success: function (res) {
+                //                 // 返回网络类型, 有效值：
+                //                 // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+                //                 var networkType = res.networkType
+                //                 console.log('网络类型：' + res.networkType)
+                //         }
+                // });
+                // //监听网络状态变化
+                // wx.onNetworkStatusChange(function (res) {
+                //         console.log(res.isConnected)
+                //         console.log(res.networkType)
+                // });
+                // //获取定位
                 // wx.getLocation({
                 //         type: 'gcj02', //返回可以用于wx.openLocation的经纬度
                 //         success: function (res) {
@@ -223,6 +225,7 @@ App({
                                                                         that.globalData.eUserInfo = res.data.data;
                                                                         console.log("unionid:" + res.data.data.unionid)
                                                                         wx.setStorageSync('wx_unionid',res.data.data.unionid)
+                                                                        wx.setStorageSync('wx_openid', res.data.data.Openid)
                                                                         wx.setStorageSync('token', res.data.data.token)
                                                                         wx.setStorageSync('memberguid', res.data.data.GUID)
                                                                     

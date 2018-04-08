@@ -1,6 +1,5 @@
-
 .container {
-       width: 100%;
+        width: 100%;
         background-color: #fff;
         min-height: 100%;
         padding: 0;
@@ -57,7 +56,6 @@
         display:flex;
         margin-left: 10px;
         flex-direction: column;
-          
 }
 
 .title{
@@ -133,9 +131,11 @@
 .img_map{
         width: 100%;
         height: auto;
-        padding: 0;
+        padding: 0px;
 }
-
+.amap{
+      width: 100%;  
+}
 
 .button-sp-area{
     margin: 0 auto;
@@ -152,8 +152,4 @@
 }
 .button-hover {
   background-color: red;
-}
-/** 添加自定义button点击态样式类**/
-.other-button-hover {
-  background-color: blue;
 }

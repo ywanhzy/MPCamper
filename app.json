@@ -1,64 +1,68 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/camp/index",
-    "pages/my/index",
-    "pages/campDetail/index",
-    "pages/camperCarDetail/index",
-    "pages/campPic/index",
-    "pages/login/index",
-    "pages/openLock/index",
-    "pages/myOrder/index",
-    "pages/setting/index",
-    "pages/loginTwo/index",
-    "pages/aboutUs/index",
-    "pages/feedBack/index"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "房车行",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#484848",
-    "selectedColor": "#3bae78",
-    "borderStyle": "white",
-    "backgroundColor": "#fff",
-    "box-shadow": "0 0 6px 0",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/index.png",
-        "selectedIconPath": "images/index_select.png"
-      },
-      {
-        "pagePath": "pages/camp/index",
-        "text": "营地",
-        "iconPath": "images/camp.png",
-        "selectedIconPath": "images/camp_select.png"
-      },
-      {
-        "pagePath": "pages/openLock/index",
-        "text": "开锁",
-        "iconPath": "images/unlock.png",
-        "selectedIconPath": "images/unlock_select.png"
-      },
-      {
-        "pagePath": "pages/my/index",
-        "text": "我的",
-        "iconPath": "images/my.png",
-        "selectedIconPath": "images/my_select.png"
-      }
-    ]
-  },
-  "networkTimeout": {
-    "request": 20000,
-    "connectSocket": 20000,
-    "uploadFile": 20000,
-    "downloadFile": 20000
-  },
-  "debug": true
+
+    "pages": [
+            "pages/index/index",
+            "pages/logs/logs",
+            "pages/camp/index",
+            "pages/my/index",
+            "pages/campDetail/index",
+            "pages/camperCarDetail/index",
+            "pages/campPic/index",
+            "pages/login/index",
+            "pages/openLock/index",
+            "pages/myOrder/index",
+            "pages/setting/index",
+            "pages/loginTwo/index",
+            "pages/aboutUs/index",
+            "pages/camperCarSubmitOrder/index",
+            "pages/camperCarPay/index",
+            "pages/feedBack/index"
+    ],
+    "window": {
+            "backgroundTextStyle": "light",
+            "navigationBarBackgroundColor": "#fff",
+            "navigationBarTitleText": "房车行",
+            "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+            "color": "#484848",
+            "selectedColor": "#3bae78",
+            "borderStyle": "white",
+            "backgroundColor": "#fff",
+            "box-shadow": "0 0 6px 0",
+            "list": [
+                    {
+                            "pagePath": "pages/index/index",
+                            "text": "首页",
+                            "iconPath": "images/index.png",
+                            "selectedIconPath": "images/index_select.png"
+                    },
+                    {
+                            "pagePath": "pages/camp/index",
+                            "text": "营地",
+                            "iconPath": "images/camp.png",
+                            "selectedIconPath": "images/camp_select.png"
+                    },
+                    {
+                            "pagePath": "pages/openLock/index",
+                            "text": "开锁",
+                            "iconPath": "images/unlock.png",
+                            "selectedIconPath": "images/unlock_select.png"
+                    },
+                    {
+                            "pagePath": "pages/my/index",
+                            "text": "我的",
+                            "iconPath": "images/my.png",
+                            "selectedIconPath": "images/my_select.png"
+                    }
+            ]
+    },
+    "networkTimeout": {
+            "request": 20000,
+            "connectSocket": 20000,
+            "uploadFile": 20000,
+            "downloadFile": 20000
+    },
+    "debug": true
+
 }
