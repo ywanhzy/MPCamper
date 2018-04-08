@@ -27,8 +27,9 @@ Page({
                                         console.log("支付成功")
                                         var camperCarOrders = JSON.stringify(camperCarOrder);
                                         var camperCarDetails = JSON.stringify(camperCarDetail);
+                                        var orderInfos = JSON.stringify(orderInfo);
                                         wx.navigateTo({
-                                                url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails,
+                                                url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
                                         })
                                 },
                                 'fail': function (res) {
@@ -53,7 +54,8 @@ Page({
 
                 this.setData({
                         camperCarDetail: camperCarDetail,
-                        camperCarOrder: camperCarOrder
+                        camperCarOrder: camperCarOrder,
+                        orderInfo: orderInfo
                 })
                 this.c1 = new $wuxCountDown({
                         date: +(new Date) + 60 * 1000 * 60 * 24,
