@@ -5,6 +5,8 @@ const app = getApp()
 const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
+var IMAGE = require('../../utils/image.js');  
+
 var width;
 var height;
 
@@ -134,7 +136,21 @@ Page({
                         userInfo: e.detail.userInfo,
                         hasUserInfo: true
                 })
+        },
+        binderrorimg: function (e) {
+                // var errorImgIndex = e.target.dataset.errorimg //获取循环的下标
+                // var imgObject = "camperCar[" + errorImgIndex + "].Img" //carlistData为数据源，对象数组
+                // console.error(imgObject)//camperCar[5].Img
+                // var errorImg = {}
+                // errorImg[imgObject] = "https://w.chesudi.com/Public/web/img/onerrorcar.png" //我们构建一个对象
+                // this.setData(errorImg) //修改数据源对应的数据
+               
+                var _that = this;
+                IMAGE.errImgFun(e, _that);
+                
         }
+
+        
 
 })
 

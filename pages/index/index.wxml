@@ -8,7 +8,7 @@
                 <view class="travel-notes">
                         <navigator url="/pages/camperCarDetail/index?carGuid={{item.CarGuid}}">
                                 <view class="travel-img">
-                                        <image class="main-img" src="{{item.Img}}" mode='widthFix'></image>
+                                        <image class="main-img" src="{{item.Img}}" mode='widthFix' binderror="binderrorimg" data-err-img="camperCar[{{index}}].Img" data-errorimg="{{index}}"></image>
                                         <image class="room-img" src="../../images/index_room.png" mode='aspectFit' wx:if="{{item.yes}}"></image>
                                 </view>
 
