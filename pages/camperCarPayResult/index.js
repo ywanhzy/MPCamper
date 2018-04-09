@@ -16,6 +16,7 @@ Page({
         },
 
         onLoad: function (options) {
+                
                 camperCarOrder = JSON.parse(options.camperCarOrder);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 orderInfo = JSON.parse(options.orderInfo);
@@ -26,7 +27,11 @@ Page({
                         orderInfo: orderInfo
                 })
         },
-
+        finish: function (e) {
+                wx.reLaunch({
+                        url: '/pages/index/index'
+                })
+        },
         /**
          * 生命周期函数--监听页面初次渲染完成
          */

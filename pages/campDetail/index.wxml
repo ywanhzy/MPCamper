@@ -28,7 +28,7 @@
 <view class="coupons" hidden="{{hasCamperData}}">
         <scroll-view class="coupons-scroll" scroll-x="true">
                 <view class="coupons-item" wx:for-items="{{camperData}}" wx:key="id" wx:for-item="item">
-                        <navigator url="/pages/camperCarDetail/index?id={{item.CarGuid}}">
+                        <navigator url="/pages/camperCarDetail/index?carGuid={{item.CarGuid}}">
                                 <view class="coupons-img">
                                         <image class="coupons-img-img" mode="aspectFill" src="{{item.Logo}}" />
                                         <text class='coupons-img-text'>￥{{item.DailyPrice}}起</text>

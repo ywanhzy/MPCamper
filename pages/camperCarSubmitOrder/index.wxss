@@ -11,6 +11,12 @@
         display: inline-block;
         align-items: center;
 }
+.line{
+        align-content: center;
+        height: 1px;
+        background-color: #e5e5e5;
+        margin: 5px 15px;
+}
 .travel-title {
         width: 100%;
         height: 60px;
@@ -31,15 +37,15 @@
 
 .title{
         line-height: 50rpx;
-        font-size: 30rpx;
+        font-size: 20px;
         color:#484848;
         overflow:hidden; 
         text-overflow:ellipsis;   
         white-space:nowrap;   
 }
 .info{
-        font-size: 22rpx;
-        color:#484848;
+        font-size: 16px;
+        color:#767676;
         overflow:hidden; 
         text-overflow:ellipsis;   
         white-space:nowrap;   
@@ -83,17 +89,24 @@
 }
 
 .weui-form-preview__value {
-        font-size: 14px;
+        font-size: 18px;
         color: #43967c;
 }
 
 .weui-form-preview__value_in-hd {
-        font-size: 26px;
+        font-size: 18px;
+        color:#43967c;
 }
 
 .weui-form-preview__hd {
         position: relative;
         padding: 10px 15px;
+        text-align: right;
+        line-height: 2.5em;
+}
+.weui-form-preview__hd_e {
+        position: relative;
+        padding: 20px 15px;
         text-align: right;
         line-height: 2.5em;
 }
@@ -105,7 +118,7 @@
         bottom: 0;
         right: 0;
         height: 1px;
-        border-bottom: 1rpx solid #d9d9d9;
+        border-bottom: 0rpx solid #d9d9d9;
         color: #d9d9d9;
         left: 15px;
 }
@@ -141,14 +154,11 @@
         overflow: hidden;
 }
 
-.weui-form-preview__label {
+.weui-form-preview__label_e {
         float: left;
         margin-right: 1em;
-        min-width: 4em;
         font-size: 18px;
         color: #484848;
-        text-align: justify;
-        text-align-last: justify;
 }
 .weui-form-preview_columm__label {
         float: left;

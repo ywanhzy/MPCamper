@@ -16,6 +16,7 @@
             "pages/aboutUs/index",
             "pages/camperCarSubmitOrder/index",
             "pages/camperCarPay/index",
+            "pages/camperCarPayResult/index",
             "pages/feedBack/index"
     ],
     "window": {
