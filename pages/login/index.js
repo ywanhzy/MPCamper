@@ -1,23 +1,17 @@
-// pages/login/index.js
 const app = getApp()
+import { $wuxToast } from '../../components/wux'
 
 const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
 var util = require('../../utils/util.js')
 var phone
 Page({
-
-        /**
-         * 页面的初始数据
-         */
         data: {
                 tel:null,
                 code:null,
+                codeShow:false,
                 codeImgUrl: null
         },
-        /**
-        * 接口调用成功处理
-        */
         successFun: function (res, selfObj) {
                 var that = selfObj;
                 if (res.res_code == 200) {
@@ -25,21 +19,20 @@ Page({
                         wx.navigateTo({
                                 url: '/pages/loginTwo/index?phone=' + phone,
                         }) 
+                }else{
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: res.res_msg
+                        })
                 }
         },
-        /**
-         * 接口调用失败处理
-         */
         failFun: function (res, selfObj) {
                 console.log('failFun', res)
         },
-        /**
-         * 生命周期函数--监听页面加载
-         */
         onLoad: function (options) {
-                //获取营地列表
-                app.globalData.me ="sdfd";
-                console.log(app.globalData.me)
+                
         },
         bindKeyInput: function (e) {
                 console.log(e)
@@ -47,7 +40,12 @@ Page({
                 if (util.isPhoneNumber(tel)){
                         var url = CONFIG.API_URL.GET_SecurityCode + "?mark=" + tel
                         this.setData({
-                                codeImgUrl: url
+                                codeImgUrl: url,
+                                codeShow: true
+                        })
+                }else{
+                        this.setData({
+                                codeShow: false
                         })
                 }
                 this.setData({
@@ -56,17 +54,32 @@ Page({
         },
         submitForm(e) {
                 var that = this;
-                phone = e.detail.value.tel;
+                phone = e.detail.value.tel.trim();
                 var code = e.detail.value.code;
                 if (phone == "") {
-                        wx.showToast({
-                                title: '请填写手机号码',
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '请填写手机号码'
+                        })
+                        return
+                }
+                if (!util.isPhoneNumber(phone)) {
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '请填写正确的手机号码'
                         })
                         return
                 }
                 if (code == "") {
-                        wx.showToast({
-                                title: '请填写验证码',
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '请填写图形验证码'
                         })
                         return
                 }

@@ -83,43 +83,6 @@
         color: #3bae78;
 }
 
-.h1{
-        width: 100%;
-        font-size: 64rpx;
-        height: 80px;
-        line-height: 80px;
-        color: #484848;
-        text-align: left;
-        margin-left: 30rpx;
-        
-}
-.h2{
-        width: 100%;
-        font-size: 50rpx;
-        height: 60px;
-        line-height: 60px;
-        color: #484848;
-        text-align: left;
-        margin-left: 30rpx;
-        border-bottom: 1px solid #e5e5e5;
-}
-.h3{
-        width: 100%;
-        font-size: 40rpx;
-        height: 60px;
-        line-height: 60px;
-        color: #484848;
-        text-align: left;
-        margin-left: 30rpx;
-}
-.h4{
-        width: 100%;
-        font-size: 34rpx;
-        color: #484848;
-        text-align: left;
-        margin-left: 30rpx;
-        font-weight: bold;
-}
 .content{
         width: 100%;
         font-size: 30rpx;

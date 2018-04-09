@@ -49,6 +49,12 @@
         align-items: center;
         border-bottom: 1px solid #e5e5e5;
 }
+.top_l {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
 .top_c {
         flex: 1;
         display: flex;
@@ -72,7 +78,7 @@
 .coupons {
         padding: 0;
         width: 100%;
-        height: 350rpx;
+        height: 400rpx;
 }
 
 .coupons-scroll {
@@ -85,7 +91,7 @@
 
 .coupons-item {
         width: 300rpx;
-        height: 350rpx;
+        height: auto;
         margin: 10rpx;
         padding-top: 20rpx;
         padding-left: 15rpx;
@@ -113,7 +119,7 @@
         position: absolute;
         left: 0px;
         bottom: 10rpx;
-        width: 100rpx;
+        width: 110rpx;
         height: 40rpx;
         background: #666;
         color: #fff;
@@ -122,8 +128,7 @@
 }
 
 .wxParse{
-        width: 100%;
-        padding: 0 20rpx;
+        padding: 0 10px;
 }
 
 .sus-h2 {

@@ -13,7 +13,7 @@
         </navigator>
 </view>
 <view class="top">
-        <view class="top_c" bindtap='goTel'>
+        <view class="top_l" bindtap='goTel'>
                 <image class="top_img" src="/images/tel.png" />
                 <text class="top_text">电话咨询</text>
         </view>
