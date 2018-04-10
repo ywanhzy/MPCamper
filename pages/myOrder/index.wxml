@@ -39,7 +39,7 @@
                         </view>
                         <view class='item-right-bottom'>
                             <text class='item-right-bottom-text'>营地：{{item.CampShortName}}</text>
-                            <text class='item-right-bottom-text'>入住时间：{{item.BTimeDate}}（{{item.Days}}晚风华高科房交会购房款的纠纷）</text>
+                            <text class='item-right-bottom-text'>入住时间：{{item.BTimeDate}}（{{item.Days}}晚）</text>
                             <text class='item-right-bottom-text'>总价：¥{{item.TotalMoney}}</text>
                         </view>
                         <view class='item-bottom'> 

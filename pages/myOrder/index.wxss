@@ -74,7 +74,6 @@
   border-radius: 10rpx;
   font-size: 30rpx;
   right: 10rpx;
-  bottom:10rpx;
 }
 
 .page, 
