@@ -3,6 +3,7 @@ import { $wuxPrompt } from '../../components/wux'
 const sliderWidth = 96
 var CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
+const util = require('../../utils/util.js')
 
 Page({
 
@@ -14,7 +15,9 @@ Page({
     activeIndex: '0',
     sliderOffset: 0,
     sliderLeft: 0,
-    order: []
+    order: [],
+    status:0,
+    statuStr:[]
   },
 
   /**
@@ -70,11 +73,110 @@ Page({
    */
   successFun: function (res, selfObj) {
     if (res.res_code == 200) {
-      var orders = res.data;
-      console.log("length:" + order.length)
-      
+      var orders = res.dtOrderCar;
+      var oo = [];
+      var ss = [];
+      console.log("length:" + orders.length)
+      if (orders.length > 0) {
+        if(status==0){
+          for (var i = 0; i < orders.length; i++) {
+            var obj = orders[i]
+            var str =""
+            switch (obj.OrderStatus){
+              case 1://待付款
+                str = "待付款"
+                break;
+              case 3://待入住
+                str = "待入住"
+                break;
+              case 4://已入住
+                str = "已入住"
+                break;
+              case 6://已消费 
+                str = "已消费"
+                break;
+              case 7://已取消  
+                str = "已取消"
+                break;
+              case 8://关闭订单
+                str = "关闭订单"
+                break;
+            }
+            ss.push(str);
+            
+            obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 200 + "X" + 200 + ".jpg";
+            obj.i = i;
+            oo.push(obj);
+          }
+          selfObj.setData({
+            statuStr: ss
+          })
+        }else if(status==1){
+          for (var i = 0; i < orders.length; i++) {
+            var obj = orders[i]
+            if (obj.OrderStatus==1){
+              var str = ""
+              switch (obj.OrderStatus) {
+                case 1://待付款
+                  str = "待付款"
+                  break;
+                case 3://待入住
+                  str = "待入住"
+                  break;
+                case 4://已入住
+                  str = "已入住"
+                  break;
+                case 6://已消费 
+                  str = "已消费"
+                  break;
+                case 7://已取消  
+                  str = "已取消"
+                  break;
+                case 8://关闭订单
+                  str = "关闭订单"
+                  break;
+              }
+              ss.push(str);
+              obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 160 + "X" + 160 + ".jpg";
+              obj.i = i;
+              oo.push(obj);
+            }
+          }
+        } else if (status == 3){
+          for (var i = 0; i < orders.length; i++) {
+            var obj = orders[i]
+            if (obj.OrderStatus == 3) {
+              var str = ""
+              switch (obj.OrderStatus) {
+                case 1://待付款
+                  str = "待付款"
+                  break;
+                case 3://待入住
+                  str = "待入住"
+                  break;
+                case 4://已入住
+                  str = "已入住"
+                  break;
+                case 6://已消费 
+                  str = "已消费"
+                  break;
+                case 7://已取消  
+                  str = "已取消"
+                  break;
+                case 8://关闭订单
+                  str = "关闭订单"
+                  break;
+              }
+              ss.push(str);
+              obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 160 + "X" + 160 + ".jpg";
+              obj.i = i;
+              oo.push(obj);
+            }
+          }
+        }
+      }
       selfObj.setData({
-        order: orders
+        order: oo
       });
     }
 
@@ -105,16 +207,22 @@ Page({
     switch (this.data.activeIndex){
       case '0':
         console.log("全部");
-        getData();
+        status = 0;
+        this.setData({ status: status,})
         break;
       case '1':
         console.log("代付款");
+        status = 1;
+        this.setData({ status: 1 })
         break;
       case '2':
         console.log("待使用");
+        status = 3;
+        this.setData({ status: 3 })
         break;
       case '3':
         console.log("退款");
+        // this.setData({ status: 0 })
         break;
     }
     this.getData(this.data.activeIndex);

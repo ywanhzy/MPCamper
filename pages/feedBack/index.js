@@ -11,7 +11,7 @@ Page({
       { name: 'one', value: '功能异常', checked: 'true' },
       { name: 'two', value: '优化建议' },
     ],
-    type:'one',
+
     content: '请描述你的问题或建议，如果有系统截图，请在添加图片处上传截图，我们将尽快优化体验，感谢您的反馈。',
 
     urls:[],
@@ -54,11 +54,6 @@ Page({
         that.setData({
           urls: res.tempFilePaths,
         })
-        if(urls.length>=9){
-          this.setData({hideAddImg:true})
-        }else{
-          this.setData({ hideAddImg: false })
-        }
       }
     })
   },
@@ -101,6 +96,10 @@ Page({
 
   radioChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
-    this.setData({ type: e.detail.value});
+    // this.setData({ type: e.detail.value});
+  },
+
+  submitForm: function(e){
+    console.log(e.detail.value.textarea + e.detail.value.radiogroup)
   }
 })
