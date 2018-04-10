@@ -1,9 +1,9 @@
-// pages/openLock/index.js
+
+const util = require('../../utils/util.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+
   data: {
   
   },
@@ -12,28 +12,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-          console.error("onLoad")
-          var token = wx.getStorageSync('token')
-          console.log(token)
-          if (token == "") {
-                  wx.navigateTo({
-                          url: '../login/index?id=1'
-                  })
-          } else {
-                  // 只允许从相机扫码
-                  wx.scanCode({
-                          onlyFromCamera: true,
-                          success: (res) => {
-                                  console.log(res)
-                          }
-                  })
-          }
+         
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+          
   
   },
 
@@ -41,22 +27,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-         
-          console.error("onshow")
+          console.error("open-onShow--" )
+          var token = wx.getStorageSync('token')
+          if (token == "") {
+                  wx.navigateTo({
+                          url: '../login/index?id=1'
+                  })
+          } else {
+                  // 只允许从相机扫码
+                  //   { result: "http://www.klch.cn/?lockcode=123456", errMsg: "scanCode:ok", scanType: "QR_CODE", charSet: "UTF-8" }
+                  wx.scanCode({
+                          onlyFromCamera: true,
+                          success: (res) => {
+                                  var result = res.result.replace("?", "\?")
+                                  console.log(result)
+                                  var parameterObject = util.getQueryObject(result)
+                                  wx.reLaunch({
+                                          url: '../openLockIng/index?lockcode=' + parameterObject.lockcode
+                                  });
+                          }
+                  })
+          }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+          console.error("open-onHide--")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+          console.error("open-onUnload--")
   },
 
   /**

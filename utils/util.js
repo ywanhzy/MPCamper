@@ -36,6 +36,46 @@ function spiltStr(str) {
         return ret;
 }
 
+//url的查询参数解析成对象
+function getQueryObject(url) {
+        url = url == null ? window.location.href : url;
+        var search = url.substring(url.lastIndexOf("?") + 1);
+        var obj = {};
+        var reg = /([^?&=]+)=([^?&=]*)/g;
+        // [^?&=]+表示：除了？、&、=之外的一到多个字符
+        // [^?&=]*表示：除了？、&、=之外的0到多个字符（任意多个）
+        search.replace(reg, function (rs, $1, $2) {
+                var name = decodeURIComponent($1);
+                var val = decodeURIComponent($2);
+                val = String(val);
+                obj[name] = val;
+                return rs;
+
+        });
+        return obj;
+}
+
+function getQueryStringArgs(url) {
+        url = url == null ? window.location.href : url;
+        var qs = url.substring(url.lastIndexOf("?") + 1);
+        var args = {};
+        var items = qs.length > 0 ? qs.split('&') : [];
+        var item = null;
+        var name = null;
+        var value = null;
+        for (var i = 0; i < items.length; i++) {
+                item = items[i].split("=");
+                //用decodeURIComponent()分别解码name 和value（因为查询字符串应该是被编码过的）。
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+                if (name.length) {
+                        args[name] = value;
+                }
+        }
+        return args;
+}
+
+
 //计算两个时间的相差天数
 //sDate1和sDate2是yyyy-month-day格式  
 function dateDifference(sDate1, sDate2) {
@@ -49,7 +89,7 @@ function dateDifference(sDate1, sDate2) {
 }
 //判断是否为空
 function isEmpty(value) {
-        if (value == undefined || value == null || value == '' || value == 'null' || value == '[]' || value == '{}'){
+        if (value == undefined || value == null || value == '' || value == 'null' || value == '[]' || value == '{}') {
                 return true
         }
         return false
@@ -61,5 +101,6 @@ module.exports = {
         formatDistance: isPhoneNumber,
         spiltStr: spiltStr,
         dateDifference: dateDifference,
-        isEmpty: isEmpty
+        isEmpty: isEmpty,
+        getQueryObject:getQueryObject
 }

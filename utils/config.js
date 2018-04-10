@@ -121,14 +121,13 @@ const CONFIG = {
                 // mobile 手机号
                 // code 验证码
 
-                //房车管理app开锁
-                GET_Unlock: API_BASE + 'fcxmanage/unlock.ashx',
-                //传入参数：
-                //         userid 用户id
-                // campid 营地id
-                // deviceId 锁设备id
-                // token
-
+      
+               // 129、二维码操作类型接口
+                GET_QrCodeType: API_BASE + 'qrcode/getQrCodeType.ashx',
+                // 129、开锁接口
+                GET_openMotorHomesCar: API_BASE + 'motorHomesCar/openMotorHomesCar.ashx',
+                // memberguid 会员id
+                // deviceId  锁设备id（二维码中获取）
 
                 GET_ARTICLE: API_BASE + '&p=',
                 GET_CATEGORY: API_BASE + '&cat='

@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -48,6 +48,12 @@
 					"id": -1,
 					"name": "登录",
 					"pathName": "pages/login/index",
+					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "开锁",
+					"pathName": "pages/openLockIng/index",
 					"query": ""
 				}
 			]
