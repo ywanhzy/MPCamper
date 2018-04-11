@@ -31,7 +31,7 @@
 }
 .login-btn{
        margin-top: 40px;
-       width: 80%;
+       width: 120px;
        height: 40px; 
        line-height: 40px;
        color: #3bae78;

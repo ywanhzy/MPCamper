@@ -17,7 +17,7 @@ Page({
 
         onLoad: function (options) {
                 
-                camperCarOrder = JSON.parse(options.camperCarOrder);
+                // camperCarOrder = JSON.parse(options.camperCarOrder);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 orderInfo = JSON.parse(options.orderInfo);
 

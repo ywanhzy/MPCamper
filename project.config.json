@@ -58,9 +58,21 @@
 				},
 				{
 					"id": 4,
-					"name": "住房车订单详情",
-					"pathName": "pages/liveCamperOrderDetail/index",
-					"query": "orderNo=7201804101124292508"
+					"name": "订单支付",
+					"pathName": "pages/camperCarPay/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "wd订单",
+					"pathName": "pages/myOrder/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "支付完成",
+					"pathName": "pages/camperCarPayResult/index",
+					"query": ""
 				}
 			]
 		}

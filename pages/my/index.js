@@ -9,12 +9,12 @@ Page({
         data: {
                 items: [
                         {
-                                icon: '../../images/tel.png',
+                                icon: '../../images/my_order.png',
                                 text: '我的订单',
                                 path: '/pages/myOrder/index'
                         },
                         {
-                                icon: '../../images/tel.png',
+                                icon: '../../images/my_about.png',
                                 text: '设置',
                                 path: '/pages/setting/index'
                         }

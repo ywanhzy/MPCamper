@@ -30,21 +30,21 @@
                         <view class='line'></view>
                         <view class="weui-form-preview__hd">
                                 <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label_e">日期</view>
-                                        <view class="weui-form-preview__value" bindtap="openCalendarS">{{ start || '入住日期' }}</view>
-                                        <view class="weui-form-preview__value" bindtap="openCalendarE">{{ end || '退房日期' }}</view>
+                                        <view class="weui-form-preview__label_e">入住日期</view>
+                                        <view class="weui-form-preview__value" bindtap="openCalendarS">{{ start || '选择入住日期' }}</view>
+                                </view>
+                        </view>
+                        <view class="weui-form-preview__hd">
+                                <view class="weui-form-preview__item">
+                                        <view class="weui-form-preview__label_e">退房日期</view>
+                                        <view class="weui-form-preview__value" bindtap="openCalendarE">{{ end || '选择退房日期' }}</view>
                                 </view>
                         </view>
                         <view class='line'></view>
                         <view class="weui-form-preview__hd">
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label_e">预订人信息</view>
-                                        <view class="weui-form-preview__value"></view>
-                                </view>
-
-                                <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label_e">{{NickName}}</view>
-                                        <view class="weui-form-preview__value"></view>
+                                        <view class="weui-form-preview__value">{{NickName}}（{{Phone}}）</view>
                                 </view>
                         </view>
                         <view class='line'></view>
