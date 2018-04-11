@@ -12,7 +12,7 @@ Page({
                 codeShow:false,
                 codeImgUrl: null
         },
-        successFun: function (res, selfObj) {
+        successFun: function (id,res, selfObj) {
                 var that = selfObj;
                 if (res.res_code == 200) {
                         console.log(res)
@@ -28,7 +28,7 @@ Page({
                         })
                 }
         },
-        failFun: function (res, selfObj) {
+        failFun: function (id,res, selfObj) {
                 console.log('failFun', res)
         },
         onLoad: function (options) {
@@ -90,7 +90,7 @@ Page({
                         imgCode: code,
                         mark: "9"
                 }
-                request.GET(url, params, this, this.successFun, this.failFun)
+                request.GET(url, params, 100, true, this, this.successFun, this.failFun)
         },
         /**
          * 生命周期函数--监听页面初次渲染完成

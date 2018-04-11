@@ -24,7 +24,7 @@ Page({
                 Phone:'',
 
         },
-        successFun: function (res, selfObj) {
+        successFun: function (id,res, selfObj) {
                 if (res.res_code == 100) {
                         var camperCarOrder = res.data;
                         console.log(camperCarOrder)
@@ -39,7 +39,7 @@ Page({
                 }
 
         },
-        failFun: function (res, selfObj) {
+        failFun: function (id,res, selfObj) {
                 console.log('failFun', res)
         },
         onLoad: function (options) {
@@ -119,7 +119,7 @@ Page({
                         invoice: "0"
                 }
                 console.log(params)
-                request.GET(url, params, this, this.successFun, this.failFun)
+                request.GET(url, params, 100, true, this, this.successFun, this.failFun)
         },
         openCalendarS() {
                 if (this.start) {

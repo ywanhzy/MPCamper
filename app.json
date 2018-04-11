@@ -17,7 +17,8 @@
                 "pages/camperCarPay/index",
                 "pages/camperCarPayResult/index",
                 "pages/feedBack/index",
-                "pages/openLockIng/index"
+                "pages/openLockIng/index",
+                "pages/liveCamperOrderDetail/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",

@@ -29,6 +29,7 @@
 
             <view class="items">
                  <view class="items" wx:for="{{ order }}" wx:key="" wx:for-item="item"> 
+                 <navigator url="/pages/liveCamperOrderDetail/index?orderNo={{item.OrderNo}}">
                     <view class='item'>
                         <view class="item-image">
                             <image class="item-image" src="{{item.Img}}" mode='center'/>
@@ -48,8 +49,10 @@
                             </view>  
                         </view>
                     </view>
+                    </navigator>
                     <view style='width:100%;height:1px;background:#ccc;margin-top:10rpx;'></view>
                  </view> 
+                 
             </view>
         </view>
     </view>
