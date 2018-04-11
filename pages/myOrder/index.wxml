@@ -29,6 +29,7 @@
 
             <view class="items">
                  <view class="item" wx:for="{{ order }}" wx:key="" wx:for-item="item"> 
+                 <navigator url="/pages/liveCamperOrderDetail/index?orderNo={{item.OrderNo}}">
                     <view class="item-image">
                         <image class="item-image" src="{{item.Img}}" mode='center'/>
                     </view>
@@ -46,7 +47,9 @@
                           <button class="item-bottom-btn" type="primary" formType="submit">扫码开锁</button>
                         </view>  
                     </view>
+                    </navigator>
                  </view> 
+                 
             </view>
         </view>
     </view>

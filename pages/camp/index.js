@@ -24,7 +24,7 @@ Page({
         /**
          * 接口调用成功处理
          */
-        successFun: function (res, selfObj) {
+        successFun: function (id,res, selfObj) {
                 if (res.res_code == 200) {
                         var camp = res.data;
                         var camps = [];
@@ -46,7 +46,7 @@ Page({
         /**
          * 接口调用失败处理
          */
-        failFun: function (res, selfObj) {
+        failFun: function (id,res, selfObj) {
                 console.log('failFun', res)
         },
         /**
@@ -59,7 +59,7 @@ Page({
                 //获取营地列表
                 var url = CONFIG.API_URL.GET_CampOwerData
                 var params = {}
-                request.GET(url, params, this, this.successFun, this.failFun)
+                request.GET(url, params, 100, true, this, this.successFun, this.failFun)
         },
 
         /**

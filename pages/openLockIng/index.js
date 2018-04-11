@@ -24,7 +24,7 @@ Page({
                 progress: 0,
                 msg: "开锁中..."
         },
-        successFun: function (res, selfObj) {
+        successFun: function (id,res, selfObj) {
                 var that = selfObj;
                 if (res.res_code == 200) {
                         that.setData({
@@ -49,7 +49,7 @@ Page({
                         })
                 }, 2000);
         },
-        failFun: function (res, selfObj) {
+        failFun: function (id,res, selfObj) {
                 console.log('failFun', res)
         },
         /**
@@ -68,7 +68,7 @@ Page({
                         deviceId: deviceId
                 }
                 setTimeout(function () {
-                        request.GET(url, params, that, that.successFun, that.failFun);
+                        request.GET(url, params, 100, true, that, that.successFun, that.failFun);
                 }, 3000);
                 
         },
