@@ -215,34 +215,34 @@ Page({
             }
         break;
       case 101:
-              if (res.res_code == 200) {
-                var wxPay = res.data;
-                console.log(wxPay)
-                wx.requestPayment({
-                  'timeStamp': wxPay.timeStamp,
-                  'nonceStr': wxPay.nonceStr,
-                  'package': wxPay.package,
-                  'signType': 'MD5',
-                  'paySign': wxPay.paySign,
-                  'success': function (res) {
-                    console.log("支付成功")
+              // if (res.res_code == 200) {
+              //   var wxPay = res.data;
+              //   console.log(wxPay)
+              //   wx.requestPayment({
+              //     'timeStamp': wxPay.timeStamp,
+              //     'nonceStr': wxPay.nonceStr,
+              //     'package': wxPay.package,
+              //     'signType': 'MD5',
+              //     'paySign': wxPay.paySign,
+              //     'success': function (res) {
+              //       console.log("支付成功")
 
-                    var camperCarOrders = JSON.stringify(camperCarOrder);
-                    var camperCarDetails = JSON.stringify(camperCarDetail);
-                    var orderInfos = JSON.stringify(orderInfo);
-                    wx.navigateTo({
-                      url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
-                    })
-                  },
-                  'fail': function (res) {
-                    console.log("支付失败")
-                  }
-                })
-              } else {
-                wx.showToast({
-                  title: res.res_msg,
-                })
-              }
+              //       var camperCarOrders = JSON.stringify(camperCarOrder);
+              //       var camperCarDetails = JSON.stringify(camperCarDetail);
+              //       var orderInfos = JSON.stringify(orderInfo);
+              //       wx.navigateTo({
+              //         url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+              //       })
+              //     },
+              //     'fail': function (res) {
+              //       console.log("支付失败")
+              //     }
+              //   })
+              // } else {
+              //   wx.showToast({
+              //     title: res.res_msg,
+              //   })
+              // }
         break;
       case 102:
               if (res.res_code == 200) {
