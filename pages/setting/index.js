@@ -9,7 +9,7 @@ Page({
                   {
                           icon: '../../images/tel.png',
                           text: '账号安全',
-                          path: '/pages/myOrder/index'
+                          path: ''
                   },
                   {
                           icon: '../../images/tel.png',

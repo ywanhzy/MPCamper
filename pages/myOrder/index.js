@@ -30,36 +30,29 @@ Page({
       }).show()
 
     $wuxPrompt.init('msg2', {
-        icon: '../../images/iconfont-order.png',
-        title: '您还没有相关的订单',
-        text: '可以去看看有哪些想买',
-        buttons: [
-          {
-            text: '随便逛逛'
-          }
-        ],
-        buttonClicked(index, item) {
-          console.log(index, item)
-        },
+        // icon: '../../images/iconfont-order.png',
+        // title: '您还没有相关的订单',
+        // text: '可以去看看有哪些想买',
+        // buttons: [
+        //   {
+        //     text: '随便逛逛'
+        //   }
+        // ],
+        // buttonClicked(index, item) {
+        //   console.log(index, item)
+        // },
+        title: '空空如也',
+        text: '暂时没有相关数据',
       }).show()
 
     $wuxPrompt.init('msg3', {
-        icon: '../../images/iconfont-empty.png',
-        title: '暂无待评价订单',
+        title: '空空如也',
+        text: '暂时没有相关数据',
       }).show()
 
     $wuxPrompt.init('msg4', {
-      icon: '../../images/iconfont-order.png',
-      title: '您还没有相关的订单',
-      text: '可以去看看有哪些想买',
-      buttons: [
-        {
-          text: '随便逛逛'
-        }
-      ],
-      buttonClicked(index, item) {
-        console.log(index, item)
-      },
+        title: '空空如也',
+        text: '暂时没有相关数据',
     }).show()
 
       this.getSystemInfo()
