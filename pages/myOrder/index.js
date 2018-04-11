@@ -26,36 +26,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    $wuxPrompt.init('msg1', {
-        title: '空空如也',
-        text: '暂时没有相关数据',
-      }).show()
-
-    $wuxPrompt.init('msg2', {
-        // icon: '../../images/iconfont-order.png',
-        // title: '您还没有相关的订单',
-        // text: '可以去看看有哪些想买',
-        // buttons: [
-        //   {
-        //     text: '随便逛逛'
-        //   }
-        // ],
-        // buttonClicked(index, item) {
-        //   console.log(index, item)
-        // },
-        title: '空空如也',
-        text: '暂时没有相关数据',
-      }).show()
-
-    $wuxPrompt.init('msg3', {
-        title: '空空如也',
-        text: '暂时没有相关数据',
-      }).show()
-
-    $wuxPrompt.init('msg4', {
-        title: '空空如也',
-        text: '暂时没有相关数据',
-    }).show()
+    
 
       this.getSystemInfo()
 
@@ -67,8 +38,10 @@ Page({
    * 接口调用成功处理
    */
   successFun: function (id,res, selfObj) {
+
     switch(id){
       case 100:
+        
             if (res.res_code == 200) {
               var orders = res.dtOrderCar;
               var oo = [];
@@ -203,8 +176,11 @@ Page({
                     statuStr: ss,
                     btnStr: btn,
                   })
+                } else if (status == 8){
+                  
                 }
               }
+              
               selfObj.setData({
                 order: oo
               });
@@ -213,6 +189,37 @@ Page({
                 order: []
               });
             }
+
+            $wuxPrompt.init('msg1', {
+              title: '空空如也',
+              text: '暂时没有相关数据',
+            }).show()
+
+            $wuxPrompt.init('msg2', {
+              // icon: '../../images/iconfont-order.png',
+              // title: '您还没有相关的订单',
+              // text: '可以去看看有哪些想买',
+              // buttons: [
+              //   {
+              //     text: '随便逛逛'
+              //   }
+              // ],
+              // buttonClicked(index, item) {
+              //   console.log(index, item)
+              // },
+              title: '空空如也',
+              text: '暂时没有相关数据',
+            }).show()
+
+            $wuxPrompt.init('msg3', {
+              title: '空空如也',
+              text: '暂时没有相关数据',
+            }).show()
+
+            $wuxPrompt.init('msg4', {
+              title: '空空如也',
+              text: '暂时没有相关数据',
+            }).show()
         break;
       case 101:
               // if (res.res_code == 200) {
@@ -285,26 +292,34 @@ Page({
         console.log("全部");
         status = 0;
         this.setData({ status: status,})
+        this.getData();
         break;
       case '1':
         console.log("代付款");
         status = 1;
         this.setData({ status: 1 })
+        this.getData();
         break;
       case '2':
         console.log("待使用");
         status = 3;
         this.setData({ status: 3 })
+        this.getData();
         break;
       case '3':
-        console.log("退款");
-        // this.setData({ status: 0 })
+        // console.log("退款");
+        // this.setData({ status: 8 })
+        this.setData({
+          statuStr: [],
+          btnStr: [],
+          order: [],
+        })
         break;
     }
-    this.getData(this.data.activeIndex);
+    // this.getData();
   },
 
-  getData: function(type){
+  getData: function(){
     var url = CONFIG.API_URL.GET_MyOrderData
     var params = {}
     request.GET(url, params, 100, true, this, this.successFun, this.failFun)

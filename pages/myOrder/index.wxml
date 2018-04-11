@@ -44,9 +44,9 @@
                                 <text class='item-right-bottom-text'>入住时间：{{item.BTimeDate}}（{{item.Days}}晚）</text>
                                 <text class='item-right-bottom-text'>总价：¥{{item.TotalMoney}}</text>
                             </view>
-                             <view class='item-bottom'> 
+                             <!-- <view class='item-bottom'> 
                               <button class="item-bottom-btn" id='{{index}}' type="primary" catchtap='btnClick'>{{btnStr[index]}}</button>
-                            </view>   
+                            </view>    -->
                         </view>
                     </view>
                     </navigator>
