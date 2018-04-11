@@ -45,7 +45,7 @@
                                 <text class='item-right-bottom-text'>总价：¥{{item.TotalMoney}}</text>
                             </view>
                              <view class='item-bottom'> 
-                              <button class="item-bottom-btn" id='{{index}}' type="primary" bindtap='btnClick'>{{btnStr[index]}}</button>
+                              <button class="item-bottom-btn" id='{{index}}' type="primary" catchtap='btnClick'>{{btnStr[index]}}</button>
                             </view>   
                         </view>
                     </view>
