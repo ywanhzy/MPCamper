@@ -52,6 +52,7 @@ const CONFIG = {
                 // type1 房车订单  2 活动订单 3住房车订单
                 // orderNo  订单号 必传
                 GET_DelMyOrder: API_BASE + 'mydata/delMyOrder.ashx',
+                
                 //56、确认取车/还车/入住接口
                 GET_UpMyOrder: API_BASE + 'mydata/upMyOrder.ashx',
                 // orderStatus订单状态3 待取车(待消费) 4 已取车待还车/ 入住 6 已消费  7 已取消  8 关闭订单

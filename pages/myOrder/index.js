@@ -17,6 +17,7 @@ Page({
     sliderLeft: 0,
     order: [],
     status:0,
+    refresh:false,
     statuStr:[]
   },
 
@@ -237,8 +238,15 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function (options) {
+          //删除 修改状态后 返回刷新
+          console.log(this.data.refresh)
+          if (this.data.refresh){
+                  this.setData({
+                          refresh:false
+                  })
+                  this.getData()
+          }
   },
 
   /**

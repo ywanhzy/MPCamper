@@ -93,7 +93,7 @@
                         <button wx:if="{{camperOrderDetail.OrderStatus==1}}" style="width:100px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
                 </view>
                 <view class='content-right' bindtap="orderDel">
-                        <button wx:if="{{camperOrderDetail.OrderStatus==8}}" style="width:100px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
+                        <button wx:if="{{camperOrderDetail.OrderStatus==7}}" style="width:100px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
                 </view>
                 <view class='content-right' bindtap="orderPay">
                         <button wx:if="{{camperOrderDetail.OrderStatus==1}}" style="width:100px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
