@@ -18,7 +18,8 @@ Page({
     order: [],
     status:0,
     refresh:false,
-    statuStr:[]
+    statuStr:[],
+    btnStr:[]
   },
 
   /**
@@ -66,113 +67,194 @@ Page({
    * 接口调用成功处理
    */
   successFun: function (id,res, selfObj) {
-    if (res.res_code == 200) {
-      var orders = res.dtOrderCar;
-      var oo = [];
-      var ss = [];
-      console.log("length:" + orders.length)
-      if (orders.length > 0) {
-        if(status==0){
-          for (var i = 0; i < orders.length; i++) {
-            var obj = orders[i]
-            var str =""
-            switch (obj.OrderStatus){
-              case 1://待付款
-                str = "待付款"
-                break;
-              case 3://待入住
-                str = "待入住"
-                break;
-              case 4://已入住
-                str = "已入住"
-                break;
-              case 6://已消费 
-                str = "已消费"
-                break;
-              case 7://已取消  
-                str = "已取消"
-                break;
-              case 8://关闭订单
-                str = "关闭订单"
-                break;
-            }
-            ss.push(str);
-            
-            obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 200 + "X" + 200 + ".jpg";
-            obj.i = i;
-            oo.push(obj);
-          }
-          selfObj.setData({
-            statuStr: ss
-          })
-        }else if(status==1){
-          for (var i = 0; i < orders.length; i++) {
-            var obj = orders[i]
-            if (obj.OrderStatus==1){
-              var str = ""
-              switch (obj.OrderStatus) {
-                case 1://待付款
-                  str = "待付款"
-                  break;
-                case 3://待入住
-                  str = "待入住"
-                  break;
-                case 4://已入住
-                  str = "已入住"
-                  break;
-                case 6://已消费 
-                  str = "已消费"
-                  break;
-                case 7://已取消  
-                  str = "已取消"
-                  break;
-                case 8://关闭订单
-                  str = "关闭订单"
-                  break;
+    switch(id){
+      case 100:
+            if (res.res_code == 200) {
+              var orders = res.dtOrderCar;
+              var oo = [];
+              var ss = [];
+              var btn = [];
+              console.log("length:" + orders.length)
+              if (orders.length > 0) {
+                if (status == 0) {
+                  for (var i = 0; i < orders.length; i++) {
+                    var obj = orders[i]
+                    var str = ""
+                    var b = ""
+                    switch (obj.OrderStatus) {
+                      case 1://待付款
+                        str = "待付款"
+                        b = "立即支付"
+                        break;
+                      case 3://待入住
+                        str = "待入住"
+                        b = "扫码开锁"
+                        break;
+                      case 4://已入住
+                        str = "已入住"
+                        b = "扫码开锁"
+                        break;
+                      case 6://已消费 
+                        str = "已消费"
+                        b = ""
+                        break;
+                      case 7://已取消  
+                        str = "已取消"
+                        b = "删除订单"
+                        break;
+                      case 8://关闭订单
+                        str = "关闭订单"
+                        b = "删除订单"
+                        break;
+                    }
+                    ss.push(str);
+                    btn.push(b);
+                    obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 200 + "X" + 200 + ".jpg";
+                    obj.i = i;
+                    oo.push(obj);
+                  }
+                  selfObj.setData({
+                    statuStr: ss,
+                    btnStr: btn,
+                  })
+                } else if (status == 1) {
+                  for (var i = 0; i < orders.length; i++) {
+                    var obj = orders[i]
+                    if (obj.OrderStatus == 1) {
+                      var str = ""
+                      var b = ""
+                      switch (obj.OrderStatus) {
+                        case 1://待付款
+                          str = "待付款"
+                          b = "立即支付"
+                          break;
+                        case 3://待入住
+                          str = "待入住"
+                          b = "扫码开锁"
+                          break;
+                        case 4://已入住
+                          str = "已入住"
+                          b = "扫码开锁"
+                          break;
+                        case 6://已消费 
+                          str = "已消费"
+                          b = ""
+                          break;
+                        case 7://已取消  
+                          str = "已取消"
+                          b = "删除订单"
+                          break;
+                        case 8://关闭订单
+                          str = "关闭订单"
+                          b = "删除订单"
+                          break;
+                      }
+                      ss.push(str);
+                      btn.push(b);
+                      obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 200 + "X" + 200 + ".jpg";
+                      obj.i = i;
+                      oo.push(obj);
+                    }
+                  }
+                  selfObj.setData({
+                    statuStr: ss,
+                    btnStr: btn,
+                  })
+                } else if (status == 3) {
+                  for (var i = 0; i < orders.length; i++) {
+                    var obj = orders[i]
+                    if (obj.OrderStatus == 3) {
+                      var str = ""
+                      var b = ""
+                      switch (obj.OrderStatus) {
+                        case 1://待付款
+                          str = "待付款"
+                          b = "立即支付"
+                          break;
+                        case 3://待入住
+                          str = "待入住"
+                          b = "扫码开锁"
+                          break;
+                        case 4://已入住
+                          str = "已入住"
+                          b = "扫码开锁"
+                          break;
+                        case 6://已消费 
+                          str = "已消费"
+                          b = ""
+                          break;
+                        case 7://已取消  
+                          str = "已取消"
+                          b = "删除订单"
+                          break;
+                        case 8://关闭订单
+                          str = "关闭订单"
+                          b = "删除订单"
+                          break;
+                      }
+                      ss.push(str);
+                      btn.push(b);
+                      obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 200 + "X" + 200 + ".jpg";
+                      obj.i = i;
+                      oo.push(obj);
+                    }
+                  }
+                  selfObj.setData({
+                    statuStr: ss,
+                    btnStr: btn,
+                  })
+                }
               }
-              ss.push(str);
-              obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 160 + "X" + 160 + ".jpg";
-              obj.i = i;
-              oo.push(obj);
+              selfObj.setData({
+                order: oo
+              });
+            } else if (res.res_code == -100) {
+              selfObj.setData({
+                order: []
+              });
             }
-          }
-        } else if (status == 3){
-          for (var i = 0; i < orders.length; i++) {
-            var obj = orders[i]
-            if (obj.OrderStatus == 3) {
-              var str = ""
-              switch (obj.OrderStatus) {
-                case 1://待付款
-                  str = "待付款"
-                  break;
-                case 3://待入住
-                  str = "待入住"
-                  break;
-                case 4://已入住
-                  str = "已入住"
-                  break;
-                case 6://已消费 
-                  str = "已消费"
-                  break;
-                case 7://已取消  
-                  str = "已取消"
-                  break;
-                case 8://关闭订单
-                  str = "关闭订单"
-                  break;
+        break;
+      case 101:
+              if (res.res_code == 200) {
+                var wxPay = res.data;
+                console.log(wxPay)
+                wx.requestPayment({
+                  'timeStamp': wxPay.timeStamp,
+                  'nonceStr': wxPay.nonceStr,
+                  'package': wxPay.package,
+                  'signType': 'MD5',
+                  'paySign': wxPay.paySign,
+                  'success': function (res) {
+                    console.log("支付成功")
+
+                    var camperCarOrders = JSON.stringify(camperCarOrder);
+                    var camperCarDetails = JSON.stringify(camperCarDetail);
+                    var orderInfos = JSON.stringify(orderInfo);
+                    wx.navigateTo({
+                      url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                    })
+                  },
+                  'fail': function (res) {
+                    console.log("支付失败")
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title: res.res_msg,
+                })
               }
-              ss.push(str);
-              obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + 160 + "X" + 160 + ".jpg";
-              obj.i = i;
-              oo.push(obj);
-            }
-          }
-        }
-      }
-      selfObj.setData({
-        order: oo
-      });
+        break;
+      case 102:
+              if (res.res_code == 200) {
+                this.getData();
+              } else {
+                wx.showToast({
+                  title: res.res_msg,
+                })
+              }
+        break;
     }
+    
 
   },
 
@@ -226,6 +308,35 @@ Page({
     var url = CONFIG.API_URL.GET_MyOrderData
     var params = {}
     request.GET(url, params, 100, true, this, this.successFun, this.failFun)
+  },
+
+  btnClick: function(e){
+    const index = parseInt(e.currentTarget.id);
+    console.log(this.data.btnStr[index])
+    switch (this.data.btnStr[index]){
+      case "立即支付":
+        // var openid = wx.getStorageSync('wx_openid')
+        // var url = CONFIG.API_URL.GET_WxPay
+        // var params = {
+        //   orderno: this.data.order[index].OrderNo,
+        //   openid: openid,
+        //   flag: "1"
+        // }
+        // request.GET(url, params, 101, true, this, this.successFun, this.failFun)
+        break;
+      case "扫码开锁":
+
+        break;
+      case "删除订单":
+        // var url = CONFIG.API_URL.GET_DelMyOrder
+        // var params = {
+        //   orderno: this.data.order[index].OrderNo,
+        //   orderGuid: this.data.order[index].OrderGuid,
+        //   type: "3"
+        // }
+        // request.GET(url, params, 102, true, this, this.successFun, this.failFun)
+        break;
+    }
   },
 
   /**
