@@ -7,13 +7,14 @@
 
         <view class="line"></view>
 
+
         <view class="order-info">
                 <view class='info-title'>预订人</view>
                 <view class='info-content'>{{orderInfo.nickName}}</view>
         </view>
         <view class="order-info">
                 <view class='info-title'>入住日期</view>
-                <view class='info-content'>{{camperCarDetail.CheckOutTime}}</view>
+                <view class='info-content'>{{camperCarDetail.CheckInTime}}</view>
         </view>
         <view class="order-info">
                 <view class='info-title'>退房日期</view>
@@ -21,5 +22,6 @@
         </view>
         <view class="line"></view>
         <view bindtap="finish">
-        <button class="login-btn" formType="submit">完成</button></view>
+                <button class="login-btn" formType="submit">完成</button>
+        </view>
 </view>

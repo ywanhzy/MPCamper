@@ -44,6 +44,25 @@ Page({
                                                 camperOrderDetail: camperOrderDetail,
                                         })
 
+                                        var d1 = new Date;
+                                        var d2 = new Date(camperOrderDetail.CreateTime);
+                                        var iCountdown = 60 * 1000 * 60 * 24 - parseInt(d1 - d2);
+                                        console.error(iCountdown)
+                                        if (iCountdown > 0) {
+                                                selfObj.c1 = new $wuxCountDown({
+                                                        date: +(new Date) + iCountdown,
+                                                        render(date) {
+                                                                //   const years = this.leadingZeros(date.years, 4) + ' 年 '
+                                                                //   const days = this.leadingZeros(date.days, 3) + ' 天 '
+                                                                const hours = this.leadingZeros(date.hours, 2) + ' 时 '
+                                                                const min = this.leadingZeros(date.min, 2) + ' 分 '
+                                                                const sec = this.leadingZeros(date.sec, 2) + ' 秒 '
+                                                                selfObj.setData({
+                                                                        c1: hours + min + sec,
+                                                                })
+                                                        },
+                                                })
+                                        }
                                         //高德静态地图
                                         var key = CONFIG.APP_KEY.AmapKey;
                                         myAmapFun = new amapFile.AMapWX({ key: key });
@@ -70,7 +89,7 @@ Page({
                                         })
                                 }
                                 break;
-                                //支付
+                        //支付
                         case 101:
                                 if (res.res_code == 200) {
                                         var wxPay = res.data;
@@ -83,12 +102,21 @@ Page({
                                                 'paySign': wxPay.paySign,
                                                 'success': function (res) {
                                                         console.log("支付成功")
-                                                        
-                                                        var camperCarOrders = JSON.stringify(camperCarOrder);
+
+                                                        var camperCarDetail = new Object();
+                                                        camperCarDetail.CamperTypeName = camperOrderDetail.CamperTypeName;
+                                                        camperCarDetail.CampShortName = camperOrderDetail.CampShortName;
+                                                        camperCarDetail.CheckInTime = camperOrderDetail.BTimeDate;
+                                                        camperCarDetail.CheckOutTime = camperOrderDetail.ETimeDate;
                                                         var camperCarDetails = JSON.stringify(camperCarDetail);
+
+                                                        var orderInfo = new Object();
+                                                        orderInfo.nickName = camperOrderDetail.BookingPersonName;
+
                                                         var orderInfos = JSON.stringify(orderInfo);
+
                                                         wx.navigateTo({
-                                                                url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                                                url: '/pages/camperCarPayResult/index?camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
                                                         })
                                                 },
                                                 'fail': function (res) {
@@ -101,7 +129,7 @@ Page({
                                         })
                                 }
                                 break;
-                                //删除订单
+                        //删除订单
                         case 102:
                                 if (res.res_code == 200) {
                                         var pages = getCurrentPages();
@@ -120,7 +148,7 @@ Page({
                                 }
                                 break;
                         case 103:
-                              
+
                                 if (res.res_code == 200) {
                                         var pages = getCurrentPages();
                                         var currPage = pages[pages.length - 1];   //当前页面
@@ -187,7 +215,7 @@ Page({
                 var params = {
                         orderno: camperOrderDetail.OrderNo,
                         orderGuid: camperOrderDetail.OrderGuid,
-                        orderStatus:"7",
+                        orderStatus: "7",
                         type: "3"
                 }
                 request.GET(url, params, 103, true, this, this.successFun, this.failFun)
