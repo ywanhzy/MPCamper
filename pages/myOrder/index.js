@@ -4,6 +4,7 @@ const sliderWidth = 96
 var CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
+var status
 
 Page({
 
@@ -38,7 +39,7 @@ Page({
    * 接口调用成功处理
    */
   successFun: function (id,res, selfObj) {
-
+    
     switch(id){
       case 100:
         
