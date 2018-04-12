@@ -2,7 +2,7 @@
         <view bindtap="bindViewTap" class="userinfo">
                 <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
                 <text wx:if="{{userInfo.nickName}}" class="userinfo-nickname">{{ userInfo.nickName }}</text>
-                <text wx:else bindtap="toLogin" class="userinfo-nickname">授权登录</text>
+                <text wx:else bindtap="toLogin" class="userinfo-nickname">点击登录重新授权</text>
         </view>
 
         <view class="info_list">

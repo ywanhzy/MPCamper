@@ -84,69 +84,26 @@
 <view class="content-b">
         <view class="content-c ">
                 <view class='content-left'>
-                        <view class="countdown">{{ c1 }}</view>
+                        <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class="countdown">{{ c1 }}</view>
                 </view>
-                <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-right' bindtap="orderCancel">
+                <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderCancel">
                         <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
                 </view>
-                <view wx:if="{{camperOrderDetail.OrderStatus==7}}"  class='content-right' bindtap="orderDel">
+                <view wx:if="{{camperOrderDetail.OrderStatus==7}}"  class='content-left' bindtap="orderDel">
                         <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
                 </view>
-                <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-right' bindtap="orderPay">
+                <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderPay">
                         <button  style="width:100px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
                 </view>
+                <view  wx:if="{{camperOrderDetail.OrderStatus==3}}" class='content-left' >
+                        待入住
+                </view>
+                <view  wx:if="{{camperOrderDetail.OrderStatus==4}}" class='content-left' >
+                        已入住
+                </view>
+                <view  wx:if="{{camperOrderDetail.OrderStatus==6}}" class='content-left' >
+                        已消费
+                </view>
+
         </view>
 </view>
-
-<!-- <view class="container">
-        <view class="text-center">
-                <view class="countdown">{{ c1 }}</view>
-                <view class="countdown">{{ c3 }}</view>
-        </view>
-
-        <view class="page__bd">
-                <view class="weui-form-preview">
-                        <view class="weui-form-preview__hd">
-                                <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview_columm__label">
-                                                <text class="title">{{camperCarDetail.CampOwerName}}</text>
-                                                <text class="info">{{camperCarDetail.CamperTypeName}}</text>
-                                        </view>
-                                        <view class="weui-form-preview__value_in-hd">
-                                                <image style="width:40px; height:40px;border-radius: 50%;" src='{{camperCarDetail.Logo}}' mode='aspectFill'></image>
-                                        </view>
-                                </view>
-                        </view>
-
-                        <view class="weui-form-preview__hd">
-                                <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label">{{camperCarDetail.CamperTypeName}}</view>
-                                        <view class="weui-form-preview__value_in-hd">¥{{camperCarDetail.DailyPrice}}/晚</view>
-                                </view>
-                        </view>
-                        <view class="weui-form-preview__bd">
-                                <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label">{{orderInfo.start}}-{{orderInfo.end}}</view>
-                                        <view class="weui-form-preview__value" bindtap="openCalendarS">{{orderInfo.day}}晚</view>
-                                </view>
-
-
-                                <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label">房费({{orderInfo.day}}晚)</view>
-                                        <view class="weui-form-preview__value">￥{{orderInfo.totalMoney}}</view>
-                                </view>
-
-
-                                <view class="weui-form-preview__item">
-                                        <view class="weui-form-preview__label">押金</view>
-                                        <view class="weui-form-preview__value">￥{{camperCarDetail.Deposit}}</view>
-                                </view>
-                        </view>
-                </view>
-        </view>
-
-
-        <view class="btn-plus" bindtap="orderPay">
-                <button class="weui-btn" type="warn">立即支付</button>
-        </view>
-</view> -->

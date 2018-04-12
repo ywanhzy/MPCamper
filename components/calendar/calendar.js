@@ -626,8 +626,9 @@ class Calendar {
                         const dateType = dataset.type
                         const yearMonthDay = dataset.ymd
                         var isContain=false
+                        
                         for (let i = 0; i < this.options.dayMoney.length; i++) {
-                                if (this.options.dayMoney[i].ActivityDate == yearMonthDay){
+                                if (this.options.dayMoney[i].ActivityDate == yearMonthDay && this.options.dayMoney[i].Num==1){
                                         isContain=true
                                 }
                         }

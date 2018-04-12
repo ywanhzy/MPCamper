@@ -5,7 +5,7 @@ const app = getApp()
 const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
-var IMAGE = require('../../utils/image.js');  
+var IMAGE = require('../../utils/image.js');
 
 var width;
 var height;
@@ -15,8 +15,8 @@ Page({
                 motto: 'Hello World',
                 userInfo: {},
                 camperCar: [],
-                width:'',
-                height:'',
+                width: '',
+                height: '',
                 telstatus: true,
                 hasUserInfo: false,
                 canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -33,7 +33,7 @@ Page({
         /**
          * 接口调用成功处理
          */
-        successFun: function (id,res, selfObj) {
+        successFun: function (id, res, selfObj) {
                 if (res.res_code == 200) {
                         var camperCar = res.data;
                         var camperCars = [];
@@ -41,12 +41,12 @@ Page({
                         if (camperCar.length > 0) {
                                 for (var i = 0; i < camperCar.length; i++) {
                                         var obj = camperCar[i]
-                                       // obj.Img1 = spiltStr(obj.Img)[0] + "_" + parseInt(width * 3 / 4) + "X" + parseInt(width / 2) + ".jpg";
+                                        // obj.Img1 = spiltStr(obj.Img)[0] + "_" + parseInt(width * 3 / 4) + "X" + parseInt(width / 2) + ".jpg";
                                         obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
                                         obj.i = i;
-                                        if (obj.Num==1){
+                                        if (obj.Num == 1) {
                                                 obj.yes = true;
-                                        }else{
+                                        } else {
                                                 obj.yes = false;
                                         }
                                         camperCars.push(obj);
@@ -57,6 +57,7 @@ Page({
                         });
                 }
 
+                wx.stopPullDownRefresh(); //停止下拉刷新
         },
         /**
          * 接口调用失败处理
@@ -65,13 +66,14 @@ Page({
                 console.log('failFun', res)
         },
         onLoad: function () {
-                var that=this
-                width=app.globalData.width
-                height=app.globalData.height
-                
+              
+                var that = this
+                width = app.globalData.width
+                height = app.globalData.height
+
                 // wx.setStorageSync('token', "")
                 // wx.setStorageSync('memberid', "")
-                
+
                 if (app.globalData.userInfo) {
                         this.setData({
                                 userInfo: app.globalData.userInfo,
@@ -99,18 +101,13 @@ Page({
                         })
                 }
 
-                //获取住房车列表
-                var url = CONFIG.API_URL.GET_CamperCarAll
-                var params = {}
-                request.GET(url, params, 100, true, this, this.successFun, this.failFun)
-
-
+                this.getList(that);
 
                 // var url = CONFIG.API_URL.GET_WxOpenId
                 // var params = {}
                 // request.GET(url, params, this, this.successFun, this.failFun)
 
-                
+
                 // wx.request({
                 //         url: 'https://api.weixin.qq.com/sns/jscode2session',
                 //         data: {
@@ -128,7 +125,6 @@ Page({
                 // })
 
         },
-
         getUserInfo: function (e) {
                 console.log(e)
                 app.globalData.userInfo = e.detail.userInfo
@@ -137,6 +133,17 @@ Page({
                         hasUserInfo: true
                 })
         },
+        onPullDownRefresh: function () {
+                var that = this;
+                console.log("下拉刷新")
+                this.getList(that);
+        },
+        getList: function (that) {
+                //获取住房车列表
+                var url = CONFIG.API_URL.GET_CamperCarAll
+                var params = {}
+                request.GET(url, params, 100, true, that, that.successFun, that.failFun)
+        },
         binderrorimg: function (e) {
                 // var errorImgIndex = e.target.dataset.errorimg //获取循环的下标
                 // var imgObject = "camperCar[" + errorImgIndex + "].Img" //carlistData为数据源，对象数组
@@ -144,13 +151,54 @@ Page({
                 // var errorImg = {}
                 // errorImg[imgObject] = "https://w.chesudi.com/Public/web/img/onerrorcar.png" //我们构建一个对象
                 // this.setData(errorImg) //修改数据源对应的数据
-               
+
                 var _that = this;
                 IMAGE.errImgFun(e, _that);
-                
+
+        },
+        /**
+         * 用户点击右上角分享
+         */
+        onShareAppMessage: function (options) {
+                console.log('onShareAppMessage')
+                var shareObj = {
+                        title: '房车行',
+                        desc: '房车行',
+                        path: '/pages/index/index',
+                        success: function (res) {
+                                console.log('success')
+                                var shareTickets = res.shareTickets;
+                                console.log('shareTickets：' + shareTickets)
+                                // if (shareTickets.length == 0) {
+                                //         return false;
+                                // }
+                                // wx.getShareInfo({
+                                //         shareTicket: shareTickets[0],
+                                //         success: function (res) {
+                                //                 var encryptedData = res.encryptedData;
+                                //                 var iv = res.iv;
+                                //         }
+                                // })
+                        },
+                        fail: function () {
+                                console.log('fail')
+                        },
+                        complete: function () {
+                               
+                        }
+                };
+
+                // 来自页面内的按钮的转发
+                if (options.from == 'button') {
+                        var eData = options.target.dataset;
+                        console.log(eData.name);     // shareBtn
+                        // 此处可以修改 shareObj 中的内容
+                        shareObj.path = '/pages/btnname/btnname?btn_name=' + eData.name;
+                }
+                return shareObj;
         }
 
-        
+
 
 })
 

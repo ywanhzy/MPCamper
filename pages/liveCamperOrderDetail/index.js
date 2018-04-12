@@ -106,8 +106,11 @@ Page({
                                                         var camperCarDetail = new Object();
                                                         camperCarDetail.CamperTypeName = camperOrderDetail.CamperTypeName;
                                                         camperCarDetail.CampShortName = camperOrderDetail.CampShortName;
-                                                        camperCarDetail.CheckInTime = camperOrderDetail.BTimeDate;
-                                                        camperCarDetail.CheckOutTime = camperOrderDetail.ETimeDate;
+                                                        camperCarDetail.CheckInTime = camperOrderDetail.CheckInTime;
+                                                        camperCarDetail.CheckOutTime = camperOrderDetail.CheckOutTime;
+                                                        camperCarDetail.BTimeDate = camperOrderDetail.BTimeDate;
+                                                        camperCarDetail.ETimeDate = camperOrderDetail.ETimeDate;
+
                                                         var camperCarDetails = JSON.stringify(camperCarDetail);
 
                                                         var orderInfo = new Object();

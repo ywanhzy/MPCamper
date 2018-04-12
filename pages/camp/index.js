@@ -41,7 +41,7 @@ Page({
                                 camp: camps
                         });
                 }
-
+                wx.stopPullDownRefresh(); //停止下拉刷新
         },
         /**
          * 接口调用失败处理
@@ -56,12 +56,22 @@ Page({
                 width=app.globalData.width;
                 height=app.globalData.height;
 
+                this.getList(this);
+        },
+        /**
+         * 页面相关事件处理函数--监听用户下拉动作
+         */
+        onPullDownRefresh: function () {
+                var that = this;
+                console.log("下拉刷新")
+                this.getList(that);
+        },
+        getList: function (that) {
                 //获取营地列表
                 var url = CONFIG.API_URL.GET_CampOwerData
                 var params = {}
-                request.GET(url, params, 100, true, this, this.successFun, this.failFun)
+                request.GET(url, params, 100, true, that, that.successFun, that.failFun)
         },
-
         /**
          * 生命周期函数--监听页面初次渲染完成
          */
@@ -90,12 +100,7 @@ Page({
 
         },
 
-        /**
-         * 页面相关事件处理函数--监听用户下拉动作
-         */
-        onPullDownRefresh: function () {
-
-        },
+        
 
         /**
          * 页面上拉触底事件的处理函数

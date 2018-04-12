@@ -45,6 +45,13 @@ Page({
                                   wx.reLaunch({
                                           url: '../openLockIng/index?lockcode=' + parameterObject.lockcode
                                   });
+                          }, fail: (res)=>{
+                                  console.log("fail"+res)
+                                  wx.reLaunch({
+                                          url: '../index/index'
+                                  });
+                          }, complete: (res)=>{
+                                  console.log("complete")
                           }
                   })
           }

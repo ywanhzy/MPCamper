@@ -43,7 +43,7 @@
                                                                                         <view class="wux-calendar__text">
                                                                                                 <view class="day_text">{{ col.day }}</view>
                                                                                                 <block wx:for="{{ dayMoney }}" wx:for-item="item" wx:key="">
-                                                                                                        <block wx:if="{{item.ActivityDate==col.date8}}">
+                                                                                                        <block wx:if="{{item.ActivityDate==col.date8 && item.Num==1}}">
                                                                                                                 <view class="dayprice_text">￥{{ item.DailyPrice }}</view>
                                                                                                         </block>
                                                                                                 </block>

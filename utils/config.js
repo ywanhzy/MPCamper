@@ -1,17 +1,6 @@
-//var API_BASE = 'http://iklch.ezagoo.com:16111/'; //正式环境
 
-var API_BASE = 'http://cs.ezagoo.net:8002/';  //测试环境
-
-
-//http://iklch.ezagoo.com:16111/home/getRecommonendData.ashx?pageIndex=1&pageSize=10
-
-//http://iklch.ezagoo.com:16111/detail/travelguide_detail.ashx?memberguid=&travelGuideGuid=c42f4f6bf6214e79bb214cedd4347bde&token=
-
-// res_code 返回 - 1000 表示需要重新登录
-// 200 返回正常数据    其余可根据返回的res_msg相应提示
-
-
-
+const conf = require('../conf.js');
+const API_BASE = conf.baseDomain
 //error相关
 var ERROR_DATA_IS_NULL = "获取数据为空，请重试";
 

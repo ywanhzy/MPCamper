@@ -1,6 +1,52 @@
 //app.js
 App({
-        onLaunch: function () {
+        onShow: function (options) {
+                console.log("[onShow] path:", options.path)
+                console.log("[onShow] query:", options.query)
+                console.log("[onShow] scene:", options.scene)
+                // console.log("[onShow] 场景值:", options.shareTicket)
+                // console.log("[onShow] 场景值:", options.referrerInfo.appId)
+                // console.log("[onShow] 场景值:", options.referrerInfo.extraData)
+
+                //1044--带 shareTicket 的小程序消息卡片
+                if (options.scene == 1044) {
+                        console.log("[onShow] shareTicket:", options.shareTicket)
+                        wx.getShareInfo({
+                                shareTicket: options.shareTicket,
+                                success: function (res) {
+                                        var encryptedData = res.encryptedData;
+                                        var iv = res.iv;
+                                        console.log("encryptedData:" + encryptedData)
+                                        console.log("iv:" + encryptedData)
+                                }
+                        })
+                }
+
+                //小程序更新
+                const updateManager = wx.getUpdateManager()
+                updateManager.onCheckForUpdate(function (res) {
+                        // 请求完新版本信息的回调
+                        console.log("onCheckForUpdate:"+res.hasUpdate)
+                })
+                updateManager.onUpdateReady(function () {
+                        wx.showModal({
+                                title: '更新提示',
+                                content: '新版本已经准备好，是否重启应用？',
+                                showCancel:false,
+                                success: function (res) {
+                                        if (res.confirm) {
+                                                // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                                                updateManager.applyUpdate()
+                                        }
+                                }
+                        })
+                })
+                updateManager.onUpdateFailed(function () {
+                        // 新的版本下载失败
+                })
+
+        },
+        onLaunch: function (options) {
                 // 展示本地存储能力
                 var that = this
                 var logs = wx.getStorageSync('logs') || []
@@ -11,7 +57,7 @@ App({
                 wx.login({
                         success: function (res) {
                                 if (res.code) {
-                                        console.error("code:"+res.code)
+                                        console.error("code:" + res.code)
                                         wx.setStorageSync('wx_code', res.code)
                                         //小程序已绑定了开放平台 就可以直接获取unionid 发起网络请求
                                         // https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
@@ -32,7 +78,7 @@ App({
                                 } else {
                                         console.log('获取用户登录态失败！' + res.errMsg)
                                 }
-                                
+
                         },
                         fail: function (res) {
                                 console.log('login-fail')
@@ -67,7 +113,7 @@ App({
                                                                 },
                                                                 success: function (res) {
                                                                         console.log(res.data)
-                                                                       
+
                                                                         that.globalData.eUserInfo = res.data.data;
                                                                         console.log(that.globalData.eUserInfo)
 
@@ -110,7 +156,7 @@ App({
                                                 }, fail: function (res) {
                                                         wx.setStorageSync('wx_authorize', false)
                                                         console.log("fail")
-                                                },complete: function(){
+                                                }, complete: function () {
                                                         console.log("complete")
                                                 }
                                         })
@@ -187,13 +233,13 @@ App({
                         address: address
                 })
         },
-        wxAuthorize: function(){
+        wxAuthorize: function () {
                 var that = this;
                 wx.login({
                         success: function (res) {
                                 if (res.code) {
                                         console.error("wxAuthorize_code:" + res.code)
-                                        wx.setStorageSync('wx_code', res.code)               
+                                        wx.setStorageSync('wx_code', res.code)
                                 } else {
                                         console.log('wxAuthorize获取用户登录态失败！' + res.errMsg)
                                 }
@@ -224,11 +270,11 @@ App({
                                                                 success: function (res) {
                                                                         that.globalData.eUserInfo = res.data.data;
                                                                         console.log("unionid:" + res.data.data.unionid)
-                                                                        wx.setStorageSync('wx_unionid',res.data.data.unionid)
+                                                                        wx.setStorageSync('wx_unionid', res.data.data.unionid)
                                                                         wx.setStorageSync('wx_openid', res.data.data.Openid)
                                                                         wx.setStorageSync('token', res.data.data.token)
                                                                         wx.setStorageSync('memberguid', res.data.data.GUID)
-                                                                    
+
                                                                 }
                                                         })
                                                 }
@@ -241,7 +287,7 @@ App({
         },
         globalData: {
                 userInfo: null,
-                eUserInfo:null,
+                eUserInfo: null,
                 phoneNumber: '4000-155-105',
                 width: null,//屏幕宽
                 height: null//屏幕高

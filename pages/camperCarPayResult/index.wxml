@@ -14,11 +14,11 @@
         </view>
         <view class="order-info">
                 <view class='info-title'>入住日期</view>
-                <view class='info-content'>{{camperCarDetail.CheckInTime}}</view>
+                <view class='info-content'>{{camperCarDetail.BTimeDate}} ({{camperCarDetail.CheckInTime}}后)</view>
         </view>
         <view class="order-info">
                 <view class='info-title'>退房日期</view>
-                <view class='info-content'>{{camperCarDetail.CheckOutTime}}</view>
+                <view class='info-content'>{{camperCarDetail.ETimeDate}} ({{camperCarDetail.CheckOutTime}}前)</view>
         </view>
         <view class="line"></view>
         <view bindtap="finish">

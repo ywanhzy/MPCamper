@@ -33,10 +33,16 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "营地",
 					"pathName": "pages/camp/index",
-					"query": ""
+					"query": "",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "wYqQ9yiNTvU5pECI7WhL_4EaFgo1XOW062XKhRGg4Yc@cr4dev",
+						"shareKey": "lFa63XiSwnYXXznAAzsMEtjIdcZ3f17v_-LzgbY59gJUEU5mwfcq1F9bh0qWTnC55OZzI4d0OvFAMRh7NP1Zqg~~"
+					}
 				},
 				{
 					"id": -1,
@@ -73,6 +79,18 @@
 					"name": "支付完成",
 					"pathName": "pages/camperCarPayResult/index",
 					"query": ""
+				},
+				{
+					"id": 7,
+					"name": "场景",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": "1044",
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "wYqQ9yiNTvU5pECI7WhL_4EaFgo1XOW062XKhRGg4Yc@cr4dev",
+						"shareKey": "lFa63XiSwnYXXznAAzsMEtjIdcZ3f17v_-LzgbY59gJUEU5mwfcq1F9bh0qWTnC55OZzI4d0OvFAMRh7NP1Zqg~~"
+					}
 				}
 			]
 		}
