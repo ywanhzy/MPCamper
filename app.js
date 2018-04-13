@@ -43,6 +43,7 @@ App({
                 })
                 updateManager.onUpdateFailed(function () {
                         // 新的版本下载失败
+                        console.log("onUpdateFailed")
                 })
 
         },

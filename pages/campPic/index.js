@@ -4,7 +4,7 @@ const app = getApp()
 var util = require('../../utils/util.js')
 var width;
 var height;
-
+var originalImgs;
 Page({
 
         /**
@@ -13,6 +13,7 @@ Page({
         data: {
                 size: 0,
                 height:null,
+                width:null,
                 campPicInitial :[],
                 campPic: []
         },
@@ -25,17 +26,24 @@ Page({
                 height = app.globalData.height;
                 console.error(options.imgs)
                 var Imgs = util.spiltStr(options.imgs);
-                var tempImgs;
+                originalImgs = util.spiltStr(options.imgs);
+
+                var ImgLists = [];
                 for (var i = 0; i < Imgs.length; i++) {
+                        var obj=new Object;
+                        obj.OriginalImg = Imgs[i];
                         Imgs[i] = Imgs[i] + "_" + parseInt(width/2) + "X" + parseInt(width / 4) + ".jpg";
                         console.error(Imgs[i])
+                        obj.Img = Imgs[i];
+                        ImgLists.push(obj);
                 }
           
                 this.setData({
                         size: Imgs.length,
-                        height: width / 3,
+                        height: width / 4,
+                        width: width / 2,
                         campPicInitial: util.spiltStr(options.imgs),
-                        campPic: Imgs
+                        campPic: ImgLists
                 })
 
 
@@ -43,11 +51,12 @@ Page({
         //预览图片
         previewImage: function (e) {
                 var that = this;
-                var src = e.currentTarget.dataset.src;
+                var ssrc = e.currentTarget.dataset.ssrc; 
+                console.log("2--" +ssrc)
                 var imageList = that.data.campPic;
                 wx.previewImage({
-                        current: src,
-                        urls: imageList,
+                        current: ssrc,
+                        urls: originalImgs,
                         fail: function () {
                         },
                         complete: function () {
