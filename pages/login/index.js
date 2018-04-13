@@ -5,6 +5,7 @@ const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
 var util = require('../../utils/util.js')
 var phone
+
 Page({
         data: {
                 tel:null,
@@ -91,6 +92,7 @@ Page({
                         mark: "9"
                 }
                 request.GET(url, params, 100, true, this, this.successFun, this.failFun)
+                
         },
         /**
          * 生命周期函数--监听页面初次渲染完成

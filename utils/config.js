@@ -77,6 +77,11 @@ const CONFIG = {
                 //119、图形验证码获取 参数： mark = 1
                 GET_SecurityCode: API_BASE + 'SecurityCode.aspx',
 
+                //发送验证码 
+                // phone = 18670339102 & mark=9
+                // phone = 18670339102 & mark=9
+                // mark 1  支付密码发送 2 第三方登陆授权注册获取验证码  3 商家注册/商家修改手机号修改第二步  4 微信注册 5商家修改手机号(第一步)  6找回密码发送验证码 9 微信版绑定
+                GET_SendPhoneCode: API_BASE + 'mydata/SendPhoneCode.ashx',
     
                 GET_CamperRecommend: API_BASE + 'motorHomesCar/getCamperRecommend.ashx',
 
