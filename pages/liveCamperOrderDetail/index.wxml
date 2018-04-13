@@ -26,7 +26,7 @@
                         <view class="weui-form-preview__hd">
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label_e">房费({{camperOrderDetail.Days}}晚)</view>
-                                        <view class="weui-form-preview__value">￥{{camperOrderDetail.PayMoney}}</view>
+                                        <view class="weui-form-preview__value">￥{{camperOrderDetail.TotalMoney}}</view>
                                 </view>
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label_e">押金</view>
@@ -36,7 +36,7 @@
                         <view class='line'></view>
                         <view class="weui-form-preview__hd_s">
                                 <view class="weui-form-preview__label_s">实付款：</view>
-                                <view class="weui-form-preview__value">￥{{camperOrderDetail.TotalMoney}}</view>
+                                <view class="weui-form-preview__value">￥{{camperOrderDetail.PayMoney}}</view>
                         </view>
                         <view class='line'></view>
                         <view class="weui-form-preview__hd">
@@ -87,13 +87,13 @@
                         <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class="countdown">{{ c1 }}</view>
                 </view>
                 <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderCancel">
-                        <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
+                        <button style="width:80px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
                 </view>
                 <view wx:if="{{camperOrderDetail.OrderStatus==7}}"  class='content-left' bindtap="orderDel">
-                        <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
+                        <button style="width:80px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
                 </view>
                 <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderPay">
-                        <button  style="width:100px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
+                        <button  style="width:80px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
                 </view>
                 <view  wx:if="{{camperOrderDetail.OrderStatus==3}}" class='content-left' >
                         待入住

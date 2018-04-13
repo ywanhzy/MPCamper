@@ -83,7 +83,6 @@ Page({
         onShow: function () {
                 var that=this
                 console.log("onShow")
-                
 
                 setTimeout(function () {
                         console.log("userInfo:" + app.globalData.userInfo)
@@ -91,7 +90,7 @@ Page({
                         that.setData({
                                 userInfo: app.globalData.userInfo
                         });
-                }, 1000);
+                }, 2000);
         },
 
         /**

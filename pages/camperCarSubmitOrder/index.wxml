@@ -76,7 +76,7 @@
                         <text class="content-title">￥{{totalPrice}}</text>
                 </view>
                 <view class='content-right' bindtap="submitOrder">
-                        <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn">确认预订</button>
+                        <button style="width:100px;line-height: 40px; height: 40px;font-size: 30rpx;" type="warn">确认预订</button>
                 </view>
         </view>
 </view>

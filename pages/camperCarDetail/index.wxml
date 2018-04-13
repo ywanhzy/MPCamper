@@ -40,7 +40,7 @@
 
         <text class="h2">房车介绍</text>
 
-        <text class="h3">便利设施{{height}}</text>
+        <text class="h3">便利设施</text>
 
         <text class="content">{{camperCarDetail.Facilities}}</text>
         <view class="img_map">
@@ -77,10 +77,10 @@
         <view class="content-c " >
                 <view class='content-left'>
                         <image src="../../images/tel.png"  style="margin-right: 5px;padding-right:15px;width:40px; height: 40px;border-right: 1px solid #e5e5e5" bindtap='goTel'></image>
-                        <text class="content-title">￥{{camperCarDetail.DailyPrice}}</text>
+                        <text class="content-title">￥{{camperCarDetail.DailyPrice}}/晚</text>
                 </view>
                 <view class='content-right' bindtap="goOrder" >
-                        <button style="width:100px; height: 40px;font-size: 30rpx;" type="warn" >预订</button>
+                        <button style="width:100px;line-height: 40px; height: 40px;font-size: 30rpx;" type="warn" >预订</button>
                 </view>
         </view>
         </view>
