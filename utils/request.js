@@ -67,18 +67,18 @@ function requestApi(url, params, method, id, showloading, sourceObj, successFun,
                 params.token = token
                 params.memberguid = memberguid
         }
-        console.error(params)
+        console.error(url + JSON.stringify(params))
         wx.request({
                 url: url,
                 method: method,
                 data: params,
                 header: { 'Content-Type': contentType },
                 success: function (res) {
-                        console.log("success:" + res.data)
+                        console.log("success:" + JSON.stringify(res.data))
                         typeof successFun == 'function' && successFun(id, res.data, sourceObj)
                 },
                 fail: function (res) {
-                        console.log("fail:" + res.data)
+                        console.log("fail:" + JSON.stringify(res.data))
                         typeof failFun == 'function' && failFun(id, res.data, sourceObj)
                 },
                 complete: function (res) {

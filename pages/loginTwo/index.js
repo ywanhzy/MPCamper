@@ -3,7 +3,7 @@ import { $wuxToast } from '../../components/wux'
 const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
 var util = require('../../utils/util.js')
-
+var codeId;//邀请人memberguid
 var unionid, phone, openid;
 Page({
 
@@ -57,13 +57,14 @@ Page({
                         })
                         return
                 }
-
+                codeId= wx.getStorage('inviteId')
                 var url = CONFIG.API_URL.GET_BindWxPhone
                 var params = {
                         flag: "1",
                         openid: openid,
                         unionid: unionid,
                         phone: phone,
+                        codeId: codeId,
                         code: code
                 }
                 request.GET(url, params, 100, true, this, this.successFun, this.failFun)

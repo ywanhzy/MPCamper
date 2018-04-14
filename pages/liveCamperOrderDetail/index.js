@@ -54,9 +54,9 @@ Page({
                                                         render(date) {
                                                                 //   const years = this.leadingZeros(date.years, 4) + ' 年 '
                                                                 //   const days = this.leadingZeros(date.days, 3) + ' 天 '
-                                                                const hours = this.leadingZeros(date.hours, 2) + ' 时 '
-                                                                const min = this.leadingZeros(date.min, 2) + ' 分 '
-                                                                const sec = this.leadingZeros(date.sec, 2) + ' 秒 '
+                                                                const hours = this.leadingZeros(date.hours, 2) + '时'
+                                                                const min = this.leadingZeros(date.min, 2) + '分'
+                                                                const sec = this.leadingZeros(date.sec, 2) + '秒'
                                                                 selfObj.setData({
                                                                         c1: hours + min + sec,
                                                                 })

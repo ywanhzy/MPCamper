@@ -310,3 +310,6 @@
         font-size: 32rpx;
         color: #43967c;
 }
+.countdown {
+        font-size: 40rpx;
+}

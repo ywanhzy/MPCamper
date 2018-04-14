@@ -44,19 +44,14 @@
                                 "text": "营地",
                                 "iconPath": "images/camp.png",
                                 "selectedIconPath": "images/camp_select.png"
-                        },
-                        {
-                                "pagePath": "pages/openLock/index",
-                                "text": "开锁",
-                                "iconPath": "images/unlock.png",
-                                "selectedIconPath": "images/unlock_select.png"
-                        },
+                        },                       
                         {
                                 "pagePath": "pages/my/index",
                                 "text": "我的",
                                 "iconPath": "images/my.png",
                                 "selectedIconPath": "images/my_select.png"
                         }
+                       
                 ]
         },
         "networkTimeout": {

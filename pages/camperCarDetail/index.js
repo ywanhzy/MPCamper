@@ -15,7 +15,7 @@ var camperCarDetail;
 
 var camperCarDetailObject = new Object();
 var result;
-
+var carGuid;
 Page({
 
         /**
@@ -128,6 +128,13 @@ Page({
         onLoad: function (options) {
                 width = app.globalData.width;
                 height = app.globalData.height;
+                carGuid= options.carGuid
+               
+                if (!util.isEmpty(options.inviteId)){
+                        console.log("inviteId:" + options.inviteId)
+                        wx.setStorageSync('inviteId', options.inviteId)
+                }
+                
                 this.setData({
                         width: width,
                 });
@@ -249,6 +256,23 @@ Page({
          * 用户点击右上角分享
          */
         onShareAppMessage: function () {
+                var inviteId = wx.getStorage('memberguid')
+                console.log("inviteId:" + inviteId)
+                console.log('onShareAppMessage')
+                var shareObj = {
+                        title: '房车行',
+                        desc: '房车详情',
+                        path: '/pages/camperCarDetail/index?carGuid=' + carGuid+'&inviteId=' + inviteId,
+                        success: function (res) {
+                                console.log('success')
+                        },
+                        fail: function () {
+                                console.log('fail')
+                        },
+                        complete: function () {
+                        }
+                };
 
+                return shareObj;
         }
 })

@@ -97,10 +97,11 @@
         white-space:nowrap;   
 }
 .camp-text-right {
-        width: 60px;
+        width: 100px;
         height: 40px;
         line-height: 40px;
         flex: none;
+        text-align:right;
         font-size: 26rpx;
         font-weight: bold;
         color: #3bae78

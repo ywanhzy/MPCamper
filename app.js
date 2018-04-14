@@ -96,7 +96,7 @@ App({
                                         wx.getUserInfo({
                                                 success: res => {
                                                         // 可以将 res 发送给后台解码出 unionId
-                                                        console.log("res:" + res)
+                                                        console.log("getUserInfo:" + JSON.stringify(res))
                                                         this.globalData.userInfo = res.userInfo
                                                         res.code = wx.getStorageSync('wx_code')
                                                         // console.log("encryptedData:" + res.encryptedData)

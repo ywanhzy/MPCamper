@@ -87,13 +87,13 @@
                         <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class="countdown">{{ c1 }}</view>
                 </view>
                 <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderCancel">
-                        <button style="width:80px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
+                        <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
                 </view>
                 <view wx:if="{{camperOrderDetail.OrderStatus==7}}"  class='content-left' bindtap="orderDel">
-                        <button style="width:80px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
+                        <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
                 </view>
                 <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderPay">
-                        <button  style="width:80px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
+                        <button  style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
                 </view>
                 <view  wx:if="{{camperOrderDetail.OrderStatus==3}}" class='content-left' >
                         待入住

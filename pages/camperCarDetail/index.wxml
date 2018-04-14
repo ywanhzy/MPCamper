@@ -49,8 +49,8 @@
 
         <text class="h3">交易规则</text>
 
-        <text class="h4">定金</text>
-        <text class="content">确认订单后，在线支付房费100%作为定金</text>
+        <text class="h4">订金</text>
+        <text class="content">确认订单后，在线支付房费100%作为订金</text>
         <text class="h4">押金</text>
         <text class="content">￥{{camperCarDetail.Deposit}}</text>
 
@@ -58,7 +58,7 @@
         <text class="content">进行入住登记后，扫码开锁即可入住</text>
 
         <text class="h3">退订政策</text>
-        <text class="content">暂不支持退订！特性情况，请联系客服。</text>
+        <text class="content">暂不支持退订！特殊情况，请联系客服。</text>
 
         <text class="h3"></text>
 <text class="h3"></text>

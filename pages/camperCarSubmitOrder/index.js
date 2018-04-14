@@ -8,41 +8,105 @@ const CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
 
 var camperCarDetail = new Object();
-var moenyDesc =new Array;
-var startDay, endDay, foregift;
+var moenyDesc = new Array;
+var startDay="",  foregift;
+var endDay="";
 var orderInfo = new Object();
+var camperCarOrder = new Object();
+
+var invoiceObj = new Object();
+var addressObj = new Object();
+var showInvoiceAddress = false;
+var dayNum = 0;
+const postage = 10;
+var roomPrice;
+var invoice="0";
 Page({
         data: {
                 camperCarDetail: [],
                 start: '',//入住时间
-                end:'',  //离开时间
-                day:'0',//入住晚数
-                totalPrice:0.00, //所有费用
+                end: '',  //离开时间
+                day: '0',//入住晚数
+                totalPrice: 0.00, //所有费用
                 roomPrice: 0.00,//房车费用
-                foregift:0.00,
-                NickName:'',
-                Phone:'',
+                foregift: 0.00,
+                NickName: '',
+                Phone: '',
+                showInvoiceAddress: false,
+                postage: postage,
+                invoiceInfo: "发票信息",
+                addressInfo: "收货地址"
 
         },
-        successFun: function (id,res, selfObj) {
-                if (res.res_code == 100) {
-                        var camperCarOrder = res.data;
-                        console.log(camperCarOrder)
-                        console.log(camperCarDetail)                       
-                        console.log(orderInfo)     
-                        var camperCarOrder = JSON.stringify(camperCarOrder);
-                        var camperCarDetails = JSON.stringify(camperCarDetail);
-                        var orderInfos = JSON.stringify(orderInfo);
-                        wx.navigateTo({
-                                url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrder + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
-                        })
+        successFun: function (id, res, selfObj) {
+                switch (id) {
+                        case 100:
+                                if (res.res_code == 100) {
+                                        camperCarOrder = res.data;
+                                        console.log(camperCarOrder)
+                                        console.log(camperCarDetail)
+                                        console.log(orderInfo)
+                                        if (showInvoiceAddress){
+                                                var url = CONFIG.API_URL.GET_AddInvoiceInfo
+                                                var params = {
+                                                        orderGuid: camperCarOrder.orderGuid,
+                                                        headerType: invoiceObj.type,
+                                                        headerTitle: invoiceObj.title,
+                                                        number: invoiceObj.taxNumber,
+                                                        invoiceFee: roomPrice,
+                                                        remarks: "",
+                                                        addressee: addressObj.userName,
+                                                        contactNumber: addressObj.telNumber,
+                                                        detailedAddress: addressObj.provinceName + addressObj.cityName + addressObj.countyName + addressObj.detailInfo
+                                                }
+                                                request.GET(url, params, 101, false, selfObj, selfObj.successFun, selfObj.failFun)
+                                        }else{
+                                                var camperCarOrders = JSON.stringify(camperCarOrder);
+                                                var camperCarDetails = JSON.stringify(camperCarDetail);
+                                                var orderInfos = JSON.stringify(orderInfo);
+                                                wx.navigateTo({
+                                                        url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                                })
+                                        }
+                                }else{
+                                        $wuxToast.show({
+                                                type: 'text',
+                                                timer: 2000,
+                                                color: '#fff',
+                                                text: res.res_msg,
+                                                success: () => console.log('文本提示')
+                                        })
+                                }
+                                break;
+                        case 101:
+                                if (res.res_code == 200) {
+                                        var camperCarOrders = JSON.stringify(camperCarOrder);
+                                        var camperCarDetails = JSON.stringify(camperCarDetail);
+                                        var orderInfos = JSON.stringify(orderInfo);
+                                        wx.navigateTo({
+                                                url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                        })
+                                }else{
+                                        $wuxToast.show({
+                                                type: 'text',
+                                                timer: 2000,
+                                                color: '#fff',
+                                                text: res.res_msg
+                                        })
+                                }
+                                break;
+
                 }
 
+
+
         },
-        failFun: function (id,res, selfObj) {
+        failFun: function (id, res, selfObj) {
                 console.log('failFun', res)
         },
         onLoad: function (options) {
+                startDay = ""
+                endDay = ""
                 moenyDesc = JSON.parse(options.moenyDesc);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 foregift = camperCarDetail.Deposit;
@@ -50,7 +114,7 @@ Page({
                         camperCarDetail: camperCarDetail,
                         NickName: app.globalData.eUserInfo.NickName,
                         Phone: app.globalData.eUserInfo.Phone,
-                        foregift:camperCarDetail.Deposit
+                        foregift: camperCarDetail.Deposit
                 })
                 if (options.camperCarDetail == null) {
                         wx.showToast({
@@ -58,9 +122,73 @@ Page({
                         })
                 }
         },
+        checkboxChange: function (e) {
+                console.log('checkbox：', e.detail.value)
+                var strValue = e.detail.value
+                if (strValue == "发票") {
+                        showInvoiceAddress = true
+                        invoice="1"
+                        roomPrice = dayNum * camperCarDetail.DailyPrice
+                        var totalPrice = roomPrice + foregift + postage;
+                        var otherTPrice = roomPrice + foregift
+                        this.setData({
+                                totalPrice: totalPrice,
+                                otherTPrice: otherTPrice,
+                                showInvoiceAddress: true
+                        })
+
+
+                } else {
+                        invoice = "0"
+                        roomPrice = dayNum * camperCarDetail.DailyPrice
+                        var totalPrice = roomPrice + foregift;
+                        this.setData({
+                                totalPrice: totalPrice,
+                                otherTPrice: totalPrice,
+                                showInvoiceAddress: true
+                        })
+                        showInvoiceAddress = false
+                        this.setData({
+                                showInvoiceAddress: false
+                        })
+                }
+        },
+        chooseInvoice: function () {
+                var that = this
+                wx.chooseInvoiceTitle({
+                        success(res) {
+                                invoiceObj = res;
+                                console.log(JSON.stringify(res))
+                                that.setData({
+                                        invoiceInfo: invoiceObj.title
+                                })
+                        },
+                        fail(res) {// 接口调用失败 / 结束的回调函数
+                        }
+                })
+        },
+        chooseAddress: function () {
+                var that = this
+                if (wx.chooseAddress) {
+                        wx.chooseAddress({
+                                success: function (res) {
+                                        addressObj = res
+                                        console.log(JSON.stringify(res))
+                                        that.setData({
+                                                addressInfo: addressObj.userName
+                                        })
+                                },
+                                fail: function (err) {
+                                        console.log(JSON.stringify(err))
+                                }
+                        })
+                } else {
+                        console.log('当前微信版本不支持chooseAddress');
+                }
+        },
         submitOrder: function (e) {
                 console.error(this.data.totalPrice)
-                if (this.data.start =='') {
+                if (this.data.start == '') {
                         $wuxToast.show({
                                 type: 'text',
                                 timer: 2000,
@@ -80,7 +208,7 @@ Page({
                         })
                         return
                 }
-                if (this.data.totalPrice==0.00){
+                if (this.data.totalPrice == 0.00) {
                         $wuxToast.show({
                                 type: 'text',
                                 timer: 2000,
@@ -90,13 +218,39 @@ Page({
                         })
                         return
                 }
+                if (showInvoiceAddress){
+                        console.log(invoiceObj)
+                        console.log(addressObj)
+                        
+                        if (util.isEmpty(invoiceObj.title)){
+                                $wuxToast.show({
+                                        type: 'text',
+                                        timer: 2000,
+                                        color: '#fff',
+                                        text: '请添加发票信息',
+                                        success: () => console.log('文本提示')
+                                })
+                                return
+                        }
+                        if (util.isEmpty(addressObj.userName)) {
+                                $wuxToast.show({
+                                        type: 'text',
+                                        timer: 2000,
+                                        color: '#fff',
+                                        text: '请添加收货地址',
+                                        success: () => console.log('文本提示')
+                                })
+                                return
+                        }
+                }
 
                 orderInfo.start = startDay;
                 orderInfo.end = endDay;
-                orderInfo.nickName=app.globalData.eUserInfo.NickName
+                orderInfo.nickName = app.globalData.eUserInfo.NickName
                 orderInfo.phone = app.globalData.eUserInfo.Phone
-                orderInfo.totalMoney=this.data.totalPrice
+                orderInfo.totalMoney = this.data.totalPrice
                 orderInfo.day = this.data.day
+                orderInfo.showInvoiceAddress = showInvoiceAddress
                 var token = wx.getStorageSync('token')
 
                 var url = CONFIG.API_URL.POST_CamperOrder
@@ -108,6 +262,8 @@ Page({
                 // currencyAmount-1 不用电子币支付抵扣
                 // totalMoney 总金额
                 // invoice  0 不需要邮费 1 需要邮费（不填默认为0）
+                
+                
                 var params = {
                         bookingPersonName: app.globalData.eUserInfo.NickName,
                         bookingPersonPhone: app.globalData.eUserInfo.Phone,
@@ -115,8 +271,8 @@ Page({
                         bTime: startDay,
                         eTime: endDay,
                         currencyAmount: "-1",
-                        totalMoney: this.data.totalPrice,
-                        invoice: "0"
+                        totalMoney: this.data.otherTPrice,
+                        invoice: invoice
                 }
                 console.log(params)
                 request.GET(url, params, 100, true, this, this.successFun, this.failFun)
@@ -130,10 +286,10 @@ Page({
                         // dateFormat: 'DD, MM dd, yyyy',
                         dayMoney: moenyDesc,
                         onChange(p, v, d) {
-                                console.error("start:"+d) 
-                                console.error("endDay:" + endDay) 
-                                if (!util.isEmpty(endDay) && !util.isEmpty(d)){
-                                        var dayNum = util.dateDifference(d, endDay)
+                                console.error("start:" + d)
+                                console.error("endDay:" + endDay)
+                                if (!util.isEmpty(endDay) && !util.isEmpty(d)) {
+                                        dayNum = util.dateDifference(d, endDay)
                                         console.error("相差：" + dayNum)
                                         if (dayNum <= 0) {
                                                 $wuxToast.show({
@@ -144,16 +300,21 @@ Page({
                                                         success: () => console.log('文本提示')
                                                 })
                                         } else {
-                                                var roomPrice = dayNum * camperCarDetail.DailyPrice
+                                                roomPrice = dayNum * camperCarDetail.DailyPrice
                                                 var totalPrice = roomPrice + foregift;
+                                                var otherTPrice = roomPrice + foregift; 
+                                                if (showInvoiceAddress) {
+                                                        totalPrice = totalPrice + postage;
+                                                }
                                                 this.setData({
                                                         day: dayNum,
                                                         totalPrice: totalPrice,
+                                                        otherTPrice: otherTPrice,
                                                         roomPrice: roomPrice,
                                                 })
                                         }
-                                }       
-                                
+                                }
+
                                 this.setData({
                                         start: d.join(', ')
                                 })
@@ -169,10 +330,10 @@ Page({
                         // dateFormat: 'DD, MM dd, yyyy',
                         dayMoney: moenyDesc,
                         onChange(p, v, d) {
-                                 if (!util.isEmpty(startDay) && !util.isEmpty(d)) {
-                                        var dayNum = util.dateDifference(startDay,d)
+                                if (!util.isEmpty(startDay) && !util.isEmpty(d)) {
+                                        dayNum = util.dateDifference(startDay, d)
                                         console.error("相差：" + dayNum)
-                                        if (dayNum<=0){
+                                        if (dayNum <= 0) {
                                                 $wuxToast.show({
                                                         type: 'text',
                                                         timer: 2000,
@@ -180,16 +341,21 @@ Page({
                                                         text: '退房日期不能小于等于入住日期',
                                                         success: () => console.log('文本提示')
                                                 })
-                                        }else{
-                                                var roomPrice = dayNum * camperCarDetail.DailyPrice
-                                                var totalPrice = roomPrice+ foregift;
+                                        } else {
+                                                roomPrice = dayNum * camperCarDetail.DailyPrice
+                                                var totalPrice = roomPrice + foregift;
+                                                var otherTPrice = roomPrice + foregift;
+                                                if (showInvoiceAddress) {
+                                                        totalPrice = totalPrice + postage;
+                                                }
                                                 this.setData({
                                                         day: dayNum,
+                                                        otherTPrice: otherTPrice,
                                                         totalPrice: totalPrice,
                                                         roomPrice: roomPrice,
                                                 })
                                         }
-                                }    
+                                }
                                 this.setData({
                                         end: d.join(', ')
                                 })

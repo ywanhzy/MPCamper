@@ -627,6 +627,13 @@ class Calendar {
                         const yearMonthDay = dataset.ymd
                         var isContain=false
                         
+
+                        if (dateType.selected && !this.options.multiple) return false
+                        if (dateType.disabled) return false
+                        if (dateType.next) this.nextMonth()
+                        if (dateType.prev) this.prevMonth()
+
+
                         for (let i = 0; i < this.options.dayMoney.length; i++) {
                                 if (this.options.dayMoney[i].ActivityDate == yearMonthDay && this.options.dayMoney[i].Num>=1){
                                         isContain=true
@@ -636,7 +643,6 @@ class Calendar {
                                 // wx.showToast({
                                 //         title: "请选择正确的时间",
                                 // })
-
                                  wx.showModal({
                                         title: '',
                                         content: '请选择正确的时间',
@@ -646,12 +652,6 @@ class Calendar {
                                 return;
                         }
                        
-
-                        if (dateType.selected && !this.options.multiple) return false
-                        if (dateType.disabled) return false
-                        if (dateType.next) this.nextMonth()
-                        if (dateType.prev) this.prevMonth()
-
                         if (typeof this.options.onDayClick === `function`) {
                                 this.options.onDayClick(this, dateYear, dateMonth, dateDay)
                         }

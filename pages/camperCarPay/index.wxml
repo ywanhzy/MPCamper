@@ -33,6 +33,10 @@
                                         <view class="weui-form-preview__label_e">押金</view>
                                         <view class="weui-form-preview__value">￥{{camperCarDetail.Deposit}}</view>
                                 </view>
+                                <view class="weui-form-preview__item" wx:if="{{orderInfo.showInvoiceAddress}}">
+                                        <view class="weui-form-preview__label_e">发票邮费</view>
+                                        <view class="weui-form-preview__value">￥10</view>
+                                </view>
                         </view>
                         <view class='line'></view>
                         <view class="weui-form-preview__hd_s">

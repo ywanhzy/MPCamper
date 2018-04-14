@@ -21,7 +21,23 @@
         border-radius: 50%;
         position: fixed;
         right: 15px;
-        bottom: 80rpx;
+        bottom: 40rpx;
+        font-size: 28rpx;
+        color: #fff;
+        -webkit-transition: 0.4s;
+        -webkit-transition: -webkit-transform 0.4s ease-out;
+        transition: transform 0.4s ease-out;
+        -moz-transition: -moz-transform 0.4s ease-out;
+}
+.scan {
+        width: 100rpx;
+        height: 100rpx;
+        /* background: rgba(0, 170, 152, 0.6)  center no-repeat; */
+        background-size: 50rpx;
+        border-radius: 50%;
+        position: fixed;
+        right: 15px;
+        bottom: 150rpx;
         font-size: 28rpx;
         color: #fff;
         -webkit-transition: 0.4s;

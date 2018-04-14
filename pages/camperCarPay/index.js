@@ -25,6 +25,10 @@ Page({
                                 'paySign': wxPay.paySign,
                                 'success': function (res) {
                                         console.log("支付成功")
+
+                                        camperCarDetail.BTimeDate = orderInfo.start;
+                                        camperCarDetail.ETimeDate = orderInfo.end;
+
                                         var camperCarOrders = JSON.stringify(camperCarOrder);
                                         var camperCarDetails = JSON.stringify(camperCarDetail);
                                         var orderInfos = JSON.stringify(orderInfo);
@@ -49,6 +53,8 @@ Page({
          * 生命周期函数--监听页面加载
          */
         onLoad: function (options) {
+               
+                
                 camperCarOrder = JSON.parse(options.camperCarOrder);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 orderInfo = JSON.parse(options.orderInfo);

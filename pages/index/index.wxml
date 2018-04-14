@@ -27,4 +27,6 @@
         </view>
 
         <view class='refesh' data-time="33" bindtap="goTel" wx:if="{{telstatus}}"> <image class="tel-img" src="../../images/index_tel.png" mode='widthFix'></image></view>
+
+        <view class='scan' data-time="33" bindtap="goScan" > <image class="tel-img" src="../../images/unlock_select.png" mode='widthFix'></image></view>
 </view>

@@ -30,6 +30,33 @@ Page({
         goTel: function (e) {
                 app.tel("");
         },
+        goScan: function (e) {
+                var token = wx.getStorageSync('token')
+                if (token == "") {
+                        wx.navigateTo({
+                                url: '../login/index?id=1'
+                        })
+                } else {
+                        wx.scanCode({
+                                onlyFromCamera: true,
+                                success: (res) => {
+                                        var result = res.result.replace("?", "\?")
+                                        console.log(result)
+                                        var parameterObject = util.getQueryObject(result)
+                                        wx.reLaunch({
+                                                url: '../openLockIng/index?lockcode=' + parameterObject.lockcode
+                                        });
+                                }, fail: (res) => {
+                                        // console.log("fail" + res)
+                                        // wx.reLaunch({
+                                        //         url: '../index/index'
+                                        // });
+                                }, complete: (res) => {
+                                        console.log("complete")
+                                }
+                        })
+                }
+        },
         /**
          * 接口调用成功处理
          */
@@ -37,7 +64,6 @@ Page({
                 if (res.res_code == 200) {
                         var camperCar = res.data;
                         var camperCars = [];
-                        console.log("length:" + camperCar.length)
                         if (camperCar.length > 0) {
                                 for (var i = 0; i < camperCar.length; i++) {
                                         var obj = camperCar[i]
@@ -65,14 +91,14 @@ Page({
         failFun: function (res, selfObj) {
                 console.log('failFun', res)
         },
-        onLoad: function () {
-              
+        onLoad: function (options) {
+                if (!util.isEmpty(options.inviteId)) {
+                        console.log("inviteId:" + options.inviteId)
+                        wx.setStorageSync('inviteId', options.inviteId)
+                }
                 var that = this
                 width = app.globalData.width
                 height = app.globalData.height
-
-                // wx.setStorageSync('token', "")
-                // wx.setStorageSync('memberid', "")
 
                 if (app.globalData.userInfo) {
                         this.setData({
@@ -160,11 +186,13 @@ Page({
          * 用户点击右上角分享
          */
         onShareAppMessage: function (options) {
+                var inviteId=wx.getStorage('memberguid')
+                console.log("inviteId:"+inviteId)
                 console.log('onShareAppMessage')
                 var shareObj = {
                         title: '房车行',
                         desc: '房车行',
-                        path: '/pages/index/index',
+                        path: '/pages/index/index?inviteId=' + inviteId,
                         success: function (res) {
                                 console.log('success')
                                 var shareTickets = res.shareTickets;
@@ -189,16 +217,14 @@ Page({
                 };
 
                 // 来自页面内的按钮的转发
-                if (options.from == 'button') {
-                        var eData = options.target.dataset;
-                        console.log(eData.name);     // shareBtn
-                        // 此处可以修改 shareObj 中的内容
-                        shareObj.path = '/pages/btnname/btnname?btn_name=' + eData.name;
-                }
+                // if (options.from == 'button') {
+                //         var eData = options.target.dataset;
+                //         console.log(eData.name);     // shareBtn
+                //         // 此处可以修改 shareObj 中的内容
+                //         shareObj.path = '/pages/btnname/btnname?btn_name=' + eData.name;
+                // }
                 return shareObj;
         }
-
-
 
 })
 

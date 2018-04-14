@@ -12,6 +12,7 @@ var width;
 var height;
 var myAmapFun;
 var longitude, latitude, campShortName, campOwerAddress, campOwerTel;
+var campOwerGuid;
 Page({
 
         /**
@@ -80,7 +81,11 @@ Page({
         onLoad: function (options) {
                 width = app.globalData.width;
                 height = app.globalData.height;
-               
+                campOwerGuid= options.CampOwerGuid;
+                if (!util.isEmpty(options.inviteId)) {
+                        console.log("inviteId:" + options.inviteId)
+                        wx.setStorageSync('inviteId', options.inviteId)
+                }
                 //获取营地列表
                 var url = CONFIG.API_URL.GET_CampOwerInfo
                 var params = {
@@ -143,6 +148,23 @@ Page({
          * 用户点击右上角分享
          */
         onShareAppMessage: function () {
+                var inviteId = wx.getStorage('memberguid')
+                console.log("inviteId:" + inviteId)
+                console.log('onShareAppMessage')
+                var shareObj = {
+                        title: '房车行',
+                        desc: '营地详情',
+                        path: '/pages/campDetail/index?campOwerGuid=' + campOwerGuid +'&inviteId=' + inviteId,
+                        success: function (res) {
+                                console.log('success')
+                        },
+                        fail: function () {
+                                console.log('fail')
+                        },
+                        complete: function () {
+                        }
+                };
 
+                return shareObj;
         }
 })
