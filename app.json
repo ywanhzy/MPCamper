@@ -18,7 +18,8 @@
                 "pages/camperCarPayResult/index",
                 "pages/feedBack/index",
                 "pages/openLockIng/index",
-                "pages/liveCamperOrderDetail/index"
+                "pages/liveCamperOrderDetail/index",
+                "pages/calendar/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",
@@ -44,14 +45,13 @@
                                 "text": "营地",
                                 "iconPath": "images/camp.png",
                                 "selectedIconPath": "images/camp_select.png"
-                        },                       
+                        },
                         {
                                 "pagePath": "pages/my/index",
                                 "text": "我的",
                                 "iconPath": "images/my.png",
                                 "selectedIconPath": "images/my_select.png"
                         }
-                       
                 ]
         },
         "networkTimeout": {

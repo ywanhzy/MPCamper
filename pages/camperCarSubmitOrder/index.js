@@ -29,7 +29,7 @@ Page({
                 day: '0',//入住晚数
                 totalPrice: 0.00, //所有费用
                 roomPrice: 0.00,//房车费用
-                foregift: 0.00,
+                foregift: 0.00, //邮费
                 NickName: '',
                 Phone: '',
                 showInvoiceAddress: false,
@@ -128,7 +128,8 @@ Page({
                 if (strValue == "发票") {
                         showInvoiceAddress = true
                         invoice="1"
-                        roomPrice = dayNum * camperCarDetail.DailyPrice
+                        // roomPrice = dayNum * camperCarDetail.DailyPrice
+                        roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift + postage;
                         var otherTPrice = roomPrice + foregift
                         this.setData({
@@ -140,17 +141,16 @@ Page({
 
                 } else {
                         invoice = "0"
-                        roomPrice = dayNum * camperCarDetail.DailyPrice
+                        showInvoiceAddress = false
+                        // roomPrice = dayNum * camperCarDetail.DailyPrice
+                        roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift;
                         this.setData({
                                 totalPrice: totalPrice,
                                 otherTPrice: totalPrice,
-                                showInvoiceAddress: true
-                        })
-                        showInvoiceAddress = false
-                        this.setData({
                                 showInvoiceAddress: false
                         })
+                        
                 }
         },
         chooseInvoice: function () {
@@ -243,7 +243,8 @@ Page({
                                 return
                         }
                 }
-
+                startDay=this.data.start
+                endDay=this.data.end
                 orderInfo.start = startDay;
                 orderInfo.end = endDay;
                 orderInfo.nickName = app.globalData.eUserInfo.NickName
@@ -277,7 +278,12 @@ Page({
                 console.log(params)
                 request.GET(url, params, 100, true, this, this.successFun, this.failFun)
         },
-        openCalendarS() {
+        openCalendarS: function () {
+                wx.navigateTo({
+                        url: '/pages/calendar/index?moenyDesc=' + JSON.stringify(moenyDesc)+'&'
+                })
+        },
+        openCalendarS_() {
                 if (this.start) {
                         return this.start.show()
                 }
@@ -374,6 +380,25 @@ Page({
          * 生命周期函数--监听页面显示
          */
         onShow: function () {
+                if (showInvoiceAddress){
+                        roomPrice = this.data.roomPrice
+                        var totalPrice = roomPrice + foregift + postage;
+                        var otherTPrice = roomPrice + foregift
+                        this.setData({
+                                totalPrice: totalPrice,
+                                otherTPrice: otherTPrice,
+                                showInvoiceAddress: true
+                        })
+                }else{
+                        roomPrice = this.data.roomPrice
+                        var totalPrice = roomPrice + foregift;
+                        this.setData({
+                                totalPrice: totalPrice,
+                                otherTPrice: totalPrice,
+                                showInvoiceAddress: false
+                        })
+                }
+        
 
         },
 
@@ -388,7 +413,7 @@ Page({
          * 生命周期函数--监听页面卸载
          */
         onUnload: function () {
-
+                showInvoiceAddress = false;
         },
 
         /**
