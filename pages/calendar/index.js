@@ -13,8 +13,7 @@ Page({
                 checkInDay: '',
                 checkOutDay: '',
                 festivaltag: {
-                        "2017/1/1": "元旦",
-                        "2017/12/25": "圣诞"
+                        "2017/1/1": "元旦"
                 }
 
         },
@@ -31,7 +30,7 @@ Page({
                         wx.showModal({
                                 title: '警告',
                                 showCancel: false,
-                                content: '商家不可预订',
+                                content: '不可预订',
                                 success: function (res) {
                                         if (res.confirm) {
                                                 wx.navigateBack();
@@ -45,21 +44,24 @@ Page({
                         intDate(this);
                 }
 
-
         },
 
         /**
          * 生命周期函数--监听页面初次渲染完成
          */
         onReady: function () {
-
+                wx.hideLoading()
+                console.log("onReady:"+new Date().getTime())
         },
 
         /**
          * 生命周期函数--监听页面显示
          */
         onShow: function () {
-
+                wx.showLoading({
+                        title: '加载中..',
+                })
+                console.log("onShow:" + new Date().getTime())
         },
 
         /**

@@ -3,6 +3,25 @@
         <view class="top">
                 <image class="top-img" src="../../images/index_logo.png" mode='aspectFit'></image>
         </view>
+        <view class="topTab">
+                <view class="top_l" >
+                        <image class="topTab_img" src="/images/index_live.png" />
+                        <text class="topTab_text">住房车</text>
+                </view>
+                <view class="top_c" >
+                        <image class="topTab_img" src="/images/index_rent.png" />
+                        <text class="topTab_text">租房车</text>
+                </view>
+                <view class="top_c" >
+                        <image class="topTab_img" src="/images/index_activity.png" />
+                        <text class="topTab_text">房车活动</text>
+                </view>
+                <view class="top_c" bindtap='goScan'>
+                        <image class="topTab_img" src="/images/index_scan.png" />
+                        <text class="topTab_text">扫码开锁</text>
+                </view>
+
+        </view>
         <view class="camps" wx:for-items="{{camperCar}}" wx:key="id" wx:for-item="item">
 
                 <view class="travel-notes">
@@ -26,7 +45,7 @@
 
         </view>
 
-        <view class='refesh' data-time="33" bindtap="goTel" wx:if="{{telstatus}}"> <image class="tel-img" src="../../images/index_tel.png" mode='widthFix'></image></view>
-
-        <view class='scan' data-time="33" bindtap="goScan" > <image class="tel-img" src="../../images/unlock_select.png" mode='widthFix'></image></view>
+        <view class='refesh' data-time="33" bindtap="goTel" wx:if="{{telstatus}}">
+                <image class="tel-img" src="../../images/index_tel.png" mode='widthFix'></image>
+        </view>
 </view>
