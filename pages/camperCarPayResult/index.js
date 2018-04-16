@@ -5,13 +5,12 @@ const request = require('../../utils/request.js')
 const CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
 
-var camperCarOrder, camperCarDetail, orderInfo;
+var  camperCarDetail, orderInfo;
 
 Page({
 
         data: {
                 camperCarDetail: {},
-                camperCarOrder: {},
                 orderInfo: {}
         },
 
@@ -23,7 +22,6 @@ Page({
 
                 this.setData({
                         camperCarDetail: camperCarDetail,
-                        camperCarOrder: camperCarOrder,
                         orderInfo: orderInfo
                 })
         },

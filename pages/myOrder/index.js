@@ -5,8 +5,10 @@ var CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
 var status = 0
-var camperCarOrder, camperCarDetail, orderInfo;
-
+var camperCarDetail=new Object
+var orderInfo = new Object
+var orders
+var index
 Page({
 
   /**
@@ -46,7 +48,7 @@ Page({
       case 100:
         
             if (res.res_code == 200) {
-              var orders = res.dtOrderCar;
+              orders = res.dtOrderCar;
               var oo = [];
               var ss = [];
               var btn = [];
@@ -236,15 +238,21 @@ Page({
                   'paySign': wxPay.paySign,
                   'success': function (res) {
                     console.log("支付成功")
+                          //this.data.
+                    camperCarDetail.BTimeDate = orders[index].BTimeDate; 
+                    camperCarDetail.ETimeDate = orders[index].ETimeDate;
+                    camperCarDetail.CheckInTime = orders[index].CheckInTime;
+                    camperCarDetail.CheckOutTime = orders[index].CheckOutTime;
+                    camperCarDetail.CamperTypeName = orders[index].CamperTypeName;
+                    camperCarDetail.CampShortName = orders[index].CampShortName;
+                    orderInfo.nickName = orders[index].BookingPersonName;
 
-                    camperCarDetail.BTimeDate = orderInfo.start;
-                    camperCarDetail.ETimeDate = orderInfo.end;
-
-                    var camperCarOrders = JSON.stringify(camperCarOrder);
                     var camperCarDetails = JSON.stringify(camperCarDetail);
                     var orderInfos = JSON.stringify(orderInfo);
+                    console.log(camperCarDetails)
+                    console.log(orderInfos)
                     wx.navigateTo({
-                      url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                      url: '/pages/camperCarPayResult/index?camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
                     })
                   },
                   'fail': function (res) {
@@ -357,7 +365,7 @@ Page({
   },
 
   btnClick: function(e){
-    const index = parseInt(e.currentTarget.id);
+    index = parseInt(e.currentTarget.id);
     console.log(this.data.btnStr[index])
     switch (this.data.btnStr[index]){
       case "立即支付":

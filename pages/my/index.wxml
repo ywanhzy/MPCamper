@@ -4,6 +4,7 @@
                 <text wx:if="{{userInfo.nickName}}" class="userinfo-nickname">{{ userInfo.nickName }}</text>
                 <text wx:else bindtap="toLogin" class="userinfo-nickname">点击登录重新授权</text>
         </view>
+        <button open-type="contact">客服会话(测试-可不用理会)</button>
 
         <view class="info_list">
                 <view class="weui-cells">
