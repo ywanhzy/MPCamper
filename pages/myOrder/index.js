@@ -4,7 +4,8 @@ const sliderWidth = 96
 var CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
 const util = require('../../utils/util.js')
-var status
+var status = 0
+var camperCarOrder, camperCarDetail, orderInfo;
 
 Page({
 
@@ -17,7 +18,6 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     order: [],
-    status:0,
     refresh:false,
     statuStr:[],
     btnStr:[]
@@ -30,6 +30,8 @@ Page({
     
 
       this.getSystemInfo()
+
+      status = 0
 
       //获取营地列表
       this.getData()
@@ -68,8 +70,8 @@ Page({
                         str = "已入住"
                         b = "扫码开锁"
                         break;
-                      case 6://已消费 
-                        str = "已消费"
+                      case 6://已完成 
+                        str = "已完成"
                         b = ""
                         break;
                       case 7://已取消  
@@ -110,8 +112,8 @@ Page({
                           str = "已入住"
                           b = "扫码开锁"
                           break;
-                        case 6://已消费 
-                          str = "已消费"
+                        case 6://已完成 
+                          str = "已完成"
                           b = ""
                           break;
                         case 7://已取消  
@@ -153,8 +155,8 @@ Page({
                           str = "已入住"
                           b = "扫码开锁"
                           break;
-                        case 6://已消费 
-                          str = "已消费"
+                        case 6://已完成 
+                          str = "已完成"
                           b = ""
                           break;
                         case 7://已取消  
@@ -223,34 +225,37 @@ Page({
             }).show()
         break;
       case 101:
-              // if (res.res_code == 200) {
-              //   var wxPay = res.data;
-              //   console.log(wxPay)
-              //   wx.requestPayment({
-              //     'timeStamp': wxPay.timeStamp,
-              //     'nonceStr': wxPay.nonceStr,
-              //     'package': wxPay.package,
-              //     'signType': 'MD5',
-              //     'paySign': wxPay.paySign,
-              //     'success': function (res) {
-              //       console.log("支付成功")
+              if (res.res_code == 200) {
+                var wxPay = res.data;
+                console.log(wxPay)
+                wx.requestPayment({
+                  'timeStamp': wxPay.timeStamp,
+                  'nonceStr': wxPay.nonceStr,
+                  'package': wxPay.package,
+                  'signType': 'MD5',
+                  'paySign': wxPay.paySign,
+                  'success': function (res) {
+                    console.log("支付成功")
 
-              //       var camperCarOrders = JSON.stringify(camperCarOrder);
-              //       var camperCarDetails = JSON.stringify(camperCarDetail);
-              //       var orderInfos = JSON.stringify(orderInfo);
-              //       wx.navigateTo({
-              //         url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
-              //       })
-              //     },
-              //     'fail': function (res) {
-              //       console.log("支付失败")
-              //     }
-              //   })
-              // } else {
-              //   wx.showToast({
-              //     title: res.res_msg,
-              //   })
-              // }
+                    camperCarDetail.BTimeDate = orderInfo.start;
+                    camperCarDetail.ETimeDate = orderInfo.end;
+
+                    var camperCarOrders = JSON.stringify(camperCarOrder);
+                    var camperCarDetails = JSON.stringify(camperCarDetail);
+                    var orderInfos = JSON.stringify(orderInfo);
+                    wx.navigateTo({
+                      url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                    })
+                  },
+                  'fail': function (res) {
+                    console.log("支付失败")
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title: res.res_msg,
+                })
+              }
         break;
       case 102:
               if (res.res_code == 200) {
@@ -292,19 +297,16 @@ Page({
       case '0':
         console.log("全部");
         status = 0;
-        this.setData({ status: status,})
         this.getData();
         break;
       case '1':
         console.log("代付款");
         status = 1;
-        this.setData({ status: 1 })
         this.getData();
         break;
       case '2':
         console.log("待使用");
         status = 3;
-        this.setData({ status: 3 })
         this.getData();
         break;
       case '3':
@@ -320,6 +322,34 @@ Page({
     // this.getData();
   },
 
+  goScan: function () {//扫码开锁
+    var token = wx.getStorageSync('token')
+    if (token == "") {
+      wx.navigateTo({
+        url: '../login/index?id=1'
+      })
+    } else {
+      wx.scanCode({
+        onlyFromCamera: true,
+        success: (res) => {
+          var result = res.result.replace("?", "\?")
+          console.log(result)
+          var parameterObject = util.getQueryObject(result)
+          wx.reLaunch({
+            url: '../openLockIng/index?lockcode=' + parameterObject.lockcode
+          });
+        }, fail: (res) => {
+          // console.log("fail" + res)
+          // wx.reLaunch({
+          //         url: '../index/index'
+          // });
+        }, complete: (res) => {
+          console.log("complete")
+        }
+      })
+    }
+  },
+
   getData: function(){
     var url = CONFIG.API_URL.GET_MyOrderData
     var params = {}
@@ -331,26 +361,26 @@ Page({
     console.log(this.data.btnStr[index])
     switch (this.data.btnStr[index]){
       case "立即支付":
-        // var openid = wx.getStorageSync('wx_openid')
-        // var url = CONFIG.API_URL.GET_WxPay
-        // var params = {
-        //   orderno: this.data.order[index].OrderNo,
-        //   openid: openid,
-        //   flag: "1"
-        // }
-        // request.GET(url, params, 101, true, this, this.successFun, this.failFun)
+        var openid = wx.getStorageSync('wx_openid')
+        var url = CONFIG.API_URL.GET_WxPay
+        var params = {
+          orderno: this.data.order[index].OrderNo,
+          openid: openid,
+          flag: "1"
+        }
+        request.GET(url, params, 101, true, this, this.successFun, this.failFun)
         break;
       case "扫码开锁":
-
+        this.goScan();
         break;
       case "删除订单":
-        // var url = CONFIG.API_URL.GET_DelMyOrder
-        // var params = {
-        //   orderno: this.data.order[index].OrderNo,
-        //   orderGuid: this.data.order[index].OrderGuid,
-        //   type: "3"
-        // }
-        // request.GET(url, params, 102, true, this, this.successFun, this.failFun)
+        var url = CONFIG.API_URL.GET_DelMyOrder
+        var params = {
+          orderno: this.data.order[index].OrderNo,
+          orderGuid: this.data.order[index].OrderGuid,
+          type: "3"
+        }
+        request.GET(url, params, 102, true, this, this.successFun, this.failFun)
         break;
     }
   },

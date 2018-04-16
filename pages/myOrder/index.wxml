@@ -42,11 +42,11 @@
                             <view class='item-right-bottom'>
                                 <text class='item-right-bottom-text'>营地：{{item.CampShortName}}</text>
                                 <text class='item-right-bottom-text'>入住时间：{{item.BTimeDate}}（{{item.Days}}晚）</text>
-                                <text class='item-right-bottom-text'>总价：¥{{item.TotalMoney}}</text>
+                                <text class='item-right-bottom-text'>实付款：¥{{item.TotalMoney}}</text>
                             </view>
-                             <!-- <view class='item-bottom'> 
-                              <button class="item-bottom-btn" id='{{index}}' type="primary" catchtap='btnClick'>{{btnStr[index]}}</button>
-                            </view>    -->
+                            <view class='item-bottom'> 
+                                <button class="item-bottom-btn" id='{{index}}' type="primary" catchtap='btnClick'>{{btnStr[index]}}</button>
+                            </view>    
                         </view>
                     </view>
                     </navigator>
