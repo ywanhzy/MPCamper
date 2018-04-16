@@ -77,7 +77,7 @@ Page({
                         b = ""
                         break;
                       case 7://已取消  
-                        str = "已取消"
+                        str = "已失效"
                         b = "删除订单"
                         break;
                       case 8://关闭订单
@@ -119,7 +119,7 @@ Page({
                           b = ""
                           break;
                         case 7://已取消  
-                          str = "已取消"
+                          str = "已失效"
                           b = "删除订单"
                           break;
                         case 8://关闭订单
@@ -162,7 +162,7 @@ Page({
                           b = ""
                           break;
                         case 7://已取消  
-                          str = "已取消"
+                          str = "已失效"
                           b = "删除订单"
                           break;
                         case 8://关闭订单
