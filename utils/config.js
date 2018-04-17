@@ -1,11 +1,9 @@
 
 const conf = require('../conf.js');
 const API_BASE = conf.baseDomain
-//error相关
 var ERROR_DATA_IS_NULL = "获取数据为空，请重试";
 
 const CONFIG = {
-        //请求数据地址  必带参数 token   memberguid
         APP_KEY: {
                 AmapKey: "580186a553d30b077a830ac2a9ca6ba7"
         },
@@ -112,6 +110,9 @@ const CONFIG = {
                 GET_openMotorHomesCar: API_BASE + 'motorHomesCar/openMotorHomesCar.ashx',
                 // memberguid 会员id
                 // deviceId  锁设备id（二维码中获取）
+
+                //提交意见反馈接口
+                POST_SuggestData: API_BASE + 'seting/suggest.ashx',
 
         },
 

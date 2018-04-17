@@ -44,10 +44,12 @@ Page({
                                                 camperOrderDetail: camperOrderDetail,
                                         })
 
-                                        var d1 = new Date;
-                                        var d2 = new Date(camperOrderDetail.CreateTime);
+                                        var d1 = new Date();
+                                        var d2 = new Date(camperOrderDetail.CreateTime.replace(/-/g, "/"));
+                                        
+                                        console.error("d1 - d2:" + parseInt(d1 - d2))
                                         var iCountdown = 60 * 1000 * 60 * 24 - parseInt(d1 - d2);
-                                        console.error(iCountdown)
+                                        console.error("iCountdown:"+iCountdown)
                                         if (iCountdown > 0) {
                                                 selfObj.c1 = new $wuxCountDown({
                                                         date: +(new Date) + iCountdown,

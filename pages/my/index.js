@@ -1,11 +1,8 @@
 // pages/my/index.js
 const app = getApp()
-
+const util = require('../../utils/util.js')
 Page({
 
-        /**
-         * 页面的初始数据
-         */
         data: {
                 items: [
                         {
@@ -27,9 +24,19 @@ Page({
          */
         onLoad: function (options) {
                 console.log("onload")
-                this.setData({
-                        userInfo: app.globalData.userInfo
-                })
+                var memeberguid = wx.getStorageSync("memberguid")
+
+                if (util.isEmpty(memeberguid)) {
+                        this.setData({
+                                nickName: app.globalData.userInfo.nickName,
+                                avatarUrl: app.globalData.userInfo.avatarUrl,
+                        });
+                } else {
+                        this.setData({
+                                nickName: app.globalData.eUserInfo.NickName,
+                                avatarUrl: app.globalData.eUserInfo.HeadImg,
+                        });
+                }
 
         },
         toLogin: function (options) {
@@ -83,13 +90,22 @@ Page({
         onShow: function () {
                 var that=this
                 console.log("onShow")
-
                 setTimeout(function () {
                         console.log("userInfo:" + app.globalData.userInfo)
-
-                        that.setData({
-                                userInfo: app.globalData.userInfo
-                        });
+                        var memeberguid=wx.getStorageSync("memberguid")
+                        
+                        if (util.isEmpty(memeberguid)){
+                                that.setData({
+                                        nickName: app.globalData.userInfo.nickName,
+                                        avatarUrl: app.globalData.userInfo.avatarUrl,
+                                });
+                        }else{
+                                that.setData({
+                                        nickName: app.globalData.eUserInfo.NickName,
+                                        avatarUrl: app.globalData.eUserInfo.HeadImg,
+                                });
+                        }
+                       
                 }, 2000);
         },
 
@@ -118,13 +134,6 @@ Page({
          * 页面上拉触底事件的处理函数
          */
         onReachBottom: function () {
-
-        },
-
-        /**
-         * 用户点击右上角分享
-         */
-        onShareAppMessage: function () {
 
         }
 })

@@ -57,7 +57,10 @@ Page({
                         })
                         return
                 }
-                codeId= wx.getStorage('inviteId')
+                codeId = wx.getStorageSync('inviteId')
+                if (util.isEmpty(codeId)) {
+                        codeId=""
+                }
                 var url = CONFIG.API_URL.GET_BindWxPhone
                 var params = {
                         flag: "1",

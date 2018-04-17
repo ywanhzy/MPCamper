@@ -122,8 +122,11 @@
         height: 80px;
         line-height: 80px;
         color: #484848;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
         text-align: left;
-        margin-left: 30rpx;
 }
 
 .h2 {
@@ -133,7 +136,10 @@
         line-height: 60px;
         color: #484848;
         text-align: left;
-        margin-left: 30rpx;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
         border-bottom: 1px solid #e5e5e5;
 }
 
@@ -143,8 +149,11 @@
         height: 60px;
         line-height: 60px;
         color: #484848;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
         text-align: left;
-        margin-left: 30rpx;
 }
 
 .h4 {
@@ -152,6 +161,9 @@
         font-size: 34rpx;
         color: #484848;
         text-align: left;
-        margin-left: 30rpx;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
         font-weight: bold;
 }

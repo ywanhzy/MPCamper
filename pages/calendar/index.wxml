@@ -112,7 +112,7 @@
                                                                                 </view>
                                                                         </block>
                                                                         <block wx:if="{{item.ActivityDate==dateFormate.getYMD(day) && item.Num==0}}">
-                                                                                <view class="date-day-item flexcColumn">
+                                                                                <view class="date-day-item flexcColumn" data-dd="{{dateFormate.getYMD(day)}}" catchtap="chooseDay" data-check-day="{{day}}">
                                                                                         <text class="show-date" style="color:#acacac">{{dateFormate.showValue(day,festivaltag)}}</text>
                                                                                         <text class="dayprice_text" style="color:#acacac">已租</text>
                                                                                 </view>

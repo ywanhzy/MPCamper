@@ -35,7 +35,9 @@ Page({
                 showInvoiceAddress: false,
                 postage: postage,
                 invoiceInfo: "发票信息",
-                addressInfo: "收货地址"
+                addressInfo: "收货地址",
+                invoiceEdit: "添加",
+                addressEdit: "添加"
 
         },
         successFun: function (id, res, selfObj) {
@@ -132,6 +134,7 @@ Page({
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift + postage;
                         var otherTPrice = roomPrice + foregift
+                        totalPrice = Math.round(parseFloat(totalPrice) * 100) / 100
                         this.setData({
                                 totalPrice: totalPrice,
                                 otherTPrice: otherTPrice,
@@ -145,6 +148,7 @@ Page({
                         // roomPrice = dayNum * camperCarDetail.DailyPrice
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift;
+                        totalPrice=Math.round(parseFloat(totalPrice) * 100) / 100
                         this.setData({
                                 totalPrice: totalPrice,
                                 otherTPrice: totalPrice,
@@ -155,33 +159,78 @@ Page({
         },
         chooseInvoice: function () {
                 var that = this
-                wx.chooseInvoiceTitle({
-                        success(res) {
-                                invoiceObj = res;
-                                console.log(JSON.stringify(res))
-                                that.setData({
-                                        invoiceInfo: invoiceObj.title
-                                })
+                wx.getSetting({
+                        success: res => {
+                                if (res.authSetting['scope.invoiceTitle']) {
+                                        wx.chooseInvoiceTitle({
+                                                success:res=> {
+                                                        invoiceObj = res;
+                                                        console.log(JSON.stringify(res))
+                                                        that.setData({
+                                                                invoiceInfo: invoiceObj.title,
+                                                                invoiceEdit:"修改"
+                                                        })
+                                                },
+                                                fail:res=> {
+                                                        console.log("chooseInvoiceTitle：" + res.toString())
+                                                }
+                                        })
+                                }else{
+                                        wx.openSetting({
+                                                success: (res) => {
+                                                        if (res.authSetting["scope.invoiceTitle"]) {
+
+                                                        }
+                                                }, fail: function (res) {
+                                                }
+                                        })
+                                }
                         },
-                        fail(res) {// 接口调用失败 / 结束的回调函数
+                        fail:res=>{
+
+                        },complete:res=>{
+
                         }
                 })
         },
         chooseAddress: function () {
                 var that = this
-                if (wx.chooseAddress) {
-                        wx.chooseAddress({
-                                success: function (res) {
-                                        addressObj = res
-                                        console.log(JSON.stringify(res))
-                                        that.setData({
-                                                addressInfo: addressObj.userName
+                wx.getSetting({
+                        success: res => {
+                                if (res.authSetting['scope.invoiceTitle']) {
+                                        wx.chooseAddress({
+                                                success: function (res) {
+                                                        addressObj = res
+                                                        console.log(JSON.stringify(res))
+                                                        that.setData({
+                                                                addressInfo: addressObj.userName,
+                                                                addressEdit: "修改"
+                                                        })
+                                                },
+                                                fail: function (err) {
+                                                        console.log(JSON.stringify(err))
+                                                }
                                         })
-                                },
-                                fail: function (err) {
-                                        console.log(JSON.stringify(err))
+                                } else {
+                                        wx.openSetting({
+                                                success: (res) => {
+                                                        if (res.authSetting["scope.address"]) {
+
+                                                        }
+                                                }, fail: function (res) {
+                                                }
+                                        })
                                 }
-                        })
+                        },
+                        fail: res => {
+
+                        }, complete: res => {
+
+                        }
+                })
+
+                if (wx.chooseAddress) {
+                        
                 } else {
                         console.log('当前微信版本不支持chooseAddress');
                 }
@@ -384,6 +433,7 @@ Page({
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift + postage;
                         var otherTPrice = roomPrice + foregift
+                        totalPrice = Math.round(parseFloat(totalPrice) * 100) / 100
                         this.setData({
                                 totalPrice: totalPrice,
                                 otherTPrice: otherTPrice,
@@ -392,6 +442,7 @@ Page({
                 }else{
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift;
+                        totalPrice = Math.round(parseFloat(totalPrice) * 100) / 100
                         this.setData({
                                 totalPrice: totalPrice,
                                 otherTPrice: totalPrice,

@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.94",
 	"appid": "wx64e0ed63ac933aaa",
-	"projectname": "Camper",
+	"projectname": "Campers",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 8,
 			"list": [
 				{
 					"id": 0,
@@ -91,6 +91,12 @@
 						"shareName": "wYqQ9yiNTvU5pECI7WhL_4EaFgo1XOW062XKhRGg4Yc@cr4dev",
 						"shareKey": "lFa63XiSwnYXXznAAzsMEtjIdcZ3f17v_-LzgbY59gJUEU5mwfcq1F9bh0qWTnC55OZzI4d0OvFAMRh7NP1Zqg~~"
 					}
+				},
+				{
+					"id": -1,
+					"name": "建议反馈",
+					"pathName": "pages/feedBack/index",
+					"query": ""
 				}
 			]
 		}

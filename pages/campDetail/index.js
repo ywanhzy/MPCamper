@@ -148,13 +148,14 @@ Page({
          * 用户点击右上角分享
          */
         onShareAppMessage: function () {
-                var inviteId = wx.getStorage('memberguid')
+                var inviteId = wx.getStorageSync('memberguid')
                 console.log("inviteId:" + inviteId)
+                console.log("campOwerGuid:" + campOwerGuid)
                 console.log('onShareAppMessage')
                 var shareObj = {
                         title: '房车行',
                         desc: '营地详情',
-                        path: '/pages/campDetail/index?campOwerGuid=' + campOwerGuid +'&inviteId=' + inviteId,
+                        path: '/pages/campDetail/index?CampOwerGuid=' + campOwerGuid +'&inviteId=' + inviteId,
                         success: function (res) {
                                 console.log('success')
                         },

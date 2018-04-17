@@ -116,7 +116,7 @@ Page({
          * 用户点击右上角分享
          */
         onShareAppMessage: function () {
-                var inviteId = wx.getStorage('memberguid')
+                var inviteId = wx.getStorageSync('memberguid')
                 console.log("inviteId:" + inviteId)
                 console.log('onShareAppMessage')
                 var shareObj = {

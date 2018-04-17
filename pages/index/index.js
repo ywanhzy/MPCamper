@@ -93,7 +93,8 @@ Page({
         },
         onLoad: function (options) {
                 if (!util.isEmpty(options.inviteId)) {
-                        console.log("inviteId:" + options.inviteId)
+
+                        console.error("inviteId:" + options.inviteId)
                         wx.setStorageSync('inviteId', options.inviteId)
                 }
                 var that = this
@@ -186,7 +187,8 @@ Page({
          * 用户点击右上角分享
          */
         onShareAppMessage: function (options) {
-                var inviteId=wx.getStorage('memberguid')
+                var inviteId = wx.getStorageSync('memberguid')
+                
                 console.log("inviteId:"+inviteId)
                 console.log('onShareAppMessage')
                 var shareObj = {

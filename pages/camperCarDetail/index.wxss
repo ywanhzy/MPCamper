@@ -3,6 +3,8 @@
         background-color: #fff;
         min-height: 100%;
         padding: 0;
+        box-sizing:border-box;
+
 }
 
 .swiper_box {
@@ -87,8 +89,11 @@
         width: 100%;
         font-size: 30rpx;
         color: #484848;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
         text-align: left;
-        margin-left: 30rpx;
 }
 
 .img_map{

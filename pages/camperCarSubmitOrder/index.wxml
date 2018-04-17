@@ -52,11 +52,11 @@
 
                                 <view class="weui-form-preview__item" wx:if="{{showInvoiceAddress}}">
                                         <view class="weui-form-preview__label_e">{{invoiceInfo}}</view>
-                                        <view class="weui-form-preview__value" bindtap="chooseInvoice">添加</view>
+                                        <view class="weui-form-preview__value" bindtap="chooseInvoice">{{invoiceEdit}}</view>
                                 </view>
                                 <view class="weui-form-preview__item" wx:if="{{showInvoiceAddress}}">
                                         <view class="weui-form-preview__label_e">{{addressInfo}}</view>
-                                        <view class="weui-form-preview__value" bindtap="chooseAddress">添加</view>
+                                        <view class="weui-form-preview__value" bindtap="chooseAddress">{{addressEdit}}</view>
                                 </view>
 
                         </view>
