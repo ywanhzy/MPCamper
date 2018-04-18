@@ -21,6 +21,7 @@ var dayNum = 0;
 const postage = 10;
 var roomPrice;
 var invoice="0";
+var strNickName, strPhone;
 Page({
         data: {
                 camperCarDetail: [],
@@ -67,7 +68,7 @@ Page({
                                                 var camperCarDetails = JSON.stringify(camperCarDetail);
                                                 var orderInfos = JSON.stringify(orderInfo);
                                                 wx.navigateTo({
-                                                        url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                                        url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos + '&roomPrice=' + roomPrice,
                                                 })
                                         }
                                 }else{
@@ -86,7 +87,7 @@ Page({
                                         var camperCarDetails = JSON.stringify(camperCarDetail);
                                         var orderInfos = JSON.stringify(orderInfo);
                                         wx.navigateTo({
-                                                url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                                url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos + '&roomPrice=' + roomPrice,
                                         })
                                 }else{
                                         $wuxToast.show({
@@ -112,10 +113,12 @@ Page({
                 moenyDesc = JSON.parse(options.moenyDesc);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 foregift = camperCarDetail.Deposit;
+                strNickName=app.globalData.eUserInfo.NickName;
+                strPhone=app.globalData.eUserInfo.Phone
                 this.setData({
                         camperCarDetail: camperCarDetail,
-                        NickName: app.globalData.eUserInfo.NickName,
-                        Phone: app.globalData.eUserInfo.Phone,
+                        NickName: strNickName,
+                        Phone: strPhone,
                         foregift: camperCarDetail.Deposit
                 })
                 if (options.camperCarDetail == null) {
@@ -123,6 +126,11 @@ Page({
                                 title: '数据为空',
                         })
                 }
+        },
+        modifyUserInfo:function(e){
+                wx.navigateTo({
+                        url: '/pages/modifyOrderUserInfo/index?orderName=' + strNickName + '&orderphone=' + strPhone
+                })
         },
         checkboxChange: function (e) {
                 console.log('checkbox：', e.detail.value)
@@ -296,8 +304,8 @@ Page({
                 endDay=this.data.end
                 orderInfo.start = startDay;
                 orderInfo.end = endDay;
-                orderInfo.nickName = app.globalData.eUserInfo.NickName
-                orderInfo.phone = app.globalData.eUserInfo.Phone
+                orderInfo.nickName = this.data.NickName
+                orderInfo.phone = this.data.Phone
                 orderInfo.totalMoney = this.data.totalPrice
                 orderInfo.day = this.data.day
                 orderInfo.showInvoiceAddress = showInvoiceAddress
@@ -315,8 +323,8 @@ Page({
                 
                 
                 var params = {
-                        bookingPersonName: app.globalData.eUserInfo.NickName,
-                        bookingPersonPhone: app.globalData.eUserInfo.Phone,
+                        bookingPersonName: this.data.NickName,
+                        bookingPersonPhone: this.data.Phone,
                         carGuid: camperCarDetail.CarGuid,
                         bTime: startDay,
                         eTime: endDay,

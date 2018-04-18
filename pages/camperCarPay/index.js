@@ -7,6 +7,7 @@ const CONFIG = require('../../utils/config.js')
 const util = require('../../utils/util.js')
 
 var camperCarOrder, camperCarDetail, orderInfo;
+var roomPrice;
 Page({
         data: {
                 camperCarDetail: {},
@@ -54,7 +55,7 @@ Page({
          */
         onLoad: function (options) {
                
-                
+                roomPrice= options.roomPrice;
                 camperCarOrder = JSON.parse(options.camperCarOrder);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 orderInfo = JSON.parse(options.orderInfo);
@@ -62,7 +63,8 @@ Page({
                 this.setData({
                         camperCarDetail: camperCarDetail,
                         camperCarOrder: camperCarOrder,
-                        orderInfo: orderInfo
+                        orderInfo: orderInfo,
+                        roomPrice: roomPrice
                 })
                 this.c1 = new $wuxCountDown({
                         date: +(new Date) + 60 * 1000 * 60 * 24,

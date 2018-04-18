@@ -19,7 +19,8 @@
                 "pages/feedBack/index",
                 "pages/openLockIng/index",
                 "pages/liveCamperOrderDetail/index",
-                "pages/calendar/index"
+                "pages/calendar/index",
+                "pages/modifyOrderUserInfo/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",

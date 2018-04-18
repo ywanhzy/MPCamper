@@ -27,7 +27,7 @@
                         <view class="weui-form-preview__hd">
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label_e">房费({{orderInfo.day}}晚)</view>
-                                        <view class="weui-form-preview__value">￥{{orderInfo.day*camperCarDetail.DailyPrice}}</view>
+                                        <view class="weui-form-preview__value">￥{{roomPrice}}</view>
                                 </view>
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label_e">押金</view>

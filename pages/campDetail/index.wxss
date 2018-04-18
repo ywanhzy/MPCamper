@@ -32,7 +32,6 @@
 }
 
 .img-title {
-        width: 100%;
         height: auto;
         position: absolute;
         left: 10rpx;
@@ -129,6 +128,8 @@
 
 .wxParse{
         padding: 0 10px;
+        box-sizing: content-box;
+        overflow: hidden;
 }
 
 .sus-h2 {
@@ -149,5 +150,7 @@
         margin-top: 30rpx;
         font-size: 36rpx;
         color: #484848;
-        margin-left: 20rpx;
+        box-sizing: border-box;
+        overflow: hidden;
+        padding-left: 20rpx;
 }
