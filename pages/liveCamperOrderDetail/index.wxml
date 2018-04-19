@@ -32,7 +32,7 @@
                                         <view class="weui-form-preview__label_e">发票邮费</view>
                                         <view class="weui-form-preview__value">￥{{camperOrderDetail.InvoiceFee}}</view>
                                 </view>
-                                
+
                                 <view class="weui-form-preview__item">
                                         <view class="weui-form-preview__label_e">押金</view>
                                         <view class="weui-form-preview__value">￥{{camperOrderDetail.Deposit}}</view>
@@ -74,6 +74,17 @@
                         <view class="h4">入住</view>
                         <view class="content">进行入住登记后，扫码开锁即可入住</view>
                         <view class='line'></view>
+                        <block wx:if="{{invoiceInfo}}">
+                                <view class="h4">发票信息</view>
+                                <view class="order_info">抬头类型：{{invoiceInfo.headerType==0?"企业":"个人"}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.headerTitle}}">发票抬头：{{invoiceInfo.headerTitle}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.number}}">纳税人识别号：{{invoiceInfo.number}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.invoiceContent}}">发票内容：{{invoiceInfo.invoiceContent}}</view>
+                                <view class="order_info" wx:if="{{invoiceInfo.invoiceFee}}">发票金额：{{invoiceInfo.invoiceFee}}</view>
+                                <view class='line'></view>
+                        </block>
+
+                        <view class="h4">订单信息</view>
                         <view class="order_info">订单编号：{{camperOrderDetail.OrderNo}}</view>
                         <view class="order_info" wx:if="{{camperOrderDetail.PayNo}}">交易号：{{camperOrderDetail.PayNo}}</view>
                         <view class="order_info">创建时间：{{camperOrderDetail.CreateTime}}</view>
@@ -86,19 +97,19 @@
 
 </view>
 
-<view class="content-b"  wx:if="{{camperOrderDetail.OrderStatus==1||camperOrderDetail.OrderStatus==7}}">
+<view class="content-b" wx:if="{{camperOrderDetail.OrderStatus==1||camperOrderDetail.OrderStatus==7}}">
         <view class="content-c ">
                 <view class='content-left'>
-                        <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class="countdown">{{ c1 }}</view>
+                        <view wx:if="{{camperOrderDetail.OrderStatus==1}}" class="countdown">{{ c1 }}</view>
                 </view>
-                <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderCancel">
+                <view wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderCancel">
                         <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">取消订单</button>
                 </view>
-                <view wx:if="{{camperOrderDetail.OrderStatus==7}}"  class='content-left' bindtap="orderDel">
+                <view wx:if="{{camperOrderDetail.OrderStatus==7}}" class='content-left' bindtap="orderDel">
                         <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">删除</button>
                 </view>
-                <view  wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderPay">
-                        <button  style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
+                <view wx:if="{{camperOrderDetail.OrderStatus==1}}" class='content-left' bindtap="orderPay">
+                        <button style="width:100px;line-height:40px; height: 40px;font-size: 30rpx;" type="warn">立即支付</button>
                 </view>
                 <!-- <view  wx:if="{{camperOrderDetail.OrderStatus==3}}" class='content-left' >
                         待入住

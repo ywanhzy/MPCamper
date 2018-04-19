@@ -1,11 +1,15 @@
 // pages/aboutUs/aboutUs.js
+
+const CONF = require('../../conf.js');
+const VERSION = CONF.version;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      version :'1.1.0'
+          version: VERSION
   },
 
   /**

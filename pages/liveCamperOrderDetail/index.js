@@ -14,7 +14,7 @@ var width;
 var height;
 var myAmapFun;
 var longitude, latitude, campShortName, campOwerAddress, campOwerTel;
-
+var InvoiceInfo;
 Page({
 
         /**
@@ -22,6 +22,7 @@ Page({
          */
         data: {
                 camperOrderDetail: [],
+                invoiceInfo: {},
                 amapSrc: ""
         },
         successFun: function (id, res, selfObj) {
@@ -29,6 +30,7 @@ Page({
                         case 100:
                                 if (res.res_code == 200) {
                                         camperOrderDetail = res.data[0];
+                                        InvoiceInfo = res.InvoiceInfo;
                                         console.log(res.data)
 
                                         // "OrderStatus": 订单状态1 待付款 3待入住/ 待登记 4 已入住/ 已登记 6 已消费 7 已取消  8 关闭订单,
@@ -42,6 +44,7 @@ Page({
 
                                         selfObj.setData({
                                                 camperOrderDetail: camperOrderDetail,
+                                                invoiceInfo: InvoiceInfo,
                                         })
 
                                         var d1 = new Date();

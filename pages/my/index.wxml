@@ -6,7 +6,7 @@
         </view>
         <!--button open-type="contact">客服会话(测试-可不用理会)</button-->
 
-        <view class="info_list">
+        <!-- <view class="info_list">
                 <view class="weui-cells">
                         <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:for="{{ items }}" wx:key="" data-path="{{ item.path }}" data-index="{{ index }}" bindtap="navigateTo">
                                 <view class="weui-cell__hd">
@@ -18,6 +18,33 @@
                                 </view>
                         </view>
                 </view>
+        </view> -->
 
+        <view class="weui-grids">
+                <block wx:for="{{gridItems}}" wx:key="*this">
+                        <block wx:if="{{ item.path }}">
+                                <navigator url="{{ item.path }}" class="weui-grid" hover-class="weui-grid_active">
+                                        <image class="weui-grid__icon" style="width:35px; height: 35px;" src="{{ item.icon }}" />
+                                        <view class="weui-grid__label">{{ item.text }}</view>
+                                </navigator>
+                        </block>
+                        <block wx:else>
+                                <view class="weui-grid" hover-class="weui-grid_active">
+                                        <button open-type="contact" >
+                                                <image class="weui-grid__icon" style="width:35px; height: 35px;" src="{{ item.icon }}" />
+                                                <view style="margin-top:5px;line-height:22px;height: 22px;text-align:center;color:#000;font-size:14px;">{{ item.text }}</view>
+
+                                        </button>
+                                </view>
+
+                        </block>
+                </block>
         </view>
+
+        <view class="weui-footer weui-footer_fixed-bottom">
+                <view class="weui-footer__links">
+                </view>
+                <view class="weui-footer__text">© 房车行 客服：4000-155-105</view>
+        </view>
+
 </view>

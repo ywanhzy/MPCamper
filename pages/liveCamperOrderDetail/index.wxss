@@ -248,6 +248,8 @@
         text-align: left;
         margin-left: 30rpx;
         font-weight: bold;
+        padding-left: 0;
+        padding-right: 0;
 }
 
 .content {
@@ -311,5 +313,8 @@
         color: #43967c;
 }
 .countdown {
-        font-size: 40rpx;
+        font-size: 36rpx;
+        height:40px;
+        line-height:40px;
+        overflow: hidden
 }

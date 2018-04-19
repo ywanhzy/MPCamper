@@ -20,7 +20,8 @@
                 "pages/openLockIng/index",
                 "pages/liveCamperOrderDetail/index",
                 "pages/calendar/index",
-                "pages/modifyOrderUserInfo/index"
+                "pages/modifyOrderUserInfo/index",
+                "pages/cooperate/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",
@@ -46,6 +47,12 @@
                                 "text": "营地",
                                 "iconPath": "images/camp.png",
                                 "selectedIconPath": "images/camp_select.png"
+                        },
+                        {
+                                "pagePath": "pages/myOrder/index",
+                                "text": "订单",
+                                "iconPath": "images/order.png",
+                                "selectedIconPath": "images/order_select.png"
                         },
                         {
                                 "pagePath": "pages/my/index",

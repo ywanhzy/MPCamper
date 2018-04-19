@@ -22,9 +22,9 @@
                 <view class="weui-tab__content" hidden="{{ activeIndex != 2 ||order.length>0}}">
                 	<template is="prompt" data="{{ ...$wux.prompt.msg3 }}"/>
                 </view>
-                <view class="weui-tab__content" hidden="{{ activeIndex != 3 ||order.length>0}}">
+                <!-- <view class="weui-tab__content" hidden="{{ activeIndex != 3 ||order.length>0}}">
                 	<template is="prompt" data="{{ ...$wux.prompt.msg4 }}"/>
-                </view>
+                </view> -->
             </view>
 
             <view class="items">
