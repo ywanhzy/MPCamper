@@ -9,8 +9,8 @@ const util = require('../../utils/util.js')
 
 var camperCarDetail = new Object();
 var moenyDesc = new Array;
-var startDay="",  foregift;
-var endDay="";
+var startDay = "", foregift;
+var endDay = "";
 var orderInfo = new Object();
 var camperCarOrder = new Object();
 
@@ -20,7 +20,7 @@ var showInvoiceAddress = false;
 var dayNum = 0;
 const postage = 10;
 var roomPrice;
-var invoice="0";
+var invoice = "0";
 var strNickName, strPhone;
 Page({
         data: {
@@ -49,7 +49,7 @@ Page({
                                         console.log(camperCarOrder)
                                         console.log(camperCarDetail)
                                         console.log(orderInfo)
-                                        if (showInvoiceAddress){
+                                        if (showInvoiceAddress) {
                                                 var url = CONFIG.API_URL.GET_AddInvoiceInfo
                                                 var params = {
                                                         orderGuid: camperCarOrder.orderGuid,
@@ -63,7 +63,7 @@ Page({
                                                         detailedAddress: addressObj.provinceName + addressObj.cityName + addressObj.countyName + addressObj.detailInfo
                                                 }
                                                 request.GET(url, params, 101, false, selfObj, selfObj.successFun, selfObj.failFun)
-                                        }else{
+                                        } else {
                                                 var camperCarOrders = JSON.stringify(camperCarOrder);
                                                 var camperCarDetails = JSON.stringify(camperCarDetail);
                                                 var orderInfos = JSON.stringify(orderInfo);
@@ -71,7 +71,7 @@ Page({
                                                         url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos + '&roomPrice=' + roomPrice,
                                                 })
                                         }
-                                }else{
+                                } else {
                                         $wuxToast.show({
                                                 type: 'text',
                                                 timer: 2000,
@@ -89,7 +89,7 @@ Page({
                                         wx.navigateTo({
                                                 url: '/pages/camperCarPay/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos + '&roomPrice=' + roomPrice,
                                         })
-                                }else{
+                                } else {
                                         $wuxToast.show({
                                                 type: 'text',
                                                 timer: 2000,
@@ -113,8 +113,8 @@ Page({
                 moenyDesc = JSON.parse(options.moenyDesc);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 foregift = camperCarDetail.Deposit;
-                strNickName=app.globalData.eUserInfo.NickName;
-                strPhone=app.globalData.eUserInfo.Phone
+                strNickName = app.globalData.eUserInfo.NickName;
+                strPhone = app.globalData.eUserInfo.Phone
                 this.setData({
                         camperCarDetail: camperCarDetail,
                         NickName: strNickName,
@@ -127,7 +127,7 @@ Page({
                         })
                 }
         },
-        modifyUserInfo:function(e){
+        modifyUserInfo: function (e) {
                 wx.navigateTo({
                         url: '/pages/modifyOrderUserInfo/index?orderName=' + strNickName + '&orderphone=' + strPhone
                 })
@@ -137,7 +137,7 @@ Page({
                 var strValue = e.detail.value
                 if (strValue == "发票") {
                         showInvoiceAddress = true
-                        invoice="1"
+                        invoice = "1"
                         // roomPrice = dayNum * camperCarDetail.DailyPrice
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift + postage;
@@ -156,56 +156,83 @@ Page({
                         // roomPrice = dayNum * camperCarDetail.DailyPrice
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift;
-                        totalPrice=Math.round(parseFloat(totalPrice) * 100) / 100
+                        totalPrice = Math.round(parseFloat(totalPrice) * 100) / 100
                         this.setData({
                                 totalPrice: totalPrice,
                                 otherTPrice: totalPrice,
                                 showInvoiceAddress: false
                         })
-                        
+
                 }
         },
         chooseInvoice: function () {
                 var that = this
-                wx.getSetting({
-                        success: res => {
-                                if (res.authSetting['scope.invoiceTitle']) {
-                                        wx.chooseInvoiceTitle({
-                                                success:res=> {
-                                                        invoiceObj = res;
-                                                        console.log(JSON.stringify(res))
-                                                        that.setData({
-                                                                invoiceInfo: invoiceObj.title,
-                                                                invoiceEdit:"修改"
-                                                        })
-                                                },
-                                                fail:res=> {
-                                                        console.log("chooseInvoiceTitle：" + res.toString())
-                                                }
-                                        })
-                                }else{
-                                        wx.openSetting({
-                                                success: (res) => {
-                                                        if (res.authSetting["scope.invoiceTitle"]) {
-
+                if (wx.chooseInvoiceTitle) {
+                        wx.getSetting({
+                                success: res => {
+                                        console.log(res.authSetting)
+                                        if (res.authSetting['scope.invoiceTitle']) {
+                                                console.log("invoiceTitle")
+                                                wx.chooseInvoiceTitle({
+                                                        success: res => {
+                                                                invoiceObj = res;
+                                                                console.log(JSON.stringify(res))
+                                                                that.setData({
+                                                                        invoiceInfo: invoiceObj.title,
+                                                                        invoiceEdit: "修改"
+                                                                })
+                                                        },
+                                                        fail: res => {
+                                                                console.log("chooseInvoiceTitle：" + res.toString())
                                                         }
-                                                }, fail: function (res) {
-                                                }
-                                        })
+                                                })
+                                        } else {
+                                                console.log("no -invoiceTitle")
+                                                wx.chooseInvoiceTitle({
+                                                        success: res => {
+                                                                invoiceObj = res;
+                                                                console.log(JSON.stringify(res))
+                                                                that.setData({
+                                                                        invoiceInfo: invoiceObj.title,
+                                                                        invoiceEdit: "修改"
+                                                                })
+                                                        },
+                                                        fail: res => {
+                                                                console.log(" no chooseInvoiceTitle：" + res.toString())
+                                                                wx.openSetting({
+                                                                        success: (res) => {
+                                                                                if (res.authSetting["scope.invoiceTitle"]) {
+                                                                                }
+                                                                        }, fail: function (res) {
+                                                                        }
+                                                                })
+                                                        }
+                                                })
+                                        }
+                                },
+                                fail: res => {
+                                }, complete: res => {
                                 }
-                        },
-                        fail:res=>{
+                        })
+                } else {
+                        console.log('当前微信版本不支持chooseInvoiceTitle');
+                      
+                        $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '当前微信版本不支持获取发票信息，请更新微信',
+                                success: () => console.log('文本提示')
+                        })
+                }
 
-                        },complete:res=>{
-
-                        }
-                })
         },
         chooseAddress: function () {
                 var that = this
                 wx.getSetting({
                         success: res => {
-                                if (res.authSetting['scope.invoiceTitle']) {
+                                if (res.authSetting['scope.address']) {
+                                        console.log("address")
                                         wx.chooseAddress({
                                                 success: function (res) {
                                                         addressObj = res
@@ -220,25 +247,38 @@ Page({
                                                 }
                                         })
                                 } else {
-                                        wx.openSetting({
-                                                success: (res) => {
-                                                        if (res.authSetting["scope.address"]) {
+                                        console.log("no -address")
+                                        wx.chooseAddress({
+                                                success: function (res) {
+                                                        addressObj = res
+                                                        console.log(JSON.stringify(res))
+                                                        that.setData({
+                                                                addressInfo: addressObj.userName,
+                                                                addressEdit: "修改"
+                                                        })
+                                                },
+                                                fail: function (err) {
+                                                        console.log(JSON.stringify(err))
+                                                        wx.openSetting({
+                                                                success: (res) => {
+                                                                        if (res.authSetting["scope.address"]) {
 
-                                                        }
-                                                }, fail: function (res) {
+                                                                        }
+                                                                }, fail: function (res) {
+                                                                }
+                                                        })
                                                 }
                                         })
                                 }
                         },
                         fail: res => {
-
                         }, complete: res => {
-
                         }
                 })
 
+
                 if (wx.chooseAddress) {
-                        
+
                 } else {
                         console.log('当前微信版本不支持chooseAddress');
                 }
@@ -275,11 +315,11 @@ Page({
                         })
                         return
                 }
-                if (showInvoiceAddress){
+                if (showInvoiceAddress) {
                         console.log(invoiceObj)
                         console.log(addressObj)
-                        
-                        if (util.isEmpty(invoiceObj.title)){
+
+                        if (util.isEmpty(invoiceObj.title)) {
                                 $wuxToast.show({
                                         type: 'text',
                                         timer: 2000,
@@ -300,8 +340,8 @@ Page({
                                 return
                         }
                 }
-                startDay=this.data.start
-                endDay=this.data.end
+                startDay = this.data.start
+                endDay = this.data.end
                 orderInfo.start = startDay;
                 orderInfo.end = endDay;
                 orderInfo.nickName = this.data.NickName
@@ -320,8 +360,8 @@ Page({
                 // currencyAmount-1 不用电子币支付抵扣
                 // totalMoney 总金额
                 // invoice  0 不需要邮费 1 需要邮费（不填默认为0）
-                
-                
+
+
                 var params = {
                         bookingPersonName: this.data.NickName,
                         bookingPersonPhone: this.data.Phone,
@@ -337,7 +377,7 @@ Page({
         },
         openCalendarS: function () {
                 wx.navigateTo({
-                        url: '/pages/calendar/index?moenyDesc=' + JSON.stringify(moenyDesc)+'&'
+                        url: '/pages/calendar/index?moenyDesc=' + JSON.stringify(moenyDesc) + '&'
                 })
         },
         openCalendarS_() {
@@ -365,7 +405,7 @@ Page({
                                         } else {
                                                 roomPrice = dayNum * camperCarDetail.DailyPrice
                                                 var totalPrice = roomPrice + foregift;
-                                                var otherTPrice = roomPrice + foregift; 
+                                                var otherTPrice = roomPrice + foregift;
                                                 if (showInvoiceAddress) {
                                                         totalPrice = totalPrice + postage;
                                                 }
@@ -437,7 +477,7 @@ Page({
          * 生命周期函数--监听页面显示
          */
         onShow: function () {
-                if (showInvoiceAddress){
+                if (showInvoiceAddress) {
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift + postage;
                         var otherTPrice = roomPrice + foregift
@@ -447,7 +487,7 @@ Page({
                                 otherTPrice: otherTPrice,
                                 showInvoiceAddress: true
                         })
-                }else{
+                } else {
                         roomPrice = this.data.roomPrice
                         var totalPrice = roomPrice + foregift;
                         totalPrice = Math.round(parseFloat(totalPrice) * 100) / 100
@@ -457,7 +497,7 @@ Page({
                                 showInvoiceAddress: false
                         })
                 }
-        
+
 
         },
 

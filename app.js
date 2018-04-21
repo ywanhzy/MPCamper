@@ -1,6 +1,9 @@
 //app.js
 App({
         onShow: function (options) {
+
+                console.log(wx.canIUse('getUpdateManager'))
+
                 console.log("[onShow] path:", options.path)
                 console.log("[onShow] query:", options.query)
                 console.log("[onShow] scene:", options.scene)
@@ -22,29 +25,31 @@ App({
                         })
                 }
 
-                //小程序更新
-                const updateManager = wx.getUpdateManager()
-                updateManager.onCheckForUpdate(function (res) {
-                        // 请求完新版本信息的回调
-                        console.log("onCheckForUpdate:"+res.hasUpdate)
-                })
-                updateManager.onUpdateReady(function () {
-                        wx.showModal({
-                                title: '更新提示',
-                                content: '新版本已经准备好，是否重启应用？',
-                                showCancel:false,
-                                success: function (res) {
-                                        if (res.confirm) {
-                                                // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                                                updateManager.applyUpdate()
-                                        }
-                                }
+                if (wx.canIUse('getUpdateManager')) {
+                        //小程序更新
+                        const updateManager = wx.getUpdateManager()
+                        updateManager.onCheckForUpdate(function (res) {
+                                // 请求完新版本信息的回调
+                                console.log("onCheckForUpdate:" + res.hasUpdate)
                         })
-                })
-                updateManager.onUpdateFailed(function () {
-                        // 新的版本下载失败
-                        console.log("onUpdateFailed")
-                })
+                        updateManager.onUpdateReady(function () {
+                                wx.showModal({
+                                        title: '更新提示',
+                                        content: '新版本已经准备好，是否重启应用？',
+                                        showCancel: false,
+                                        success: function (res) {
+                                                if (res.confirm) {
+                                                        // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                                                        updateManager.applyUpdate()
+                                                }
+                                        }
+                                })
+                        })
+                        updateManager.onUpdateFailed(function () {
+                                // 新的版本下载失败
+                                console.log("onUpdateFailed")
+                        })
+                }
 
         },
         onLaunch: function (options) {
