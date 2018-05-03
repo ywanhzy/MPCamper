@@ -190,7 +190,7 @@ Page({
                                 }
 
                                 $wuxPrompt.init('msg1', {
-                                        title: '空空如也',
+                                        title: '',
                                         text: '暂时没有相关数据',
                                 }).show()
 
@@ -206,17 +206,17 @@ Page({
                                         // buttonClicked(index, item) {
                                         //   console.log(index, item)
                                         // },
-                                        title: '空空如也',
+                                        title: '',
                                         text: '暂时没有相关数据',
                                 }).show()
 
                                 $wuxPrompt.init('msg3', {
-                                        title: '空空如也',
+                                        title: '',
                                         text: '暂时没有相关数据',
                                 }).show()
 
                                 $wuxPrompt.init('msg4', {
-                                        title: '空空如也',
+                                        title: '',
                                         text: '暂时没有相关数据',
                                 }).show()
                                 break;

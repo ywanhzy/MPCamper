@@ -1,14 +1,14 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.2",
+	"libVersion": "1.9.90",
 	"appid": "wx64e0ed63ac933aaa",
 	"projectname": "Campers",
 	"isGameTourist": false,
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 7,
 			"list": [
 				{
 					"id": 0,
@@ -82,32 +82,15 @@
 				},
 				{
 					"id": 7,
-					"name": "场景",
-					"pathName": "pages/index/index",
+					"name": "我的",
+					"pathName": "pages/my/index",
 					"query": "",
-					"scene": "1044",
-					"shareInfo": {
-						"groupName": "测试模拟群0",
-						"shareName": "wYqQ9yiNTvU5pECI7WhL_4EaFgo1XOW062XKhRGg4Yc@cr4dev",
-						"shareKey": "lFa63XiSwnYXXznAAzsMEtjIdcZ3f17v_-LzgbY59gJUEU5mwfcq1F9bh0qWTnC55OZzI4d0OvFAMRh7NP1Zqg~~"
-					}
+					"scene": "1001"
 				},
 				{
 					"id": -1,
-					"name": "建议反馈",
-					"pathName": "pages/feedBack/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/my/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/my/index",
+					"name": "推荐",
+					"pathName": "pages/invitation/index",
 					"query": ""
 				}
 			]

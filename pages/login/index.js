@@ -122,9 +122,9 @@ Page({
                 //   wx.navigateBack({
                 //           delta: 2
                 //   })
-                wx.switchTab({
-                        url: '../index/index?id=1'
-                })
+                // wx.switchTab({
+                //         url: '../index/index?id=1'
+                // })
         },
 
         /**

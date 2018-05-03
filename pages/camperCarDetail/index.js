@@ -203,7 +203,21 @@ Page({
                         }
                 }else{
                         //未授权 去授权登录
-                        app.wxAuthorize()
+                        // app.wxAuthorize()
+                        wx.showModal({
+                                title: '提示',
+                                content: '请绑定房车行账号',
+                                success: function (res) {
+                                        if (res.confirm) {
+                                                wx.switchTab({
+                                                        url: '../my/index',
+                                                })
+                                        } else if (res.cancel) {
+                                                console.log('用户点击取消')
+                                        }
+                                }
+                        })
+                        
                 }
         },
         goTel: function (e) {

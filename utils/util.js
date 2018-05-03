@@ -95,6 +95,19 @@ function isEmpty(value) {
         return false
 }
 
+/**
+ * 防止快速点击
+ *  if (!this.data.buttonClicked) {
+            preventDoubleClick(this);
+    }
+ */
+function preventDoubleClick(self, timeout = 500) {
+        self.setData({ buttonClicked: true });
+        setTimeout(function () {
+                self.setData({ buttonClicked: false })
+        }, timeout);
+}
+
 module.exports = {
         formatTime: formatTime,
         isPhoneNumber: isPhoneNumber,
@@ -102,5 +115,6 @@ module.exports = {
         spiltStr: spiltStr,
         dateDifference: dateDifference,
         isEmpty: isEmpty,
+        preventDoubleClick:preventDoubleClick,
         getQueryObject:getQueryObject
 }

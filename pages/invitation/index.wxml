@@ -1,0 +1,18 @@
+<view class="container">
+        <view class="topTab">
+                <view class="top_l" >
+                        <image class="topimg" src="/images/weixin_ico.png" />
+                        <text class="toptext">发给微信好友</text>
+                </view>
+                <!-- <view class="top_c">
+                        <image class="topimg" src="/images/pyq_ico.png" />
+                        <text class="toptext">分享到朋友圈</text>
+                </view> -->
+        </view>
+        <view class="line"></view>
+        <view class='content'>
+                <text class='content_describe'>邀请好友消费，轻松赚推荐现金奖励！</text>
+
+                <text class='content_record' bindtap='goRecord'>邀请记录>></text>
+        </view>
+</view>

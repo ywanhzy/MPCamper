@@ -1,6 +1,7 @@
 // pages/my/index.js
 const app = getApp()
 const util = require('../../utils/util.js')
+const CONFIG = require('../../utils/config.js')
 Page({
 
         data: {
@@ -31,7 +32,7 @@ Page({
                         {
                                 icon: '../../images/my_tjyj.png',
                                 text: '推荐有奖',
-                                path: '11'
+                                path: '/pages/invitation/index'
                         },
                         {
                                 icon: '../../images/my_yjfk.png',
@@ -49,7 +50,8 @@ Page({
                                 path: '/pages/aboutUs/index'
                         }
                 ],
-                userInfo: null
+                userInfo: null,
+                nickName:null
         },
 
         /**
@@ -60,15 +62,20 @@ Page({
                 var memeberguid = wx.getStorageSync("memberguid")
 
                 if (util.isEmpty(memeberguid)) {
-                        this.setData({
-                                nickName: app.globalData.userInfo.nickName,
-                                avatarUrl: app.globalData.userInfo.avatarUrl,
-                        });
+                        if (app.globalData.userInfo != null) {
+                                this.setData({
+                                        nickName: app.globalData.userInfo.nickName,
+                                        avatarUrl: app.globalData.userInfo.avatarUrl,
+                                });
+                        }
                 } else {
-                        this.setData({
-                                nickName: app.globalData.eUserInfo.NickName,
-                                avatarUrl: app.globalData.eUserInfo.HeadImg,
-                        });
+                        if (app.globalData.eUserInfo != null) {
+                                this.setData({
+                                        nickName: app.globalData.eUserInfo.NickName,
+                                        avatarUrl: app.globalData.eUserInfo.HeadImg,
+                                        phone: app.globalData.eUserInfo.Phone
+                                });
+                        }
                 }
 
         },
@@ -76,7 +83,7 @@ Page({
                 var that = this;
                 //未授权 去授权登录
                 app.wxAuthorize()
-                
+
         },
         navigateTo: function (e) {
                 const index = e.currentTarget.dataset.index
@@ -86,27 +93,30 @@ Page({
                 var token = wx.getStorageSync('token')
                 switch (index) {
                         case 0:
-                                if(my_authorize){
-                                    if(token==''){
-                                        wx.navigateTo({
-                                          url: '../login/index?id=1'
+                                if (my_authorize) {
+                                        if (token == '') {
+                                                wx.navigateTo({
+                                                        url: '../login/index?id=1'
+                                                })
+                                        } else {
+                                                wx.navigateTo({
+                                                        url: path
+                                                })
+                                        }
+
+                                } else {
+                                        // app.wxAuthorize();
+                                        wx.showToast({
+                                                title: '请绑定房车行账号',
                                         })
-                                    }else{
-                                        wx.navigateTo({
-                                          url: path
-                                        })
-                                    }
-                                    
-                                }else{
-                                    app.wxAuthorize();
                                 }
                                 break
                         default:
                                 wx.navigateTo({
                                         url: path,
-                                        success: function(res) {},
-                                        fail: function(res) {},
-                                        complete: function(res) {},
+                                        success: function (res) { },
+                                        fail: function (res) { },
+                                        complete: function (res) { },
                                 })
                 }
         },
@@ -121,27 +131,117 @@ Page({
          * 生命周期函数--监听页面显示
          */
         onShow: function () {
-                var that=this
+                var that = this
                 console.log("onShow")
                 setTimeout(function () {
                         console.log("userInfo:" + app.globalData.userInfo)
-                        var memeberguid=wx.getStorageSync("memberguid")
-                        
-                        if (util.isEmpty(memeberguid)){
-                                that.setData({
-                                        nickName: app.globalData.userInfo.nickName,
-                                        avatarUrl: app.globalData.userInfo.avatarUrl,
-                                });
-                        }else{
-                                that.setData({
-                                        nickName: app.globalData.eUserInfo.NickName,
-                                        avatarUrl: app.globalData.eUserInfo.HeadImg,
-                                });
-                        }
-                       
-                }, 2000);
-        },
+                        console.log("eUserInfo:" + app.globalData.eUserInfo)
+                        var memeberguid = wx.getStorageSync("memberguid")
 
+                        if (util.isEmpty(memeberguid)) {
+                                if (app.globalData.userInfo != null) {
+                                        that.setData({
+                                                nickName: app.globalData.userInfo.nickName,
+                                                avatarUrl: app.globalData.userInfo.avatarUrl,
+                                        });
+                                }
+                        } else {
+                                if (app.globalData.eUserInfo != null) {
+                                        that.setData({
+                                                nickName: app.globalData.eUserInfo.NickName,
+                                                avatarUrl: app.globalData.eUserInfo.HeadImg,
+                                                phone: app.globalData.eUserInfo.Phone
+                                        });
+                                }
+                        }
+
+                }, 1000);
+        },
+        userInfoHandler:function(e){
+                var that=this
+                console.log("userInfoHandler：" + JSON.stringify(e.detail))
+                var resData = e.detail
+
+                console.log("getUserInfo:" + JSON.stringify(e.detail.userInfo))
+                if (util.isEmpty(e.detail.userInfo)) {
+                        wx.setStorageSync('wx_authorize', false)
+                        console.log("userInfofalse" )
+                }else{
+                        wx.setStorageSync('wx_authorize', true)
+                        console.log("userInfotrue" )
+                }
+
+                wx.login({
+                        success: function (res) {
+                                if (res.code) {
+                                        console.error("code:" + res.code)
+                                        wx.setStorageSync('wx_code', res.code)
+                                        resData.code = wx.getStorageSync('wx_code')
+
+                                        console.error(JSON.stringify(resData))
+                                        wx.showLoading({
+                                                title: '加载中...',
+                                        })
+                                        wx.request({
+                                                url: CONFIG.API_URL.GET_WeChatLoginInfo,
+                                                data: {
+                                                        jsonData: JSON.stringify(resData)
+                                                },
+                                                success: function (res) {
+                                                        console.log(res.data)
+                                                        wx.hideLoading()
+                                                        if (!util.isEmpty(res.data)) {
+                                                                app.globalData.eUserInfo = res.data.data;
+                                                                
+
+                                                                wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                wx.setStorageSync('wx_openid', res.data.data.Openid)
+                                                                wx.setStorageSync('token', res.data.data.token)
+                                                                wx.setStorageSync('memberguid', res.data.data.GUID)
+
+                                                                var memeberguid = wx.getStorageSync("memberguid")
+
+                                                                if (util.isEmpty(res.data.data.GUID)) {
+                                                                        if (app.globalData.userInfo != null) {
+                                                                                that.setData({
+                                                                                        nickName: app.globalData.userInfo.nickName,
+                                                                                        avatarUrl: app.globalData.userInfo.avatarUrl,
+                                                                                });
+                                                                        }
+                                                                } else {
+                                                                        console.log(app.globalData.eUserInfo.NickName)
+                                                                        console.log(app.globalData.eUserInfo.HeadImg)
+
+                                                                        if (app.globalData.eUserInfo != null) {
+                                                                                that.setData({
+                                                                                        nickName: app.globalData.eUserInfo.NickName,
+                                                                                        avatarUrl: app.globalData.eUserInfo.HeadImg,
+                                                                                        phone: app.globalData.eUserInfo.Phone
+                                                                                });
+                                                                        }
+                                                                }
+
+                                                                var token = wx.getStorageSync('token')
+                                                                if (token == '') {
+                                                                        wx.navigateTo({
+                                                                                url: '../login/index?id=1'
+                                                                        })
+                                                                } 
+                                                        }
+                                                }
+                                        })
+
+                                } else {
+                                        console.log('获取用户登录态失败！' + res.errMsg)
+                                }
+
+                        },
+                        fail: function (res) {
+                                console.log('login-fail')
+                        }
+                });
+
+        },
         /**
          * 生命周期函数--监听页面隐藏
          */

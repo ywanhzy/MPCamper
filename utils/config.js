@@ -114,6 +114,22 @@ const CONFIG = {
                 //提交意见反馈接口
                 POST_SuggestData: API_BASE + 'seting/suggest.ashx',
 
+                //57、添加收藏接口
+                //collectionType  收藏类型(1房车2活动3图集4游记(房车or活动的游记)) 5 攻略 6 营地收藏 7 住房车收藏
+                //relevantGuid  相关主建
+                GET_AddMyCollection: API_BASE + 'mydata/addMyCollection.ashx',
+                //relevantGuid  相关主建
+                GET_DelMyCollection: API_BASE + 'mydata/delMyCollection.ashx',
+
+                GET_UpdateUserImage: API_BASE + 'mydata/upUserImage.ashx',
+                GET_UpdateUserNickName: API_BASE + 'mydata/upUserNickName.ashx',
+                //nickName 昵称
+                GET_UpdateUserSex: API_BASE + 'mydata/upUserSex.ashx',
+                //sex 0 女 1 男
+
+                //34、个人中心我的收藏 
+                GET_MyColectionData: API_BASE + 'mydata/getMyColectionData.ashx',
+
         },
 
         //文字提示

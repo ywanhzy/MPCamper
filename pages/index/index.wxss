@@ -1,7 +1,7 @@
 /**index.wxss**/
 
 .container {
-        background-color: #fff;
+        
         min-height: 100%;
         padding: 0;
 }
@@ -100,6 +100,7 @@
         flex-direction: row;
         align-items: center;
         justify-content:space-between;
+        overflow: hidden;
 }
 
 
@@ -109,6 +110,7 @@
         height: auto;
         display:flex;
         flex-direction: column;
+        overflow: hidden;
           
 }
 
@@ -129,7 +131,7 @@
         white-space:nowrap;   
 }
 .camp-text-right {
-        width: 100px;
+        width: 80px;
         height: 40px;
         line-height: 40px;
         flex: none;

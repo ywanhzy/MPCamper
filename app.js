@@ -1,7 +1,13 @@
 //app.js
-App({
-        onShow: function (options) {
+var CONFIG = require('/utils/config.js')
+// const LOGIN ="https://fcx.ezagoo.com/wechat/postWeChatLoginInfo.ashx"
 
+const LOGIN = "http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx"
+App({
+        
+        onShow: function (options) {
+      
+                console.log(CONFIG.GET_WeChatLoginInfo)
                 console.log(wx.canIUse('getUpdateManager'))
 
                 console.log("[onShow] path:", options.path)
@@ -64,7 +70,7 @@ App({
                         success: function (res) {
                                 if (res.code) {
                                         console.error("code:" + res.code)
-                                        wx.setStorageSync('wx_code', res.code)
+                                        // wx.setStorageSync('wx_code', res.code)
                                         //小程序已绑定了开放平台 就可以直接获取unionid 发起网络请求
                                         // https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
                                         // wx.request({
@@ -90,7 +96,7 @@ App({
                                 console.log('login-fail')
                         }
                 });
-
+/*
                 // 获取用户信息
                 wx.getSetting({
                         success: res => {
@@ -111,9 +117,9 @@ App({
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }
-                                                        console.error(res)
+                                                        console.error("getUserInfo" + JSON.stringify(res))
                                                         wx.request({
-                                                                url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
+                                                                url: LOGIN,
                                                                 data: {
                                                                         jsonData: res
                                                                 },
@@ -139,14 +145,14 @@ App({
                                                         this.globalData.userInfo = res.userInfo
                                                         res.code = wx.getStorageSync('wx_code')
                                                         // console.log(this.globalData.userInfo)
-                                                        // console.log(res.encryptedData)
+                                                        console.error("getUserInfo"+res)
                                                         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
                                                         // 所以此处加入 callback 以防止这种情况
                                                         if (this.userInfoReadyCallback) {
                                                                 this.userInfoReadyCallback(res)
                                                         }
                                                         wx.request({
-                                                                url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
+                                                                url: LOGIN,
                                                                 data: {
                                                                         jsonData: res
                                                                 },
@@ -169,6 +175,7 @@ App({
                                 }
                         }
                 })
+                */
 
         },
         GetInfo: function (that) {
@@ -269,7 +276,7 @@ App({
                                                                 this.userInfoReadyCallback(res)
                                                         }
                                                         wx.request({
-                                                                url: 'http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx',
+                                                                url: LOGIN,
                                                                 data: {
                                                                         jsonData: res
                                                                 },
