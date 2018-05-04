@@ -1,5 +1,7 @@
 <!--pages/myOrder/index.wxml-->
+<import src="../../components/toast/toast.wxml" />
 <import src="../../components/prompt/prompt.wxml"/>
+<template is="toast" data="{{ ...$wux.toast }}" />
 
 <view class="page">
     <view class="page__bd">

@@ -1,3 +1,6 @@
+<import src="../../components/toast/toast.wxml" />
+
+<template is="toast" data="{{ ...$wux.toast }}" />
 <view class="container">
         <view class="countdown">{{ c1 }}</view>
         <view class="page__bd">

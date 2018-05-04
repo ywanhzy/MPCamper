@@ -32,7 +32,7 @@ Page({
                         {
                                 icon: '../../images/my_tjyj.png',
                                 text: '推荐有奖',
-                                path: '/pages/invitation/index'
+                                path: ''
                                 // path: '/pages/invitation/index'
                         },
                         {

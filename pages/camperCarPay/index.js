@@ -1,4 +1,4 @@
-
+import { $wuxToast } from '../../components/wux'
 import { $wuxCountDown } from '../../components/wux'
 const app = getApp()
 
@@ -12,50 +12,71 @@ Page({
         data: {
                 camperCarDetail: {},
                 camperCarOrder: {},
-                orderInfo:{}
+                orderInfo: {}
         },
-        successFun: function (id,res, selfObj) {
-                if (res.res_code == 200) {
-                        var wxPay = res.data;
-                        console.log(wxPay)
-                        wx.requestPayment({
-                                'timeStamp': wxPay.timeStamp,
-                                'nonceStr': wxPay.nonceStr,
-                                'package': wxPay.package,
-                                'signType': 'MD5',
-                                'paySign': wxPay.paySign,
-                                'success': function (res) {
-                                        console.log("支付成功")
-
-                                        camperCarDetail.BTimeDate = orderInfo.start;
-                                        camperCarDetail.ETimeDate = orderInfo.end;
-
-                                        var camperCarOrders = JSON.stringify(camperCarOrder);
-                                        var camperCarDetails = JSON.stringify(camperCarDetail);
-                                        var orderInfos = JSON.stringify(orderInfo);
-                                        wx.navigateTo({
-                                                url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
-                                        })
-                                },
-                                'fail': function (res) {
-                                        console.log("支付失败")
+        successFun: function (id, res, selfObj) {
+                if (id == 101) {
+                        if (res.res_code == 200 || res.res_code == 100){
+                                var openid = wx.getStorageSync('wx_openid')
+                                var url = CONFIG.API_URL.GET_WxPay
+                                var params = {
+                                        orderno: camperCarOrder.orderNo,
+                                        openid: openid,
+                                        flag: "1"
                                 }
-                        })
+                                request.GET(url, params, 100, true, selfObj, selfObj.successFun, selfObj.failFun)
+                        }else{
+                                $wuxToast.show({
+                                        type: 'text',
+                                        timer: 2000,
+                                        color: '#fff',
+                                        text: res.res_msg,
+                                        success: () => console.log('文本提示')
+                                })
+                        }
+                } else if(id ==100) {
+                        if (res.res_code == 200) {
+                                var wxPay = res.data;
+                                console.log(wxPay)
+                                wx.requestPayment({
+                                        'timeStamp': wxPay.timeStamp,
+                                        'nonceStr': wxPay.nonceStr,
+                                        'package': wxPay.package,
+                                        'signType': 'MD5',
+                                        'paySign': wxPay.paySign,
+                                        'success': function (res) {
+                                                console.log("支付成功")
+
+                                                camperCarDetail.BTimeDate = orderInfo.start;
+                                                camperCarDetail.ETimeDate = orderInfo.end;
+
+                                                var camperCarOrders = JSON.stringify(camperCarOrder);
+                                                var camperCarDetails = JSON.stringify(camperCarDetail);
+                                                var orderInfos = JSON.stringify(orderInfo);
+                                                wx.navigateTo({
+                                                        url: '/pages/camperCarPayResult/index?camperCarOrder=' + camperCarOrders + '&camperCarDetail=' + camperCarDetails + '&orderInfo=' + orderInfos,
+                                                })
+                                        },
+                                        'fail': function (res) {
+                                                console.log("支付失败")
+                                        }
+                                })
+                        }
                 }
-        },
-        
+},
+
         /**
          * 接口调用失败处理
          */
-        failFun: function (id,res, selfObj) {
+        failFun: function (id, res, selfObj) {
                 console.log('failFun', res)
         },
         /**
          * 生命周期函数--监听页面加载
          */
         onLoad: function (options) {
-               
-                roomPrice= options.roomPrice;
+
+                roomPrice = options.roomPrice;
                 camperCarOrder = JSON.parse(options.camperCarOrder);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 orderInfo = JSON.parse(options.orderInfo);
@@ -81,14 +102,16 @@ Page({
                 })
         },
         orderPay: function (e) {
-                var openid = wx.getStorageSync('wx_openid')
-                var url = CONFIG.API_URL.GET_WxPay
+
+
+                var url = CONFIG.API_URL.GET_IsCamperOrder
                 var params = {
-                        orderno: camperCarOrder.orderNo,
-                        openid: openid,
-                        flag: "1"
+                        orderNo: camperCarOrder.orderNo
                 }
-                request.GET(url, params, 100, true, this, this.successFun, this.failFun)
+                request.GET(url, params, 101, true, this, this.successFun, this.failFun)
+
+
+                
         },
         /**
          * 生命周期函数--监听页面初次渲染完成
@@ -132,5 +155,5 @@ Page({
 
         }
 
-       
+
 })

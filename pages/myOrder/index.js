@@ -1,5 +1,6 @@
 // pages/myOrder/index.js
 import { $wuxPrompt } from '../../components/wux'
+import { $wuxToast } from '../../components/wux'
 const sliderWidth = 96
 var CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
@@ -268,8 +269,27 @@ Page({
                                         })
                                 }
                                 break;
+                        case 103:
+                                if (res.res_code == 200 || res.res_code == 100) {
+                                        var openid = wx.getStorageSync('wx_openid')
+                                        var url = CONFIG.API_URL.GET_WxPay
+                                        var params = {
+                                                orderno: this.data.order[index].OrderNo,
+                                                openid: openid,
+                                                flag: "1"
+                                        }
+                                        request.GET(url, params, 101, true, selfObj, selfObj.successFun, selfObj.failFun)
+                                } else {
+                                        $wuxToast.show({
+                                                type: 'text',
+                                                timer: 2000,
+                                                color: '#fff',
+                                                text: res.res_msg,
+                                                success: () => console.log('文本提示')
+                                        })
+                                }
+                                break;
                 }
-
 
         },
 
@@ -363,14 +383,12 @@ Page({
                 console.log(this.data.btnStr[index])
                 switch (this.data.btnStr[index]) {
                         case "立即支付":
-                                var openid = wx.getStorageSync('wx_openid')
-                                var url = CONFIG.API_URL.GET_WxPay
+                                var url = CONFIG.API_URL.GET_IsCamperOrder
                                 var params = {
-                                        orderno: this.data.order[index].OrderNo,
-                                        openid: openid,
-                                        flag: "1"
+                                        orderNo: this.data.order[index].OrderNo
                                 }
-                                request.GET(url, params, 101, true, this, this.successFun, this.failFun)
+                                request.GET(url, params, 103, true, this, this.successFun, this.failFun)
+                               
                                 break;
                         case "扫码开锁":
                                 this.goScan();
