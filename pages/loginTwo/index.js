@@ -15,6 +15,7 @@ Page({
                 if (res.res_code == 200) {
                         console.log(res)
                         app.globalData.eUserInfo = res.data;
+                        wx.setStorage({ key: "eUserInfo", data: res.data })
 
                         console.log("memberguid:" + res.data.GUID)
                         wx.setStorageSync('wx_unionid', res.data.unionid)

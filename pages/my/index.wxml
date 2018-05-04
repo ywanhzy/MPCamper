@@ -6,7 +6,7 @@
         </view>       -->
 
         <view class="box">
-                <view class="left_box">
+                <view class="left_box" bindtap='goClean'>
                         <!-- <image class="userinfo-avatar" wx:if="{{avatarUrl}}" src="{{ avatarUrl }}" /> -->
                         <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
                 </view>

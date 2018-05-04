@@ -113,8 +113,11 @@ Page({
                 moenyDesc = JSON.parse(options.moenyDesc);
                 camperCarDetail = JSON.parse(options.camperCarDetail);
                 foregift = camperCarDetail.Deposit;
-                strNickName = app.globalData.eUserInfo.NickName;
-                strPhone = app.globalData.eUserInfo.Phone
+
+                var eUserInfo = wx.getStorageSync("eUserInfo")
+
+                strNickName = eUserInfo.NickName
+                strPhone = eUserInfo.Phone
                 this.setData({
                         camperCarDetail: camperCarDetail,
                         NickName: strNickName,

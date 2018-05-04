@@ -33,6 +33,7 @@ Page({
                                 icon: '../../images/my_tjyj.png',
                                 text: '推荐有奖',
                                 path: '/pages/invitation/index'
+                                // path: '/pages/invitation/index'
                         },
                         {
                                 icon: '../../images/my_yjfk.png',
@@ -61,22 +62,6 @@ Page({
                 console.log("onload")
                 var memeberguid = wx.getStorageSync("memberguid")
 
-                if (util.isEmpty(memeberguid)) {
-                        if (app.globalData.userInfo != null) {
-                                this.setData({
-                                        nickName: app.globalData.userInfo.nickName,
-                                        avatarUrl: app.globalData.userInfo.avatarUrl,
-                                });
-                        }
-                } else {
-                        if (app.globalData.eUserInfo != null) {
-                                this.setData({
-                                        nickName: app.globalData.eUserInfo.NickName,
-                                        avatarUrl: app.globalData.eUserInfo.HeadImg,
-                                        phone: app.globalData.eUserInfo.Phone
-                                });
-                        }
-                }
 
         },
         toLogin: function (options) {
@@ -84,6 +69,16 @@ Page({
                 //未授权 去授权登录
                 app.wxAuthorize()
 
+        },
+        goClean: function(){
+                try {
+                        wx.clearStorageSync()
+                        wx.reLaunch({
+                                url: '/pages/index/index',
+                        })
+                } catch (e) {
+                        // Do something when catch error
+                }
         },
         navigateTo: function (e) {
                 const index = e.currentTarget.dataset.index
@@ -137,25 +132,26 @@ Page({
                         console.log("userInfo:" + app.globalData.userInfo)
                         console.log("eUserInfo:" + app.globalData.eUserInfo)
                         var memeberguid = wx.getStorageSync("memberguid")
-
+                        var eUserInfo=wx.getStorageSync("eUserInfo")
+                        var userInfo = wx.getStorageSync("userInfo")
                         if (util.isEmpty(memeberguid)) {
-                                if (app.globalData.userInfo != null) {
+                                if (userInfo != null) {
                                         that.setData({
-                                                nickName: app.globalData.userInfo.nickName,
-                                                avatarUrl: app.globalData.userInfo.avatarUrl,
+                                                nickName: userInfo.nickName,
+                                                avatarUrl: userInfo.avatarUrl,
                                         });
                                 }
                         } else {
-                                if (app.globalData.eUserInfo != null) {
+                                if (eUserInfo != null) {
                                         that.setData({
-                                                nickName: app.globalData.eUserInfo.NickName,
-                                                avatarUrl: app.globalData.eUserInfo.HeadImg,
-                                                phone: app.globalData.eUserInfo.Phone
+                                                nickName: eUserInfo.NickName,
+                                                avatarUrl: eUserInfo.HeadImg,
+                                                phone: eUserInfo.Phone
                                         });
                                 }
                         }
 
-                }, 1000);
+                }, 500);
         },
         userInfoHandler:function(e){
                 var that=this
@@ -163,6 +159,8 @@ Page({
                 var resData = e.detail
 
                 console.log("getUserInfo:" + JSON.stringify(e.detail.userInfo))
+                wx.setStorage({ key: "userInfo", data: e.detail.userInfo }) //保存微信的信息
+
                 if (util.isEmpty(e.detail.userInfo)) {
                         wx.setStorageSync('wx_authorize', false)
                         console.log("userInfofalse" )
@@ -192,7 +190,8 @@ Page({
                                                         wx.hideLoading()
                                                         if (!util.isEmpty(res.data)) {
                                                                 app.globalData.eUserInfo = res.data.data;
-                                                                
+                                                                wx.setStorage({ key: "eUserInfo", data: res.data.data })
+
 
                                                                 wx.setStorageSync('wx_unionid', res.data.data.unionid)
                                                                 wx.setStorageSync('wx_openid', res.data.data.Openid)
@@ -202,21 +201,23 @@ Page({
                                                                 var memeberguid = wx.getStorageSync("memberguid")
 
                                                                 if (util.isEmpty(res.data.data.GUID)) {
-                                                                        if (app.globalData.userInfo != null) {
+                                                                        e.detail.userInfo
+                                                                        var userInfo = wx.getStorageSync("userInfo")
+                                                                        if (userInfo != null) {
                                                                                 that.setData({
-                                                                                        nickName: app.globalData.userInfo.nickName,
-                                                                                        avatarUrl: app.globalData.userInfo.avatarUrl,
+                                                                                        nickName: userInfo.nickName,
+                                                                                        avatarUrl: userInfo.avatarUrl,
                                                                                 });
                                                                         }
                                                                 } else {
-                                                                        console.log(app.globalData.eUserInfo.NickName)
-                                                                        console.log(app.globalData.eUserInfo.HeadImg)
+                                                                        console.log(res.data.data.NickName)
+                                                                        console.log(res.data.data.HeadImg)
 
-                                                                        if (app.globalData.eUserInfo != null) {
+                                                                        if (res.data.data != null) {
                                                                                 that.setData({
-                                                                                        nickName: app.globalData.eUserInfo.NickName,
-                                                                                        avatarUrl: app.globalData.eUserInfo.HeadImg,
-                                                                                        phone: app.globalData.eUserInfo.Phone
+                                                                                        nickName: res.data.data.NickName,
+                                                                                        avatarUrl: res.data.data.HeadImg,
+                                                                                        phone: res.data.data.Phone
                                                                                 });
                                                                         }
                                                                 }

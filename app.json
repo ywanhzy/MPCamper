@@ -22,7 +22,6 @@
                 "pages/calendar/index",
                 "pages/modifyOrderUserInfo/index",
                 "pages/cooperate/index",
-                "pages/invitationRecord/index",
                 "pages/invitation/index"
         ],
         "window": {
