@@ -1,13 +1,8 @@
 //app.js
-var CONFIG = require('/utils/config.js')
-// const LOGIN ="https://fcx.ezagoo.com/wechat/postWeChatLoginInfo.ashx"
-
-const LOGIN = "http://cs.ezagoo.net:8002/wechat/postWeChatLoginInfo.ashx"
 App({
         
         onShow: function (options) {
       
-                console.log(CONFIG.GET_WeChatLoginInfo)
                 console.log(wx.canIUse('getUpdateManager'))
 
                 console.log("[onShow] path:", options.path)

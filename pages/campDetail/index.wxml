@@ -4,6 +4,7 @@
 <view class="travel-img">
         <navigator url="/pages/campPic/index?imgs={{campDetail.Imgs}}">
                 <image src="{{campDetail.Img}}" mode='widthFix'></image>
+                 <view style='width:100%;height:{{imgHeight}}px;position:absolute;left:0;top:0;background-color:#000;filter:alpha(opacity=20);opacity:0.2;'></view>
                 <view class="travel-title">
                         <text class="title">{{campDetail.CampOwerName}}</text>
                         <text class="description">{{campDetail.CampOwerAddress}}</text>

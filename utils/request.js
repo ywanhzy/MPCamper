@@ -74,7 +74,7 @@ function requestApi(url, params, method, id, showloading, sourceObj, successFun,
                 data: params,
                 header: { 'Content-Type': contentType },
                 success: function (res) {
-                        console.log("success:" + JSON.stringify(res.data))
+                        // console.log("success:" + JSON.stringify(res.data))
                         typeof successFun == 'function' && successFun(id, res.data, sourceObj)
                 },
                 fail: function (res) {

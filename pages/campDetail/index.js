@@ -10,6 +10,7 @@ var WxParse = require('../../wxParse/wxParse.js');
 var id;
 var width;
 var height;
+var imgHeight
 var myAmapFun;
 var longitude, latitude, campShortName, campOwerAddress, campOwerTel;
 var campOwerGuid;
@@ -31,9 +32,11 @@ Page({
                 var that = selfObj;
                 if (res.res_code == 200) {
                         var campDetail = res.data;
+                        imgHeight=parseInt(width * 3 / 5)
                         campDetail.Img = util.spiltStr(campDetail.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width*3 / 5) + ".jpg";
                         campDetail.ImgSize = util.spiltStr(campDetail.Imgs).length;
                         selfObj.setData({
+                                imgHeight: imgHeight,
                                 campDetail: campDetail,
                                 camperData: res.camperData,
                                 hasCamperData: res.camperData.length > 0 ? false : true

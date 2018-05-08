@@ -4,8 +4,11 @@ const app = getApp()
 
 const request = require('../../utils/request.js')
 var CONFIG = require('../../utils/config.js')
-const util = require('../../utils/util.js')
+// const util = require('../../utils/util.js')
 var IMAGE = require('../../utils/image.js');
+
+import * as util from '../../utils/util';
+
 
 var width;
 var height;
@@ -92,6 +95,7 @@ Page({
                 console.log('failFun', res)
         },
         onLoad: function (options) {
+                console.log("dfsffdsf"+util.formatDistance(50))
                 if (!util.isEmpty(options.inviteId)) {
 
                         console.error("inviteId:" + options.inviteId)

@@ -111,7 +111,7 @@ function preventDoubleClick(self, timeout = 500) {
 module.exports = {
         formatTime: formatTime,
         isPhoneNumber: isPhoneNumber,
-        formatDistance: isPhoneNumber,
+        formatDistance: formatDistance,
         spiltStr: spiltStr,
         dateDifference: dateDifference,
         isEmpty: isEmpty,

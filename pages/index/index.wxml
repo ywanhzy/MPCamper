@@ -3,7 +3,7 @@
         <view class="top">
                 <image class="top-img" src="../../images/index_logo.png" mode='aspectFit'></image>
         </view>
-        <view class="topTab">
+        <!-- <view class="topTab">
                 <view class="top_l" >
                         <image class="topTab_img" src="/images/index_live.png" />
                         <text class="topTab_text">住房车</text>
@@ -20,8 +20,7 @@
                         <image class="topTab_img" src="/images/index_scan.png" />
                         <text class="topTab_text">扫码开锁</text>
                 </view>
-
-        </view>
+        </view> -->
         <view class="camps" wx:for-items="{{camperCar}}" wx:key="id" wx:for-item="item">
 
                 <view class="travel-notes">

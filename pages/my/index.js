@@ -19,22 +19,22 @@ Page({
                 ],
 
                 gridItems: [
-                        {
-                                icon: '../../images/my_sc.png',
-                                text: '我的收藏',
-                                path: '11'
-                        },
+                        // {
+                        //         icon: '../../images/my_sc.png',
+                        //         text: '我的收藏',
+                        //         path: '11'
+                        // },
                         {
                                 icon: '../../images/my_kf.png',
                                 text: '在线客服',
                                 path: null,
                         },
-                        {
-                                icon: '../../images/my_tjyj.png',
-                                text: '推荐有奖',
-                                path: ''
-                                // path: '/pages/invitation/index'
-                        },
+                        // {
+                        //         icon: '../../images/my_tjyj.png',
+                        //         text: '推荐有奖',
+                        //         path: '11'
+                        //         // path: '/pages/invitation/index'
+                        // },
                         {
                                 icon: '../../images/my_yjfk.png',
                                 text: '建议反馈',
@@ -72,10 +72,10 @@ Page({
         },
         goClean: function(){
                 try {
-                        wx.clearStorageSync()
-                        wx.reLaunch({
-                                url: '/pages/index/index',
-                        })
+                        // wx.clearStorageSync()
+                        // wx.reLaunch({
+                        //         url: '/pages/index/index',
+                        // })
                 } catch (e) {
                         // Do something when catch error
                 }
@@ -214,9 +214,19 @@ Page({
                                                                         console.log(res.data.data.HeadImg)
 
                                                                         if (res.data.data != null) {
+                                                                                var _nickName, _avatarUrl
+                                                                                var userInfo = wx.getStorageSync("userInfo")
+                                                                                if (util.isEmpty(res.data.data.NickName)){
+                                                                                        _nickName = userInfo.nickName
+                                                                                }
+                                                                                if (util.isEmpty(res.data.data.HeadImg)) {
+                                                                                        _avatarUrl = userInfo.avatarUrl
+                                                                                }
+                                                                                console.error("_nickName"+_nickName)
+                                                                                console.error("_avatarUrl"+_avatarUrl)
                                                                                 that.setData({
-                                                                                        nickName: res.data.data.NickName,
-                                                                                        avatarUrl: res.data.data.HeadImg,
+                                                                                        nickName: _nickName,
+                                                                                        avatarUrl: _avatarUrl,
                                                                                         phone: res.data.data.Phone
                                                                                 });
                                                                         }

@@ -3,8 +3,8 @@
                 <text>共{{size}}张图片</text>
         </view>
         <view class="grid-img">
-                <view class="camp-pic-item"  wx:for-items="{{campPic}}" wx:key="id" wx:for-item="item">
-                        <image style="height:{{height}}px;width:{{width-10}}px" data-ssrc="{{item.OriginalImg}}" bindtap="previewImage" src="{{item.Img}}" mode="aspectFill" />
+                <view class="camp-pic-item" style="height:{{height}}px;width:{{width-6}}px" wx:for-items="{{campPic}}" wx:key="id" wx:for-item="item">
+                        <image style="height:{{height}}px;width:{{width-6}}px" data-ssrc="{{item.OriginalImg}}" bindtap="previewImage" src="{{item.Img}}" mode="aspectFill" />
                 </view>
         </view>
 </view> 
