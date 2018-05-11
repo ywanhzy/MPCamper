@@ -13,7 +13,7 @@
  * @param  {Function} completeFun 接口调用结束的回调函数(调用成功、失败都会执行)
  */
 function requestPostApi(url, params, id, showloading, sourceObj, successFun, failFun, completeFun) {
-        requestApi(url, params, 'POST', id, showloading, sourceObj, successFun, failFun, completeFun)
+    requestApi(url, params, 'POST', id, showloading, sourceObj, successFun, failFun, completeFun)
 }
 
 /**
@@ -26,7 +26,7 @@ function requestPostApi(url, params, id, showloading, sourceObj, successFun, fai
  * @param  {Function} completeFun 接口调用结束的回调函数(调用成功、失败都会执行)
  */
 function requestGetApi(url, params, id, showloading, sourceObj, successFun, failFun, completeFun) {
-        requestApi(url, params, 'GET', id, showloading, sourceObj, successFun, failFun, completeFun)
+    requestApi(url, params, 'GET', id, showloading, sourceObj, successFun, failFun, completeFun)
 }
 
 /**
@@ -42,60 +42,60 @@ function requestGetApi(url, params, id, showloading, sourceObj, successFun, fail
  * @param  {Function} completeFun 接口调用结束的回调函数(调用成功、失败都会执行)
  */
 function requestApi(url, params, method, id, showloading, sourceObj, successFun, failFun, completeFun) {
-        if (showloading) {
-                wx.showLoading({
-                        title: '加载中...',
-                })
-        }
-        if (method == 'POST') {
-                var contentType = 'application/x-www-form-urlencoded'
-        } else {
-                var contentType = 'application/json'
-        }
-        var token = wx.getStorageSync('token')
-        var memberguid = wx.getStorageSync('memberguid')
-        var a = {
-                "token": token,
-                "memberguid": memberguid,
-        }
-        //方法一
-        // params = combin(a, params)
-        //方法二
-        // var str = '{"age":23,"name":"你"}'
-        // var params1 = JSON.parse(str)
-        if (params != null) {
-                params.token = token
-                params.memberguid = memberguid
-        }
-        console.error(url + JSON.stringify(params))
-        wx.request({
-                url: url,
-                method: method,
-                data: params,
-                header: { 'Content-Type': contentType },
-                success: function (res) {
-                        // console.log("success:" + JSON.stringify(res.data))
-                        typeof successFun == 'function' && successFun(id, res.data, sourceObj)
-                },
-                fail: function (res) {
-                        console.log("fail:" + JSON.stringify(res.data))
-                        typeof failFun == 'function' && failFun(id, res.data, sourceObj)
-                },
-                complete: function (res) {
-                        wx.hideLoading()
-                        typeof completeFun == 'function' && completeFun(id, res.data, sourceObj)
-                }
+    if (showloading) {
+        wx.showLoading({
+            title: '加载中...',
         })
+    }
+    if (method == 'POST') {
+        var contentType = 'application/x-www-form-urlencoded'
+    } else {
+        var contentType = 'application/json'
+    }
+    var token = wx.getStorageSync('token')
+    var memberguid = wx.getStorageSync('memberguid')
+    var a = {
+        "token": token,
+        "memberguid": memberguid,
+    }
+    //方法一
+    // params = combin(a, params)
+    //方法二
+    // var str = '{"age":23,"name":"你"}'
+    // var params1 = JSON.parse(str)
+    if (params != null) {
+        params.token = token
+        params.memberguid = memberguid
+    }
+    console.error(url + JSON.stringify(params))
+    wx.request({
+        url: url,
+        method: method,
+        data: params,
+        header: { 'Content-Type': contentType },
+        success: function (res) {
+            // console.log("success:" + JSON.stringify(res.data))
+            typeof successFun == 'function' && successFun(id, res.data, sourceObj)
+        },
+        fail: function (res) {
+            console.log("fail:" + JSON.stringify(res.data))
+            typeof failFun == 'function' && failFun(id, res.data, sourceObj)
+        },
+        complete: function (res) {
+            wx.hideLoading()
+            typeof completeFun == 'function' && completeFun(id, res.data, sourceObj)
+        }
+    })
 }
 
 function combin(a, b) {
-        for (var i in b) {
-                a[i] = b[i]
-        }
-        return a;
+    for (var i in b) {
+        a[i] = b[i]
+    }
+    return a;
 }
 
 module.exports = {
-        POST: requestPostApi,
-        GET: requestGetApi
+    POST: requestPostApi,
+    GET: requestGetApi
 }

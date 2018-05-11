@@ -1,81 +1,80 @@
 /* pages/myOrder/index.wxss */
 
 .page, .page__bd, .weui-tab__content {
-        
-        padding-bottom: 0;
+    padding-bottom: 0;
 }
 
 .items {
-        display: flex;
-        flex-direction: column;
-        padding: 25rpx;
+    display: flex;
+    flex-direction: column;
+    padding: 25rpx;
 }
 
 .item {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        padding: 25rpx;
-        height: 260rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 25rpx;
+    height: 260rpx;
 }
 
 .item-image {
-        width: 100rpx;
-        height: 100rpx;
+    width: 100rpx;
+    height: 100rpx;
 }
 
 .item-right {
-        display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .item-right-top {
-        width: auto;
-        display: flex;
-        flex-direction: row;
-        overflow: hidden;
-        justify-content:space-between;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: space-between;
 }
 
 .item-right-top-title {
-        width: 180px;
-        margin-left: 15rpx;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+    width: 180px;
+    margin-left: 15rpx;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .item-right-top-status {
-        font-size: 30rpx;
-        color: #666;
-        width: 50px;
-        flex: none;
-        text-align:right;
+    font-size: 30rpx;
+    color: #666;
+    width: 50px;
+    flex: none;
+    text-align: right;
 }
 
 .item-right-bottom {
-        display: flex;
-        flex-direction: column;
-        margin-left: 15rpx;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15rpx;
 }
 
 .item-right-bottom-text {
-        font-size: 30rpx;
-        color: #666;
+    font-size: 30rpx;
+    color: #666;
 }
 
 .item-bottom {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .item-bottom-btn {
-        position: absolute;
-        text-align: right;
-        margin-right: 10rpx;
-        background: green;
-        border-radius: 10rpx;
-        font-size: 30rpx;
-        right: 20rpx;
+    position: absolute;
+    text-align: right;
+    margin-right: 10rpx;
+    background: green;
+    border-radius: 10rpx;
+    font-size: 30rpx;
+    right: 20rpx;
 }
