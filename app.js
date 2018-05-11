@@ -92,85 +92,85 @@ App({
             }
         });
         /*
-                        // 获取用户信息
-                        wx.getSetting({
-                                success: res => {
-                                        if (res.authSetting['scope.userInfo']) {
-                                                wx.setStorageSync('wx_authorize', true)
-                                                console.log("已经授权")
-                                                // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                                                wx.getUserInfo({
-                                                        success: res => {
-                                                                // 可以将 res 发送给后台解码出 unionId
-                                                                console.log("getUserInfo:" + JSON.stringify(res))
-                                                                this.globalData.userInfo = res.userInfo
-                                                                res.code = wx.getStorageSync('wx_code')
-                                                                // console.log("encryptedData:" + res.encryptedData)
-                                                                // console.log("iv:" + res.iv)
-                                                                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                                                                // 所以此处加入 callback 以防止这种情况
-                                                                if (this.userInfoReadyCallback) {
-                                                                        this.userInfoReadyCallback(res)
-                                                                }
-                                                                console.error("getUserInfo" + JSON.stringify(res))
-                                                                wx.request({
-                                                                        url: LOGIN,
-                                                                        data: {
-                                                                                jsonData: res
-                                                                        },
-                                                                        success: function (res) {
-                                                                                console.log(res.data)
-        
-                                                                                that.globalData.eUserInfo = res.data.data;
-                                                                                console.log(that.globalData.eUserInfo)
-        
-                                                                                wx.setStorageSync('wx_unionid', res.data.data.unionid)
-                                                                                wx.setStorageSync('wx_openid', res.data.data.Openid)
-                                                                                wx.setStorageSync('token', res.data.data.token)
-                                                                                wx.setStorageSync('memberguid', res.data.data.GUID)
-                                                                        }
-                                                                })
-                                                        }
-                                                })
-                                        } else {
-                                                console.log("wei授权")
-                                                wx.getUserInfo({
-                                                        success: res => {
-                                                                // 可以将 res 发送给后台解码出 unionId
-                                                                this.globalData.userInfo = res.userInfo
-                                                                res.code = wx.getStorageSync('wx_code')
-                                                                // console.log(this.globalData.userInfo)
-                                                                console.error("getUserInfo"+res)
-                                                                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                                                                // 所以此处加入 callback 以防止这种情况
-                                                                if (this.userInfoReadyCallback) {
-                                                                        this.userInfoReadyCallback(res)
-                                                                }
-                                                                wx.request({
-                                                                        url: LOGIN,
-                                                                        data: {
-                                                                                jsonData: res
-                                                                        },
-                                                                        success: function (res) {
-                                                                                console.log(res.data)
-                                                                                that.globalData.eUserInfo = res.data;
-                                                                                wx.setStorageSync('wx_unionid', res.data.data.unionid)
-                                                                                wx.setStorageSync('wx_openid', res.data.data.Openid)
-                                                                                wx.setStorageSync('token', res.data.data.token)
-                                                                                wx.setStorageSync('memberguid', res.data.data.GUID)
-                                                                        }
-                                                                })
-                                                        }, fail: function (res) {
-                                                                wx.setStorageSync('wx_authorize', false)
-                                                                console.log("fail")
-                                                        }, complete: function () {
-                                                                console.log("complete")
+        // 获取用户信息
+        wx.getSetting({
+                success: res => {
+                        if (res.authSetting['scope.userInfo']) {
+                                wx.setStorageSync('wx_authorize', true)
+                                console.log("已经授权")
+                                // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+                                wx.getUserInfo({
+                                        success: res => {
+                                                // 可以将 res 发送给后台解码出 unionId
+                                                console.log("getUserInfo:" + JSON.stringify(res))
+                                                this.globalData.userInfo = res.userInfo
+                                                res.code = wx.getStorageSync('wx_code')
+                                                // console.log("encryptedData:" + res.encryptedData)
+                                                // console.log("iv:" + res.iv)
+                                                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                                                // 所以此处加入 callback 以防止这种情况
+                                                if (this.userInfoReadyCallback) {
+                                                        this.userInfoReadyCallback(res)
+                                                }
+                                                console.error("getUserInfo" + JSON.stringify(res))
+                                                wx.request({
+                                                        url: LOGIN,
+                                                        data: {
+                                                                jsonData: res
+                                                        },
+                                                        success: function (res) {
+                                                                console.log(res.data)
+
+                                                                that.globalData.eUserInfo = res.data.data;
+                                                                console.log(that.globalData.eUserInfo)
+
+                                                                wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                wx.setStorageSync('wx_openid', res.data.data.Openid)
+                                                                wx.setStorageSync('token', res.data.data.token)
+                                                                wx.setStorageSync('memberguid', res.data.data.GUID)
                                                         }
                                                 })
                                         }
-                                }
-                        })
-                        */
+                                })
+                        } else {
+                                console.log("wei授权")
+                                wx.getUserInfo({
+                                        success: res => {
+                                                // 可以将 res 发送给后台解码出 unionId
+                                                this.globalData.userInfo = res.userInfo
+                                                res.code = wx.getStorageSync('wx_code')
+                                                // console.log(this.globalData.userInfo)
+                                                console.error("getUserInfo"+res)
+                                                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                                                // 所以此处加入 callback 以防止这种情况
+                                                if (this.userInfoReadyCallback) {
+                                                        this.userInfoReadyCallback(res)
+                                                }
+                                                wx.request({
+                                                        url: LOGIN,
+                                                        data: {
+                                                                jsonData: res
+                                                        },
+                                                        success: function (res) {
+                                                                console.log(res.data)
+                                                                that.globalData.eUserInfo = res.data;
+                                                                wx.setStorageSync('wx_unionid', res.data.data.unionid)
+                                                                wx.setStorageSync('wx_openid', res.data.data.Openid)
+                                                                wx.setStorageSync('token', res.data.data.token)
+                                                                wx.setStorageSync('memberguid', res.data.data.GUID)
+                                                        }
+                                                })
+                                        }, fail: function (res) {
+                                                wx.setStorageSync('wx_authorize', false)
+                                                console.log("fail")
+                                        }, complete: function () {
+                                                console.log("complete")
+                                        }
+                                })
+                        }
+                }
+        })
+        */
 
     },
     GetInfo: function (that) {
