@@ -22,7 +22,8 @@
                 "pages/calendar/index",
                 "pages/modifyOrderUserInfo/index",
                 "pages/cooperate/index",
-                "pages/invitation/index"
+                "pages/invitation/index",
+                "pages/suggest/index"
         ],
         "window": {
                 "backgroundTextStyle": "light",
