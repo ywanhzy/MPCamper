@@ -14,6 +14,7 @@ var imgHeight
 var myAmapFun;
 var longitude, latitude, campShortName, campOwerAddress, campOwerTel;
 var campOwerGuid;
+let isCollection;
 Page({
 
     /**
@@ -22,6 +23,7 @@ Page({
     data: {
         src: "",
         hasCamperData: false,
+        isCollection: false,
         campDetail: {},
         camperData: []
     },
@@ -29,46 +31,86 @@ Page({
     * 接口调用成功处理
     */
     successFun: function (id, res, selfObj) {
-        var that = selfObj;
-        if (res.res_code == 200) {
-            var campDetail = res.data;
-            imgHeight = parseInt(width * 3 / 5)
-            campDetail.Img = util.spiltStr(campDetail.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width * 3 / 5) + ".jpg";
-            campDetail.ImgSize = util.spiltStr(campDetail.Imgs).length;
-            selfObj.setData({
-                imgHeight: imgHeight,
-                campDetail: campDetail,
-                camperData: res.camperData,
-                hasCamperData: res.camperData.length > 0 ? false : true
-            })
-            longitude = campDetail.Longitude;
-            latitude = campDetail.Latitude;
-            campShortName = campDetail.CampShortName;
-            campOwerAddress = campDetail.CampOwerAddress;
-            campOwerTel = campDetail.CampOwerTel;
-            //高德静态地图
-            var key = CONFIG.APP_KEY.AmapKey;
-            myAmapFun = new amapFile.AMapWX({ key: key });
-            var size = width + "*" + parseInt(height / 2);
-            myAmapFun.getStaticmap({
-                zoom: 13,
-                size: size,
-                scale: 2,
-                location: res.data.Longitude + "," + res.data.Latitude,
-                markers: "large,0xFF0000,A:" + res.data.Longitude + "," + res.data.Latitude,
-                labels: res.data.CampShortName + ",2,0,32,0xFFFFFF,0x008000:" + res.data.Longitude + "," + res.data.Latitude,
-                success: function (data) {
-                    that.setData({
-                        src: data.url
-                    })
-                },
-                fail: function (info) {
-                    wx.showModal({ title: info.errMsg })
+        if (id === 100) {
+            var that = selfObj;
+            if (res.res_code == 200) {
+                var campDetail = res.data;
+                if (campDetail.isCollection === 0 ){
+                    isCollection=false;
+                }else{
+                    isCollection=true;
                 }
-            })
+                imgHeight = parseInt(width * 3 / 5)
+                campDetail.Img = util.spiltStr(campDetail.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width * 3 / 5) + ".jpg";
+                campDetail.ImgSize = util.spiltStr(campDetail.Imgs).length;
+                selfObj.setData({
+                    imgHeight: imgHeight,
+                    campDetail: campDetail,
+                    camperData: res.camperData,
+                    hasCamperData: res.camperData.length > 0 ? false : true,
+                    isCollection: isCollection
+                })
+                longitude = campDetail.Longitude;
+                latitude = campDetail.Latitude;
+                campShortName = campDetail.CampShortName;
+                campOwerAddress = campDetail.CampOwerAddress;
+                campOwerTel = campDetail.CampOwerTel;
+                //高德静态地图
+                var key = CONFIG.APP_KEY.AmapKey;
+                myAmapFun = new amapFile.AMapWX({ key: key });
+                var size = width + "*" + parseInt(height / 2);
+                myAmapFun.getStaticmap({
+                    zoom: 13,
+                    size: size,
+                    scale: 2,
+                    location: res.data.Longitude + "," + res.data.Latitude,
+                    markers: "large,0xFF0000,A:" + res.data.Longitude + "," + res.data.Latitude,
+                    labels: res.data.CampShortName + ",2,0,32,0xFFFFFF,0x008000:" + res.data.Longitude + "," + res.data.Latitude,
+                    success: function (data) {
+                        that.setData({
+                            src: data.url
+                        })
+                    },
+                    fail: function (info) {
+                        wx.showModal({ title: info.errMsg })
+                    }
+                })
 
-            //html
-            WxParse.wxParse('article', 'html', res.data.Description, this, 5);
+                //html
+                WxParse.wxParse('article', 'html', res.data.Description, this, 5);
+            }
+        } else if (id === 101) {
+            wx.showToast({
+                title: res.res_msg,
+            })
+            if (res.res_code == 200) {
+                console.error(res.res_msg)
+                isCollection=true;
+                selfObj.setData({
+                    isCollection: isCollection
+                })
+            }else{
+                isCollection = false;
+                // selfObj.setData({
+                //     isCollection: isCollection
+                // })
+            }
+        } else if (id === 102) {
+            if (res.res_code == 200) {
+                console.error(res.res_msg)
+                isCollection = false;
+                selfObj.setData({
+                    isCollection: isCollection
+                })
+            } else {
+                isCollection = true;
+                // selfObj.setData({
+                //     isCollection: isCollection
+                // })
+            }
+            wx.showToast({
+                title: res.res_msg,
+            })
         }
 
     },
@@ -89,7 +131,7 @@ Page({
             console.log("inviteId:" + options.inviteId)
             wx.setStorageSync('inviteId', options.inviteId)
         }
-        //获取营地列表
+        //获取营地详情
         var url = CONFIG.API_URL.GET_CampOwerInfo
         var params = {
             memberguid: '',
@@ -104,6 +146,20 @@ Page({
     },
     goMap: function () {
         app.map(latitude, longitude, 28, campShortName, campOwerAddress);
+    },
+    collectClick: function() {
+        let params = {
+            collectionType: '6',
+            relevantGuid: campOwerGuid
+        }
+        if (isCollection){
+            let delurl = CONFIG.API_URL.GET_DelMyCollection
+            request.GET(delurl, params, 102, true, this, this.successFun, this.failFun)
+        }else{
+            let addUrl = CONFIG.API_URL.GET_AddMyCollection
+            request.GET(addUrl, params, 101, true, this, this.successFun, this.failFun)
+        }
+        
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

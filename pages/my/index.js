@@ -19,22 +19,21 @@ Page({
         ],
 
         gridItems: [
-            // {
-            //         icon: '../../images/my_sc.png',
-            //         text: '我的收藏',
-            //         path: '11'
-            // },
+            {
+                    icon: '../../images/my_sc.png',
+                    text: '我的收藏',
+                    path: '11'
+            },
             {
                 icon: '../../images/my_kf.png',
                 text: '在线客服',
                 path: null,
             },
-            // {
-            //         icon: '../../images/my_tjyj.png',
-            //         text: '推荐有奖',
-            //         path: '11'
-            //         // path: '/pages/invitation/index'
-            // },
+            {
+                    icon: '../../images/my_tjyj.png',
+                    text: '推荐有奖',
+                    path: '/pages/invitation/index'
+            },
             {
                 icon: '../../images/my_yjfk.png',
                 text: '建议反馈',

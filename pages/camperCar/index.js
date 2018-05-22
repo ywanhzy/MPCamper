@@ -179,44 +179,10 @@ Page({
         this.getList(that);
     },
     getList: (that) => {
-        //获取推荐住房车列表
-        let url = CONFIG.API_URL.GET_CamperRecommend
+        //获取住房车列表
+        let url = CONFIG.API_URL.GET_CamperCarAll
         let params = {}
         request.GET(url, params, 100, true, that, that.successFun, that.failFun)
-    },
-    //租房车
-    goRentCamperCar:()=>{
-        wx.showModal({
-            title: '提示',
-            content: '即将开通，敬请期待',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
-            }
-        })
-    },
-    //房车活动
-    goCamperCarActivity:()=>{
-        wx.showModal({
-            title: '提示',
-            content: '即将开通，敬请期待',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
-            }
-        })
-    },
-    //住房车
-    goCamperCar:()=>{
-        wx.navigateTo({
-            url: '../camperCar/index',
-        })
     },
     binderrorimg: function (e) {
         // var errorImgIndex = e.target.dataset.errorimg //获取循环的下标
