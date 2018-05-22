@@ -80,6 +80,7 @@ const CONFIG = {
         // mark 1  支付密码发送 2 第三方登陆授权注册获取验证码  3 商家注册/商家修改手机号修改第二步  4 微信注册 5商家修改手机号(第一步)  6找回密码发送验证码 9 微信版绑定
         GET_SendPhoneCode: API_BASE + 'mydata/SendPhoneCode.ashx',
 
+        //首页--发现--获取推荐住房车列表
         GET_CamperRecommend: API_BASE + 'motorHomesCar/getCamperRecommend.ashx',
 
         //根据code获取openid
@@ -129,6 +130,11 @@ const CONFIG = {
 
         //34、个人中心我的收藏 
         GET_MyColectionData: API_BASE + 'mydata/getMyColectionData.ashx',
+
+        //161、获取城市 type 1 租房车城市,2  住房车城市 3 营地城市
+        GET_CityData: API_BASE + 'mydata/getCtityData.ashx',
+        //我的优惠券
+        GET_MyCouponData: API_BASE + 'mydata/getMyCouponData.ashx',
 
     },
 

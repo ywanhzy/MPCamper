@@ -5,6 +5,7 @@
         "pages/camp/index",
         "pages/my/index",
         "pages/campDetail/index",
+        "pages/camperCar/index",
         "pages/camperCarDetail/index",
         "pages/campPic/index",
         "pages/login/index",
@@ -23,6 +24,7 @@
         "pages/modifyOrderUserInfo/index",
         "pages/cooperate/index",
         "pages/invitation/index",
+        "pages/invitationRecord/index",
         "pages/suggest/index"
     ],
     "window": {

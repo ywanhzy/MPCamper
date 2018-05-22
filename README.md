@@ -199,3 +199,11 @@ const template = `<div>
 ```
 
 
+# CSS编码规范
+
+###命名
+类名class使用小写字母，以中划线分隔
+id采用驼峰式命名
+scss中的变量、函数、混合、placeholder采用驼峰式命名
+
+

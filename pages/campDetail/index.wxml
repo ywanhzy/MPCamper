@@ -2,24 +2,33 @@
 
 
 <view class="travel-img">
-    <navigator url="/pages/campPic/index?imgs={{campDetail.Imgs}}">
+    <navigator hover-class="none" url="/pages/campPic/index?imgs={{campDetail.Imgs}}">
         <image src="{{campDetail.Img}}" mode='widthFix'></image>
         <view style='width:100%;height:{{imgHeight}}px;position:absolute;left:0;top:0;background-color:#000;filter:alpha(opacity=20);opacity:0.2;'></view>
         <view class="travel-title">
             <text class="title">{{campDetail.CampOwerName}}</text>
             <text class="description">{{campDetail.CampOwerAddress}}</text>
+
         </view>
-        <view class="img-title">{{campDetail.ImgSize}}张照片
+        <view class="img-title">{{campDetail.ImgSize}}张照片</view>
+        <view class="img-collect" catchtap='collectClick'>
+            <block wx:if='{{ isCollection}}'>
+                <image style='width:25px;height:25px' mode="widthFix" src="../../images/tel.png"></image>
+            </block>
+            <block wx:if='{{ !isCollection}}'>
+                <image style='width:25px;height:25px' mode="widthFix" src="../../images/collect.png"></image>
+            </block>
         </view>
     </navigator>
+
 </view>
 <view class="top">
     <view class="top_l" bindtap='goTel'>
-        <image class="top_img" src="/images/tel.png" />
+        <image class="top_img" src="../../images/tel.png" />
         <text class="top_text">电话咨询</text>
     </view>
     <view class="top_c" bindtap='goMap'>
-        <image class="top_img" src="/images/map.png" />
+        <image class="top_img" src="../../images/map.png" />
         <text class="top_text">地图导航</text>
     </view>
 

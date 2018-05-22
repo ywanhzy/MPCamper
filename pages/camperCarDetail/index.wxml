@@ -1,11 +1,21 @@
 <view class="container">
-    <swiper class="swiper_box" indicator-active-color="#ff0000" indicator-color="#fff" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" style="height:{{imgheights[current]}}px;">
-        <block wx:for="{{ imgUrls }}" wx:key="id">
-            <swiper-item>
-                <image src="{{ item }}" data-src="{{item}}" bindload="imageLoad" bindtap="previewImage" style='height:{{imgheights[index]}}px;width:100%;' class="slide-image" mode='widthFix' />
-            </swiper-item>
-        </block>
-    </swiper>
+    <view style="width: 100%;position: relative;height:{{imgheights[current]}}px;">
+        <swiper class="swiper_box" indicator-active-color="#ff0000" indicator-color="#fff" indicator-dots="{{ indicatorDots }}" autoplay="{{ autoplay }}" current="{{ current }}" interval="{{ interval }}" duration="{{ duration }}" circular="{{ circular }}" style="height:{{imgheights[current]}}px;">
+            <block wx:for="{{ imgUrls }}" wx:key="id">
+                <swiper-item>
+                    <image src="{{ item }}" data-src="{{item}}" bindload="imageLoad" bindtap="previewImage" style='height:{{imgheights[index]}}px;width:100%;' class="slide-image" mode='widthFix' />
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="img-collect" catchtap='collectClick'>
+            <block wx:if='{{ isCollection}}'>
+                <image style='width:25px;height:25px' mode="widthFix" src="../../images/tel.png"></image>
+            </block>
+            <block wx:if='{{ !isCollection}}'>
+                <image style='width:25px;height:25px' mode="widthFix" src="../../images/collect.png"></image>
+            </block>
+        </view>
+    </view>
     <text class="h1">{{camperCarDetail.CamperTypeName}}</text>
     <view class="travel-title">
         <view class='camp-text-left'>

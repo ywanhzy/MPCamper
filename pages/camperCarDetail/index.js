@@ -16,6 +16,7 @@ var camperCarDetail;
 var camperCarDetailObject = new Object();
 var result;
 var carGuid;
+let isCollection;
 Page({
 
     /**
@@ -34,85 +35,127 @@ Page({
         imgheights: [],
         width: 0,
         camperCarDetail: {},
-        moenyDesc: []
+        moenyDesc: [],
+        isCollection: false
     },
     /**
             * 接口调用成功处理
             */
     successFun: function (id, res, selfObj) {
-        var that = selfObj;
-        if (res.res_code == 200) {
-            result = res.data;
-            camperCarDetail = res.data[0];
+        if(id===100){
+            var that = selfObj;
+            if (res.res_code == 200) {
+                result = res.data;
+                camperCarDetail = res.data[0];
 
-            camperCarDetailObject.Deposit = camperCarDetail.Deposit;
-            camperCarDetailObject.CarGuid = camperCarDetail.CarGuid;
-            camperCarDetailObject.CampID = camperCarDetail.CampID;
-            camperCarDetailObject.CamperTypeName = camperCarDetail.CamperTypeName;
-            camperCarDetailObject.BedNum = camperCarDetail.BedNum;
-            camperCarDetailObject.CarImg = camperCarDetail.CarImg;
-            camperCarDetailObject.FitCheckNum = camperCarDetail.FitCheckNum;
-            camperCarDetailObject.Introduce = camperCarDetail.Introduce;
-            camperCarDetailObject.CamperImgs = camperCarDetail.CamperImgs;
-            camperCarDetailObject.CampShortName = camperCarDetail.CampShortName;
-            camperCarDetailObject.Logo = camperCarDetail.Logo;
-            camperCarDetailObject.isCollection = camperCarDetail.isCollection;
+                camperCarDetailObject.Deposit = camperCarDetail.Deposit;
+                camperCarDetailObject.CarGuid = camperCarDetail.CarGuid;
+                camperCarDetailObject.CampID = camperCarDetail.CampID;
+                camperCarDetailObject.CamperTypeName = camperCarDetail.CamperTypeName;
+                camperCarDetailObject.BedNum = camperCarDetail.BedNum;
+                camperCarDetailObject.CarImg = camperCarDetail.CarImg;
+                camperCarDetailObject.FitCheckNum = camperCarDetail.FitCheckNum;
+                camperCarDetailObject.Introduce = camperCarDetail.Introduce;
+                camperCarDetailObject.CamperImgs = camperCarDetail.CamperImgs;
+                camperCarDetailObject.CampShortName = camperCarDetail.CampShortName;
+                camperCarDetailObject.Logo = camperCarDetail.Logo;
+                camperCarDetailObject.isCollection = camperCarDetail.isCollection;
 
-            camperCarDetailObject.CampOwerTel = camperCarDetail.CampOwerTel;
-            camperCarDetailObject.CampOwerName = camperCarDetail.CampOwerName;
-            camperCarDetailObject.CampOwerAddress = camperCarDetail.CampOwerAddress;
-            camperCarDetailObject.Longitude = camperCarDetail.Longitude;
-            camperCarDetailObject.Latitude = camperCarDetail.Latitude;
-            camperCarDetailObject.CheckOutTime = camperCarDetail.CheckOutTime;
-            camperCarDetailObject.CheckInTime = camperCarDetail.CheckInTime;
-            camperCarDetailObject.ToiletNum = camperCarDetail.ToiletNum;
-            camperCarDetailObject.IsIntelligentLock = camperCarDetail.IsIntelligentLock;
+                camperCarDetailObject.CampOwerTel = camperCarDetail.CampOwerTel;
+                camperCarDetailObject.CampOwerName = camperCarDetail.CampOwerName;
+                camperCarDetailObject.CampOwerAddress = camperCarDetail.CampOwerAddress;
+                camperCarDetailObject.Longitude = camperCarDetail.Longitude;
+                camperCarDetailObject.Latitude = camperCarDetail.Latitude;
+                camperCarDetailObject.CheckOutTime = camperCarDetail.CheckOutTime;
+                camperCarDetailObject.CheckInTime = camperCarDetail.CheckInTime;
+                camperCarDetailObject.ToiletNum = camperCarDetail.ToiletNum;
+                camperCarDetailObject.IsIntelligentLock = camperCarDetail.IsIntelligentLock;
 
-            camperCarDetailObject.Facilities = camperCarDetail.Facilities;
-            //camperCarDetailObject.ShareUrl = camperCarDetail.ShareUrl;
-            camperCarDetailObject.currencyAmount = camperCarDetail.currencyAmount;
-            camperCarDetailObject.deductibleAmount = camperCarDetail.deductibleAmount;
-            camperCarDetailObject.DailyPrice = camperCarDetail.DailyPrice;
-
-
-            //   campDetail.Img = util.spiltStr(camperCarDetail.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width * 3 / 5) + ".jpg";
-            var Imgs = util.spiltStr(camperCarDetail.CarImg);
-
-            for (var i = 0; i < Imgs.length; i++) {
-                Imgs[i] = Imgs[i] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
-                // console.error(Imgs[i])
-            }
+                camperCarDetailObject.Facilities = camperCarDetail.Facilities;
+                //camperCarDetailObject.ShareUrl = camperCarDetail.ShareUrl;
+                camperCarDetailObject.currencyAmount = camperCarDetail.currencyAmount;
+                camperCarDetailObject.deductibleAmount = camperCarDetail.deductibleAmount;
+                camperCarDetailObject.DailyPrice = camperCarDetail.DailyPrice;
 
 
-            campOwerTel = camperCarDetail.CampOwerTel;
-            // console.error(camperCarDetail.MoenyDesc.length)
+                //   campDetail.Img = util.spiltStr(camperCarDetail.Imgs)[0] + "_" + parseInt(width) + "X" + parseInt(width * 3 / 5) + ".jpg";
+                var Imgs = util.spiltStr(camperCarDetail.CarImg);
 
-            //高德静态地图
-            var key = CONFIG.APP_KEY.AmapKey;
-            myAmapFun = new amapFile.AMapWX({ key: key });
-            var size = width + "*" + parseInt(height / 2);
-            myAmapFun.getStaticmap({
-                zoom: 13,
-                size: size,
-                scale: 2,
-                location: camperCarDetail.Longitude + "," + camperCarDetail.Latitude,
-                markers: "large,0xFF0000,A:" + camperCarDetail.Longitude + "," + camperCarDetail.Latitude,
-                labels: camperCarDetail.CampShortName + ",2,0,32,0xFFFFFF,0x008000:" + camperCarDetail.Longitude + "," + camperCarDetail.Latitude,
-                success: function (data) {
-                    that.setData({
-                        mapSrc: data.url
-                    })
-                },
-                fail: function (info) {
-                    wx.showModal({ title: info.errMsg })
+                for (var i = 0; i < Imgs.length; i++) {
+                    Imgs[i] = Imgs[i] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
+                    // console.error(Imgs[i])
                 }
-            })
 
-            selfObj.setData({
-                camperCarDetail: camperCarDetail,
-                moenyDesc: camperCarDetail.MoenyDesc,
-                imgUrls: Imgs,
-                height: parseInt(width / 2)
+
+                campOwerTel = camperCarDetail.CampOwerTel;
+                // console.error(camperCarDetail.MoenyDesc.length)
+
+                //高德静态地图
+                var key = CONFIG.APP_KEY.AmapKey;
+                myAmapFun = new amapFile.AMapWX({ key: key });
+                var size = width + "*" + parseInt(height / 2);
+                myAmapFun.getStaticmap({
+                    zoom: 13,
+                    size: size,
+                    scale: 2,
+                    location: camperCarDetail.Longitude + "," + camperCarDetail.Latitude,
+                    markers: "large,0xFF0000,A:" + camperCarDetail.Longitude + "," + camperCarDetail.Latitude,
+                    labels: camperCarDetail.CampShortName + ",2,0,32,0xFFFFFF,0x008000:" + camperCarDetail.Longitude + "," + camperCarDetail.Latitude,
+                    success: function (data) {
+                        that.setData({
+                            mapSrc: data.url
+                        })
+                    },
+                    fail: function (info) {
+                        wx.showModal({ title: info.errMsg })
+                    }
+                })
+
+                if (camperCarDetail.isCollection === 0) {
+                    isCollection = false;
+                } else {
+                    isCollection = true;
+                }
+
+                selfObj.setData({
+                    camperCarDetail: camperCarDetail,
+                    moenyDesc: camperCarDetail.MoenyDesc,
+                    isCollection: isCollection,
+                    imgUrls: Imgs,
+                    height: parseInt(width / 2)
+                })
+            }
+        } else if (id === 101) {
+            wx.showToast({
+                title: res.res_msg,
+            })
+            if (res.res_code == 200) {
+                console.error(res.res_msg)
+                isCollection = true;
+                selfObj.setData({
+                    isCollection: isCollection
+                })
+            } else {
+                isCollection = false;
+                // selfObj.setData({
+                //     isCollection: isCollection
+                // })
+            }
+        } else if (id === 102) {
+            if (res.res_code == 200) {
+                console.error(res.res_msg)
+                isCollection = false;
+                selfObj.setData({
+                    isCollection: isCollection
+                })
+            } else {
+                isCollection = true;
+                // selfObj.setData({
+                //     isCollection: isCollection
+                // })
+            }
+            wx.showToast({
+                title: res.res_msg,
             })
         }
     },
@@ -223,6 +266,20 @@ Page({
     goTel: function (e) {
         var phone = camperCarDetail.CampOwerTel;
         app.tel(phone);
+    },
+    collectClick: function () {
+        let params = {
+            collectionType: '7',
+            relevantGuid: carGuid
+        }
+        if (isCollection) {
+            let delurl = CONFIG.API_URL.GET_DelMyCollection
+            request.GET(delurl, params, 102, true, this, this.successFun, this.failFun)
+        } else {
+            let addUrl = CONFIG.API_URL.GET_AddMyCollection
+            request.GET(addUrl, params, 101, true, this, this.successFun, this.failFun)
+        }
+
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
