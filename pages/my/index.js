@@ -38,7 +38,7 @@ Page({
             {
                 icon: '../../images/my_yjfk.png',
                 text: '建议反馈',
-                path: '/pages/feedBack/index'
+                path: '/pages/suggest/index'
             },
             {
                 icon: '../../images/my_wyhz.png',
