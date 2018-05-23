@@ -202,15 +202,17 @@ App({
         //         console.log(res.isConnected)
         //         console.log(res.networkType)
         // });
-        // //获取定位
-        // wx.getLocation({
-        //         type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-        //         success: function (res) {
-        //                 var latitude = res.latitude
-        //                 var longitude = res.longitude
-        //                 console.log(latitude + "--" + longitude)
-        //         }
-        // })
+        //获取定位
+        wx.getLocation({
+                type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+                success: function (res) {
+                        var latitude = res.latitude
+                        var longitude = res.longitude
+                        wx.setStorageSync('latitude', latitude)
+                        wx.setStorageSync('longitude', longitude)
+                        console.log(latitude + "--" + longitude)
+                }
+        })
     },
     //拨打电话 phoneNumber 为空时默认电话
     tel: function (phoneNumber) {

@@ -216,10 +216,14 @@ Page({
                                         let _nickName, _avatarUrl
                                         let userInfo = wx.getStorageSync("userInfo")
                                         if (util.isEmpty(res.data.data.NickName)) {
-                                            _nickName = userInfo.nickName
+                                            _nickName = userInfo.nickName;
+                                        }else{
+                                            _nickName = res.data.data.NickName;
                                         }
                                         if (util.isEmpty(res.data.data.HeadImg)) {
-                                            _avatarUrl = userInfo.avatarUrl
+                                            _avatarUrl = userInfo.avatarUrl;
+                                        }else{
+                                            _avatarUrl = res.data.data.HeadImg;
                                         }
                                         console.error("_nickName" + _nickName)
                                         console.error("_avatarUrl" + _avatarUrl)

@@ -86,6 +86,15 @@
 
 
 /*条件选择*/
+.checkbox-count{
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #3bae78;
+    color: #fff;
+    border-radius:50%;
+    text-align: center;
+}
 
 .choice-bar {
   position: fixed;
@@ -102,7 +111,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20rpx;
+  padding: 0 40rpx;
   width: 33.33%;
   height: 80rpx;
   border-top: 1rpx solid #ddd;
@@ -120,8 +129,8 @@
 }
 
 .icon-chioce {
-  height: 30rpx;
-  width: 30rpx;
+  height: 12rpx;
+  width: 18rpx;
 }
 .mask{
   position: fixed;
@@ -165,9 +174,9 @@
 
 /*区域位置*/
 
-.district-list {
+/* .district-list {
   display: flex;
-}
+} */
 
 .district-left {
   flex-grow: 1;
@@ -227,8 +236,8 @@
 }
 
 .icon-selected {
-  height: 30rpx;
-  width: 30rpx;
+  height: 40rpx;
+  width: 40rpx;
 }
 
 .filter-footer {
