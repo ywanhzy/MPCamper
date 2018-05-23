@@ -182,7 +182,7 @@ Page({
                 let allCity = [...country, ...citys];
                 console.error(allCity)
                 selfObj.setData({
-                    districtList: allCitydd
+                    districtList: allCity
                 });
             }
         }

@@ -20,9 +20,9 @@ Page({
 
         gridItems: [
             {
-                    icon: '../../images/my_sc.png',
-                    text: '我的收藏',
-                    path: '11'
+                icon: '../../images/my_sc.png',
+                text: '我的收藏',
+                path: '11'
             },
             {
                 icon: '../../images/my_kf.png',
@@ -30,14 +30,14 @@ Page({
                 path: null,
             },
             {
-                    icon: '../../images/my_tjyj.png',
-                    text: '推荐有奖',
-                    path: '/pages/invitation/index'
+                icon: '../../images/my_tjyj.png',
+                text: '推荐有奖',
+                path: '/pages/invitation/index'
             },
             {
                 icon: '../../images/my_yjfk.png',
                 text: '建议反馈',
-                path: '/pages/suggest/index'
+                path: '/pages/feedBack/index'
             },
             {
                 icon: '../../images/my_wyhz.png',
@@ -217,12 +217,12 @@ Page({
                                         let userInfo = wx.getStorageSync("userInfo")
                                         if (util.isEmpty(res.data.data.NickName)) {
                                             _nickName = userInfo.nickName;
-                                        }else{
+                                        } else {
                                             _nickName = res.data.data.NickName;
                                         }
                                         if (util.isEmpty(res.data.data.HeadImg)) {
                                             _avatarUrl = userInfo.avatarUrl;
-                                        }else{
+                                        } else {
                                             _avatarUrl = res.data.data.HeadImg;
                                         }
                                         console.error("_nickName" + _nickName)
