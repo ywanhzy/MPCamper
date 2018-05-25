@@ -21,6 +21,8 @@
 .item-image {
     width: 100rpx;
     height: 100rpx;
+    margin-top: 10rpx;
+    border-radius: 10rpx;
 }
 
 .item-right {
@@ -46,7 +48,7 @@
 
 .item-right-top-status {
     font-size: 30rpx;
-    color: #666;
+    color: green;
     width: 50px;
     flex: none;
     text-align: right;

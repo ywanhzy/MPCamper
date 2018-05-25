@@ -22,7 +22,7 @@ Page({
             {
                     icon: '../../images/my_sc.png',
                     text: '我的收藏',
-                    path: '11'
+                    path: '/pages/myCollection/index'
             },
             {
                 icon: '../../images/my_kf.png',
