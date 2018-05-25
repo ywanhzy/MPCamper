@@ -20,15 +20,9 @@ Page({
 
         gridItems: [
             {
-<<<<<<< HEAD
-                    icon: '../../images/my_sc.png',
-                    text: '我的收藏',
-                    path: '/pages/myCollection/index'
-=======
                 icon: '../../images/my_sc.png',
                 text: '我的收藏',
-                path: '11'
->>>>>>> 9667ba3255f74e9e6dbc9fbbadb050a3068cb20d
+                path: '/pages/myCollection/index'
             },
             {
                 icon: '../../images/my_kf.png',
