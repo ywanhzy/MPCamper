@@ -1,0 +1,98 @@
+<!--pages/myCollection/index.wxml-->
+<import src="../../components/prompt/prompt.wxml" />
+
+<view class='container'>
+    <view class='top-tab'>
+        <view class="weui-navbar">
+            <block wx:for-items="{{ tabs}}" wx:key="{{ index }}">
+                <view id="{{ index }}" class="weui-navbar__item {{ activeIndex == index ? 'weui-bar__item_on' : '' }}" bindtap="tabClick">
+                    <view class="weui-navbar__title">{{ item }}</view>
+                </view>
+            </block>
+            <view class="weui-navbar__slider" style="left: {{ sliderLeft }}px; transform: translateX({{ sliderOffset }}px); -webkit-transform:                          translateX({{ sliderOffset }}px);"></view>
+        </view>
+    </view>
+
+        <view class="no-data" hidden="{{collections.length>0}}">
+            <view class="weui-tab__content" hidden="{{ activeIndex != 0 ||collections.length>0 }}">
+                <template is="prompt" data="{{ ...$wux.prompt.msg1 }}" />
+            </view>
+            <view class="weui-tab__content" hidden="{{ activeIndex != 1 ||collections.length>0}}">
+                <template is="prompt" data="{{ ...$wux.prompt.msg2 }}" />
+            </view>
+            <view class="weui-tab__content" hidden="{{ activeIndex != 2 ||collections.length>0}}">
+                <template is="prompt" data="{{ ...$wux.prompt.msg3 }}" />
+            </view>
+            <view class="weui-tab__content" hidden="{{ activeIndex != 3 ||collections.length>0}}">
+                <template is="prompt" data="{{ ...$wux.prompt.msg4 }}"/>
+            </view>
+        </view>
+    <view class='content'>
+
+        <view class='items'>
+            <view class="items" wx:for="{{ collections }}" wx:key="" wx:for-item="item">
+            <view wx:if="{{activeIndex === '0' }}">
+                <navigator url="/pages/campDetail/index?CampOwerGuid={{item.RelevantGUID}}">
+                    <view class='collection-item'>
+                        <image class='image-left' src='{{item.Imgs}}'></image>
+                        <view class='text-right'>
+                            <text class='text-right-title'>{{item.Title}}</text>
+                            <text class='text-right-middle'>成人门票，原价</text>
+                            <view class='text-bottom'>
+                                <text class='text-bottom-left'>¥980 </text>
+                                <text class='text-bottom-right'> /天</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:elif="{{activeIndex === '1' }}">
+                <navigator url="/pages/camperCarDetail/index?carGuid={{item.RelevantGUID}}">
+                    <view class='collection-item'>
+                        <image class='image-left' src='{{item.Imgs}}'></image>
+                        <view class='text-right'>
+                            <text class='text-right-title'>{{item.CampShortName}} | {{item.Title}}</text>
+                            <text class='text-right-middle'>{{item.BedNum}}张床 | 宜住{{item.FitCheckNum}}人</text>
+                            <view class='text-bottom'>
+                                <text class='text-bottom-left'>¥{{item.BasePrice}} </text>
+                                <text class='text-bottom-right'>  / 晚</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:elif="{{activeIndex === '2' }}">
+                <navigator url="/pages/liveCamperOrderDetail/index?orderNo={{item.OrderNo}}">
+                    <view class='collection-item'>
+                        <image class='image-left' src='{{item.Url}}'></image>
+                        <view class='text-right'>
+                            <text class='text-right-title'>{{item.MotorHomesLeaseTitle}}</text>
+                            <text class='text-right-middle'>{{item.GearboxTypeName}} | {{item.DrivingLicence}} | {{item.PeopleNum}}人</text>
+                            <view class='text-bottom'>
+                                <text class='text-bottom-left'>¥580 </text>
+                                <text class='text-bottom-right'> /天</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            <view wx:else>
+                <navigator url="/pages/liveCamperOrderDetail/index?orderNo={{item.OrderNo}}">
+                    <view class='collection-item'>
+                        <image class='image-left' src='../../images/tel.png'></image>
+                        <view class='text-right'>
+                            <text class='text-right-title'>橘子洲 | 露台式拖挂房车</text>
+                            <text class='text-right-middle'>2张床 | 宜住4人</text>
+                            <view class='text-bottom'>
+                                <text class='text-bottom-left'>¥980 </text>
+                                <text class='text-bottom-right'> /天</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+                <view style='width:100%;height:1px;background:#ccc;margin-top:25rpx;'></view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -26,7 +26,8 @@
         "pages/invitation/index",
         "pages/invitationRecord/index",
         "pages/suggest/index",
-        "pages/myInfo/index"
+        "pages/myInfo/index",
+        "pages/myCollection/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

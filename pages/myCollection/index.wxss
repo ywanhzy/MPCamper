@@ -1,0 +1,83 @@
+/* pages/myCollection/index.wxss */
+.container {
+    position:relative;
+    height:100%;
+    width: 100%;
+}
+
+.top-tab {
+    position:fixed;
+    top:0;
+    display:flex;
+    width:100vw;
+    font-size:16px;
+    background-color:#fff;
+    z-index:9;
+}
+
+.content {
+    height:auto;
+    width: 100%;
+    margin-top: 110rpx;
+}
+
+.no-data {
+    height:90%;    
+    width: 100%;
+    margin-top: 110rpx;
+}
+
+.weui-tab__content {
+    height:100%;
+}
+
+.items {
+    width: 100%;
+    height:auto;
+}
+
+.collection-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height:auto;
+}
+
+.image-left {
+    width: 160rpx;
+    height: 160rpx;
+    padding-left: 25rpx;
+    padding-top: 25rpx;
+    border-radius: 10rpx;
+}
+
+.text-right {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20rpx;
+    padding-top: 30rpx;
+}
+
+.text-right-title {
+    color: #333;
+}
+
+.text-right-middle {
+    font-size: 30rpx;
+    color: #666;
+}
+
+.text-bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-bottom-left {
+    color: green;
+    font-size: 30rpx;
+}
+
+.text-bottom-right {
+    font-size: 30rpx;
+    color: #666;
+}
