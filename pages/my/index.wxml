@@ -47,12 +47,13 @@
                 </view>
         </view> -->
     <view class="my-money">
-        <view class="my-money-left" bindtap='goCamperCar'>
+        <view class="my-money-left">
             <view>
                 <text class="my-money-title">总资产(元)</text>
-                <image style='width:24px;height:16px;' src='../../images/eye_off.png'></image>
+                <image style='width:24px;height:16px;margin-left:5px;'  bindtap='showMoney' src='{{showPic}}'></image>
             </view>
-            <text class="my-money-content">{{WalletMoney}}</text>
+            <text wx:if='{{isShow}}' class="my-money-content">{{WalletMoney}}</text>
+            <text wx:else class="my-money-content">***</text>
         </view>
         <view class="my-money-right" bindtap='goScan'>
             <text class="my-money-title">昨日收益</text>

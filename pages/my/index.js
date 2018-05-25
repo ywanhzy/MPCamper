@@ -2,7 +2,7 @@ const app = getApp()
 const util = require('../../utils/util.js')
 const CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
-
+let isShow=false;
 Page({
     data: {
         items: [
@@ -55,7 +55,9 @@ Page({
         Profit: 0.00,
         WalletMoney: 0.00,
         ConponTotalMoney: 0.00,
-        TotalProfit: 0.00
+        TotalProfit: 0.00,
+        showPic:'../../images/eye_off.png',
+        isShow: isShow
     },
     successFun: function (id, res, selfObj) {
         if (id === 100) {
@@ -97,6 +99,22 @@ Page({
         //未授权 去授权登录
         app.wxAuthorize()
 
+    },
+    showMoney: function (){
+        if (isShow){
+            isShow=false;
+            this.setData({
+                isShow: isShow,
+                showPic: '../../images/eye_off.png'
+            });
+        }else{
+            isShow = true;
+            this.setData({
+                isShow: isShow,
+                showPic: '../../images/eye_on.png'
+            });
+        }
+        
     },
     goClean: function () {
         try {
