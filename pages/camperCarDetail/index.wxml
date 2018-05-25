@@ -9,7 +9,7 @@
         </swiper>
         <view class="img-collect" catchtap='collectClick'>
             <block wx:if='{{ isCollection}}'>
-                <image style='width:25px;height:25px' mode="widthFix" src="../../images/tel.png"></image>
+                <image style='width:25px;height:25px' mode="widthFix" src="../../images/collected.png"></image>
             </block>
             <block wx:if='{{ !isCollection}}'>
                 <image style='width:25px;height:25px' mode="widthFix" src="../../images/collect.png"></image>
