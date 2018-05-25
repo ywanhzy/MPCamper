@@ -136,6 +136,11 @@ const CONFIG = {
         //我的优惠券
         GET_MyCouponData: API_BASE + 'mydata/getMyCouponData.ashx',
 
+        //个人中心
+        GET_MyIndexData: API_BASE + 'mydata/getMyIndexData.ashx',
+
+        
+
     },
 
     //文字提示

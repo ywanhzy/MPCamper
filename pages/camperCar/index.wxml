@@ -1,5 +1,27 @@
-<!--index.wxml-->
+<import src="../../components/calendar/calendar.wxml" />
+<import src="../../components/toast/toast.wxml" />
+
+<template is="toast" data="{{ ...$wux.toast }}" />
+<template is="calendar" data="{{ ...$wux.calendar.start }}" />
+<template is="calendar" data="{{ ...$wux.calendar.end }}" />
+
 <view class="container">
+    <view class="choice-bar">
+        <view bindtap="choiceItem" data-item="1" class="chioce-item chioce-item-first" hover-class="click-once-opaque">{{cityname}}长沙市
+            <image class="icon-chioce" src="{{cityChioceIcon}}"></image>
+        </view>
+        <view bindtap="choiceItem" data-item="2" class="chioce-item" hover-class="click-once-opaque" bindtap="openCalendarS">{{ start || '选择入住日期' }}
+            <text class='checkbox-count' wx:if='{{checkboxCounts!==0}}'>{{checkboxCounts}}</text>
+        </view>
+        <view  class="chioce-item" hover-class="click-once-opaque">共2晚
+            <text class='checkbox-count' wx:if='{{checkboxCounts!==0}}'>{{checkboxCounts}}</text>
+        </view>
+        <view bindtap="choiceItem" data-item="3" class="chioce-item chioce-item-last" hover-class="click-once-opaque" bindtap="openCalendarE">{{ end || '选择退房日期' }}
+            <image class="icon-chioce" src="{{districtChioceIcon}}"></image>
+        </view>
+
+    </view>
+
     <view class="camps" wx:for-items="{{camperCar}}" wx:key="id" wx:for-item="item">
         <view class="travel-notes">
             <navigator url="/pages/camperCarDetail/index?carGuid={{item.CarGuid}}">

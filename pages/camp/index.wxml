@@ -1,7 +1,6 @@
 <view class="container">
     <!--条件选择-->
     <view class="choice-bar">
-
         <view bindtap="choiceItem" data-item="2" class="chioce-item chioce-item-first" hover-class="click-once-opaque">{{activeSortingName}}
             <image class="icon-chioce" src="{{sortingChioceIcon}}"></image>
         </view>
@@ -40,9 +39,11 @@
                 <image wx:if="{{item.selected}}" class="icon-selected" src="/images/checkbox_select.png"></image>
                 <image wx:else class="icon-selected" src="/images/checkbox.png"></image>
             </view>
-            <view class="filter-footer">
-                <button catchtap="resetFilter" plain="true" class="button-reset" type="default" size="mini" hover-class="click-once">重置</button>
-                <button catchtap="filterButtonClick" class="button-submit" type="primary" size="mini">确定</button>
+            <view class="wux-filterbar__btns">
+                <!-- <button catchtap="resetFilter" plain="true" class="button-reset" type="default" size="mini" hover-class="click-once">重置</button>
+                <button catchtap="filterButtonClick" class="button-submit" type="primary" size="mini">确定</button> -->
+                <view class="wux-filterbar__btn" catchtap="resetFilter">重置</view>
+                <view class="wux-filterbar__btn wux-filterbar__btn--danger" catchtap="filterButtonClick" >确定</view>
             </view>
         </view>
     </view>

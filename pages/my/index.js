@@ -1,9 +1,9 @@
-// pages/my/index.js
 const app = getApp()
 const util = require('../../utils/util.js')
 const CONFIG = require('../../utils/config.js')
-Page({
+const request = require('../../utils/request.js')
 
+Page({
     data: {
         items: [
             {
@@ -51,9 +51,38 @@ Page({
             }
         ],
         userInfo: null,
-        nickName: null
+        nickName: null,
+        Profit: 0.00,
+        WalletMoney: 0.00,
+        ConponTotalMoney: 0.00,
+        TotalProfit: 0.00
     },
-
+    successFun: function (id, res, selfObj) {
+        if (id === 100) {
+            if (res.res_code == 200) {
+                let myData = res.data[0];
+                console.log("length:" + myData)
+                selfObj.setData({
+                    Profit: myData.Profit,
+                    WalletMoney: myData.WalletMoney,
+                    ConponTotalMoney: myData.ConponTotalMoney,
+                    TotalProfit: myData.TotalProfit
+                })
+            } else {
+                wx.showToast({
+                    title: res.res_msg,
+                })
+            }
+        } else if (id === 101) {
+            // “Profit”:昨日收益,
+            // “ConponTotalMoney”:总优惠券金额,
+            // “TotalProfit”:累计收益
+        }
+    },
+ 
+    failFun: function (id, res, selfObj) {
+        console.log('failFun', res)
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -127,7 +156,7 @@ Page({
     onShow: function () {
         let that = this
         console.log("onShow")
-        setTimeout(function () {
+        setTimeout(()=> {
             console.log("userInfo:" + app.globalData.userInfo)
             console.log("eUserInfo:" + app.globalData.eUserInfo)
             let memeberguid = wx.getStorageSync("memberguid")
@@ -135,22 +164,32 @@ Page({
             let userInfo = wx.getStorageSync("userInfo")
             if (util.isEmpty(memeberguid)) {
                 if (userInfo != null) {
-                    that.setData({
+                    this.setData({
                         nickName: userInfo.nickName,
                         avatarUrl: userInfo.avatarUrl,
                     });
                 }
             } else {
                 if (eUserInfo != null) {
-                    that.setData({
+                    this.setData({
                         nickName: eUserInfo.NickName,
                         avatarUrl: eUserInfo.HeadImg,
                         phone: eUserInfo.Phone
                     });
                 }
             }
-
         }, 500);
+
+        let memeberguid = wx.getStorageSync("memberguid")
+        if (!util.isEmpty(memeberguid)) {
+            this.getMyData(that);
+        }
+        
+    },
+    getMyData: (that)=>{
+        let url = CONFIG.API_URL.GET_MyIndexData;
+        let params = {};
+        request.GET(url, params, 100, true, that, that.successFun, that.failFun);
     },
     userInfoHandler: function (e) {
         let that = this
@@ -191,11 +230,12 @@ Page({
                                 app.globalData.eUserInfo = res.data.data;
                                 wx.setStorage({ key: "eUserInfo", data: res.data.data })
 
-
                                 wx.setStorageSync('wx_unionid', res.data.data.unionid)
                                 wx.setStorageSync('wx_openid', res.data.data.Openid)
                                 wx.setStorageSync('token', res.data.data.token)
                                 wx.setStorageSync('memberguid', res.data.data.GUID)
+
+                                that.getMyData(that);
 
                                 let memeberguid = wx.getStorageSync("memberguid")
 
@@ -255,6 +295,16 @@ Page({
             }
         });
 
+    },
+    goMyInfo:()=>{
+        let memeberguid = wx.getStorageSync("memberguid")
+        if (util.isEmpty(memeberguid)) {
+            
+        }else{
+            wx.navigateTo({
+                url: '../../pages/myInfo/index',
+            })
+        }
     },
     /**
      * 生命周期函数--监听页面隐藏

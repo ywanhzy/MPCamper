@@ -5,7 +5,7 @@
                 <text wx:else bindtap="toLogin" class="userinfo-nickname">点我授权</text>
         </view>       -->
 
-    <view class="box">
+    <view class="box" bindtap='goMyInfo'>
         <view class="left_box" bindtap='goClean'>
             <!-- <image class="userinfo-avatar" wx:if="{{avatarUrl}}" src="{{ avatarUrl }}" /> -->
             <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
@@ -23,7 +23,7 @@
             </block>
             <block wx:else>
                 <!-- <view class="username" bindtap="toLogin">点我授权</view> -->
-                <button open-type="getUserInfo" class="reButton" bindgetuserinfo="userInfoHandler">授权登录房车行</button>
+                <button open-type="getUserInfo" class="reButton" catchgetuserinfo="userInfoHandler">授权登录房车行</button>
             </block>
         </view>
         <view class="right_box">
@@ -46,7 +46,33 @@
                         </view>
                 </view>
         </view> -->
+    <view class="my-money">
+        <view class="my-money-left" bindtap='goCamperCar'>
+            <view>
+                <text class="my-money-title">总资产(元)</text>
+                <image style='width:24px;height:16px;' src='../../images/eye_off.png'></image>
+            </view>
+            <text class="my-money-content">{{WalletMoney}}</text>
+        </view>
+        <view class="my-money-right" bindtap='goScan'>
+            <text class="my-money-title">昨日收益</text>
+            <text class="my-money-content green">{{Profit}}</text>
+        </view>
+    </view>
 
+    <view class="my-coupon">
+        <view class="my-coupon-left" bindtap='goCoupon'>
+            <text class="my-coupon-title">优惠券</text>
+            <text class="my-coupon-content">{{ConponTotalMoney}}</text>
+        </view>
+        <view class="my-coupon-right" bindtap='goProfit'>
+            <text class="my-coupon-title">运营收益</text>
+             <view class='my-coupon-content'>
+                <text class='coupon-title'>{{TotalProfit}}</text>
+                <text class='coupon-title1'>+100</text>
+            </view>
+        </view>
+    </view>
 
     <view class="weui-grids">
         <block wx:for="{{gridItems}}" wx:key="*this">

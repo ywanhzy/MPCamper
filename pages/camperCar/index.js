@@ -1,5 +1,7 @@
 //index.js
 //获取应用实例
+import { $wuxCalendar } from '../../components/wux'
+
 const app = getApp()
 
 const request = require('../../utils/request.js')
@@ -11,7 +13,10 @@ import * as util from '../../utils/util';
 
 
 let width, height;
-
+let citys;
+let startDay = "", foregift;
+let endDay = "";
+let dayNum = 0;
 Page({
     data: {
         motto: 'Hello World',
@@ -63,29 +68,40 @@ Page({
      * 接口调用成功处理
      */
     successFun: function (id, res, selfObj) {
-        if (res.res_code == 200) {
-            let camperCar = res.data;
-            let camperCars = [];
-            if (camperCar.length > 0) {
-                for (let i = 0; i < camperCar.length; i++) {
-                    let obj = camperCar[i]
-                    // obj.Img1 = spiltStr(obj.Img)[0] + "_" + parseInt(width * 3 / 4) + "X" + parseInt(width / 2) + ".jpg";
-                    obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
-                    obj.i = i;
-                    if (obj.Num == 1) {
-                        obj.yes = true;
-                    } else {
-                        obj.yes = false;
+        if (id === 100) {
+            if (res.res_code === 200) {
+                let camperCar = res.data;
+                let camperCars = [];
+                if (camperCar.length > 0) {
+                    for (let i = 0; i < camperCar.length; i++) {
+                        let obj = camperCar[i]
+                        // obj.Img1 = spiltStr(obj.Img)[0] + "_" + parseInt(width * 3 / 4) + "X" + parseInt(width / 2) + ".jpg";
+                        obj.Img = util.spiltStr(obj.CarImg)[0] + "_" + parseInt(width) + "X" + parseInt(width / 2) + ".jpg";
+                        obj.i = i;
+                        if (obj.Num == 1) {
+                            obj.yes = true;
+                        } else {
+                            obj.yes = false;
+                        }
+                        camperCars.push(obj);
                     }
-                    camperCars.push(obj);
                 }
+                selfObj.setData({
+                    camperCar: camperCars
+                });
             }
-            selfObj.setData({
-                camperCar: camperCars
-            });
-        }
 
-        wx.stopPullDownRefresh(); //停止下拉刷新
+            wx.stopPullDownRefresh(); //停止下拉刷新
+        } else if (id === 101) {
+            //获取区域位置
+            if (res.res_code == 200) {
+                citys = res.data;
+                console.error(citys)
+                selfObj.setData({
+                    cityList: citys
+                });
+            }
+        }
     },
     /**
      * 接口调用失败处理
@@ -94,7 +110,7 @@ Page({
         console.log('failFun', res)
     },
     onLoad: function (options) {
-
+        //测试--
         function foo(x, y, ...rest) {
             console.error(`dddd--${rest[0]}`)
          return ((x + y) * rest.length);
@@ -103,8 +119,9 @@ Page({
         console.error(`dddd--${ss}`)
 
         console.log("dfsffdsf" + util.formatDistance(50))
-        if (!util.isEmpty(options.inviteId)) {
+        //---
 
+        if (!util.isEmpty(options.inviteId)) {
             console.error("inviteId:" + options.inviteId)
             wx.setStorageSync('inviteId', options.inviteId)
         }
@@ -142,6 +159,7 @@ Page({
         }
 
         this.getList(that);
+        this.getCity(that);
 
         // var url = CONFIG.API_URL.GET_WxOpenId
         // var params = {}
@@ -178,6 +196,11 @@ Page({
         console.log("下拉刷新")
         this.getList(that);
     },
+    getCity: (that) => {
+        let url = CONFIG.API_URL.GET_CityData
+        let params = { type: '2' }
+        request.GET(url, params, 101, true, that, that.successFun, that.failFun)
+    },
     getList: (that) => {
         //获取住房车列表
         let url = CONFIG.API_URL.GET_CamperCarAll
@@ -195,6 +218,75 @@ Page({
         let _that = this;
         IMAGE.errImgFun(e, _that);
 
+    },
+    openCalendarS() {
+        if (this.start) {
+            return this.start.show()
+        }
+
+        this.start = $wuxCalendar.init('start', {
+            // dateFormat: 'DD, MM dd, yyyy',
+            onChange(p, v, d) {
+                console.error("start:" + d)
+                console.error("endDay:" + endDay)
+                if (!util.isEmpty(endDay) && !util.isEmpty(d)) {
+                    dayNum = util.dateDifference(d, endDay)
+                    console.error("相差：" + dayNum)
+                    if (dayNum <= 0) {
+                        $wuxToast.show({
+                            type: 'text',
+                            timer: 2000,
+                            color: '#fff',
+                            text: '退房日期不能小于等于入住日期',
+                            success: () => console.log('文本提示')
+                        })
+                    } else {
+                      
+                        this.setData({
+                            day: dayNum,
+                        })
+                    }
+                }
+
+                this.setData({
+                    start: d.join(', ')
+                })
+                startDay = d.join(', ')
+            }
+        })
+    },
+    openCalendarE() {
+        if (this.end) {
+            return this.end.show()
+        }
+        this.end = $wuxCalendar.init('end', {
+            // dateFormat: 'DD, MM dd, yyyy',
+            onChange(p, v, d) {
+                if (!util.isEmpty(startDay) && !util.isEmpty(d)) {
+                    dayNum = util.dateDifference(startDay, d)
+                    console.error("相差：" + dayNum)
+                    if (dayNum <= 0) {
+                        $wuxToast.show({
+                            type: 'text',
+                            timer: 2000,
+                            color: '#fff',
+                            text: '退房日期不能小于等于入住日期',
+                            success: () => console.log('文本提示')
+                        })
+                    } else {
+                      
+                        this.setData({
+                            day: dayNum,
+                            
+                        })
+                    }
+                }
+                this.setData({
+                    end: d.join(', ')
+                })
+                endDay = d.join(', ')
+            }
+        })
     },
     /**
      * 用户点击右上角分享

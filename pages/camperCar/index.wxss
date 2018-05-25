@@ -90,3 +90,43 @@
     font-weight: bold;
     color: #3bae78;
 }
+
+
+
+.choice-bar {
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    font-size: 16px;
+    background-color: #fff;
+    z-index: 9;
+}
+
+.chioce-item {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40rpx;
+    width: 33.33%;
+    height: 80rpx;
+    border-top: 1rpx solid #ddd;
+    border-bottom: 1rpx solid #ddd;
+    border-left: 1rpx solid #ddd;
+    /*border-right: 1rpx solid #ddd;*/
+}
+
+.chioce-item-last {
+    border-right: none;
+}
+
+.chioce-item-first {
+    border-left: none;
+}
+
+
+.icon-chioce {
+    height: 12rpx;
+    width: 18rpx;
+}

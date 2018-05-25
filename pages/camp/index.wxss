@@ -1,8 +1,9 @@
-.camps-content{
+.camps-content {
     width: 92%;
     height: auto;
     margin-top: 90rpx;
 }
+
 .camps {
     margin-top: 20rpx;
     height: auto;
@@ -84,92 +85,94 @@
     color: #3bae78;
 }
 
-
 /*条件选择*/
-.checkbox-count{
+
+.checkbox-count {
     width: 20px;
     height: 20px;
     line-height: 20px;
     background-color: #3bae78;
     color: #fff;
-    border-radius:50%;
+    border-radius: 50%;
     text-align: center;
 }
 
 .choice-bar {
-  position: fixed;
-  top: 0;
-  display: flex;
-  width: 100vw;
-  font-size: 16px;
-  background-color: #fff;
-  z-index: 9;
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    font-size: 16px;
+    background-color: #fff;
+    z-index: 9;
 }
 
 .chioce-item {
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40rpx;
-  width: 33.33%;
-  height: 80rpx;
-  border-top: 1rpx solid #ddd;
-  border-bottom: 1rpx solid #ddd;
-  border-left: 1rpx solid #ddd;
-  /*border-right: 1rpx solid #ddd;*/
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40rpx;
+    width: 33.33%;
+    height: 80rpx;
+    border-top: 1rpx solid #ddd;
+    border-bottom: 1rpx solid #ddd;
+    border-left: 1rpx solid #ddd;
+    /*border-right: 1rpx solid #ddd;*/
 }
 
 .chioce-item-last {
-  border-right: none;
+    border-right: none;
 }
 
 .chioce-item-first {
-  border-left: none;
+    border-left: none;
 }
 
 .icon-chioce {
-  height: 12rpx;
-  width: 18rpx;
+    height: 12rpx;
+    width: 18rpx;
 }
-.mask{
-  position: fixed;
-  top:0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: #000;
-  opacity: 0.5;
+
+.mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.5;
 }
-.district-list,.sorting-list,.filter-list {
-  margin-top: 2rpx;
-  position: absolute;
-  top: 80rpx;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  z-index: -1;
-  font-size: 14px;
-  border-bottom: 1rpx solid #ddd;
+
+.district-list, .sorting-list, .filter-list {
+    margin-top: 2rpx;
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: -1;
+    font-size: 14px;
+    border-bottom: 1rpx solid #ddd;
 }
 
 .chioce-list-show {
-  top: 80rpx;
-  animation: slide 500ms;
+    top: 80rpx;
+    animation: slide 500ms;
 }
 
 @keyframes slide {
-  0% {
-    top: -500rpx;
-  }
+    0% {
+        top: -500rpx;
+    }
 
-  100% {
-    top: 80rpx;
-  }
+    100% {
+        top: 80rpx;
+    }
 }
 
 .chioce-list-hide {
-  display: none !important;
+    display: none !important;
 }
 
 /*区域位置*/
@@ -179,78 +182,103 @@
 } */
 
 .district-left {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .district-right {
-  flex-grow: 4;
+    flex-grow: 4;
 }
-.scroll-district{
-  height: 500rpx;
+
+.scroll-district {
+    height: 500rpx;
 }
+
 .district-parent {
-  height: 100rpx;
-  line-height: 100rpx;
-  padding: 0 40rpx;
-  border-bottom: 1rpx solid #ddd;
-  border-right: 1rpx solid #ddd;
-  background-color: #f0f0f0;
+    height: 100rpx;
+    line-height: 100rpx;
+    padding: 0 40rpx;
+    border-bottom: 1rpx solid #ddd;
+    border-right: 1rpx solid #ddd;
+    background-color: #f0f0f0;
 }
 
 .district-parent-active {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .district-children {
-  height: 100rpx;
-  line-height: 100rpx;
-  padding: 0 40rpx;
-  border-bottom: 1rpx solid #ddd;
+    height: 100rpx;
+    line-height: 100rpx;
+    padding: 0 40rpx;
+    border-bottom: 1rpx solid #ddd;
 }
 
 /*综合排序*/
 
 .sorting-item {
-  height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 40rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1rpx solid #ddd;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0 40rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1rpx solid #ddd;
 }
 
-.sorting-item image{
-    display:inline-block;
+.sorting-item image {
+    display: inline-block;
 }
+
 /*筛选*/
 
 .filter-item {
-  height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 40rpx;
-  border-bottom: 1rpx solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0 40rpx;
+    border-bottom: 1rpx solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .icon-selected {
-  height: 40rpx;
-  width: 40rpx;
+    height: 40rpx;
+    width: 40rpx;
 }
 
 .filter-footer {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .filter-footer button {
-  margin: 20rpx 80rpx;
-  border-radius: 0 !important;
+    margin: 20rpx 80rpx;
+    border-radius: 0 !important;
 }
 
 .button-reset {
-  border: 1rpx solid #ddd !important;
-  color: #666 !important;
+    border: 1rpx solid #ddd !important;
+    color: #666 !important;
+}
+
+
+
+.wux-filterbar__btns .wux-filterbar__btn {
+    background-color: #fff;
+    color: #252525;
+    font-size: 32rpx;
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    border: none;
+    border-radius: 0;
+    height: 88rpx;
+    line-height: 88rpx;
+}
+
+.wux-filterbar__btns .wux-filterbar__btn--danger {
+    background-color: #3bae78;
+    color: #fff;
 }
