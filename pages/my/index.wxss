@@ -263,3 +263,8 @@ button {
 .coupon-title1{
     flex: 3;
 }
+
+.weui-footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

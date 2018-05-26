@@ -27,7 +27,9 @@
         "pages/invitationRecord/index",
         "pages/suggest/index",
         "pages/myInfo/index",
-        "pages/myCollection/index"
+        "pages/myCollection/index",
+        "pages/rentCamperCar/index",
+        "pages/rentCamperCarDetail/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

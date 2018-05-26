@@ -70,7 +70,7 @@
             <text class="my-coupon-title">运营收益</text>
              <view class='my-coupon-content'>
                 <text class='coupon-title'>{{TotalProfit}}</text>
-                <text class='coupon-title1'>+100</text>
+                <text class='coupon-title1'>{{Profit}}</text>
             </view>
         </view>
     </view>
@@ -95,8 +95,8 @@
             </block>
         </block>
     </view>
-
-    <view class="weui-footer weui-footer_fixed-bottom">
+<!-- weui-footer_fixed-bottom -->
+    <view class="weui-footer ">
         <view class="weui-footer__links">
         </view>
         <view class="weui-footer__text">© 房车行 客服：4000-155-105</view>

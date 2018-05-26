@@ -140,6 +140,14 @@ const CONFIG = {
         GET_MyIndexData: API_BASE + 'mydata/getMyIndexData.ashx',
 
         
+        //租房车
+        GET_MotorHomes: API_BASE + 'motorHomes/getMotorHomes.ashx',
+        //租房车详情接口
+        GET_MotorHomesInfo: API_BASE + 'motorHomes/getMotorHomesInfo.ashx',
+        //24、提交房车订单接口
+        Post_MotoHomesOrder: API_BASE + 'motorHomes/postMotoHomesOrder.ashx',
+        //26、房车订单详情
+        GET_MotoHomesOrder: API_BASE + 'motorHomes/getMotoHomesOrder.ashx',
 
     },
 

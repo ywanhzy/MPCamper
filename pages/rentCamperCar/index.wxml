@@ -1,0 +1,30 @@
+<import src="../../components/calendar/calendar.wxml" />
+<import src="../../components/toast/toast.wxml" />
+
+<template is="toast" data="{{ ...$wux.toast }}" />
+<template is="calendar" data="{{ ...$wux.calendar.start }}" />
+<template is="calendar" data="{{ ...$wux.calendar.end }}" />
+
+<view class="container">
+    <view class="camps" wx:for-items="{{camperCar}}" wx:key="id" wx:for-item="item">
+        <view class="travel-notes">
+            <navigator url="/pages/rentCamperCarDetail/index?MotorHomesLeaseGuid={{item.MotorHomesLeaseGuid}}">
+                <view class="travel-img">
+                    <image class="main-img" src="{{item.Url}}" mode='widthFix' binderror="binderrorimg" data-err-img="camperCar[{{index}}].Url" data-errorimg="{{index}}"></image>
+                </view>
+
+                <view class="travel-title">
+                    <view class='camp-text-left'>
+                        <text class="title">{{item.MotorHomesLeaseTitle}}|{{item.PlateNumber}}</text>
+                        <text class="info">{{item.GearboxTypeName}}|{{item.DrivingLicence}}|{{item.PeopleNum}}</text>
+                    </view>
+                    <view class='camp-text-right'>
+                        ￥{{item.BasePrice}}/天
+                    </view>
+                </view>
+            </navigator>
+        </view>
+
+    </view>
+
+</view>
