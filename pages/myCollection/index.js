@@ -4,6 +4,7 @@ import { $wuxToast } from '../../components/wux'
 const sliderWidth = 96
 const CONFIG = require('../../utils/config.js')
 const request = require('../../utils/request.js')
+const util = require('../../utils/util.js')
 
 Page({
 

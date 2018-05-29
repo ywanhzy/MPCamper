@@ -62,14 +62,14 @@
                 </navigator>
             </view>
             <view wx:elif="{{activeIndex === '2' }}">
-                <navigator url="/pages/liveCamperOrderDetail/index?orderNo={{item.OrderNo}}">
+                <navigator url="/pages/rentCamperCarDetail/index?MotorHomesLeaseGuid={{item.RelevantGUID}}">
                     <view class='collection-item'>
                         <image class='image-left' src='{{item.Url}}'></image>
                         <view class='text-right'>
                             <text class='text-right-title'>{{item.MotorHomesLeaseTitle}}</text>
                             <text class='text-right-middle'>{{item.GearboxTypeName}} | {{item.DrivingLicence}} | {{item.PeopleNum}}人</text>
                             <view class='text-bottom'>
-                                <text class='text-bottom-left'>¥580 </text>
+                                <text class='text-bottom-left'>¥{{item.BasePrice}} </text>
                                 <text class='text-bottom-right'> /天</text>
                             </view>
                         </view>

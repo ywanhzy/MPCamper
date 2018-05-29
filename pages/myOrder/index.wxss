@@ -80,3 +80,19 @@
     font-size: 30rpx;
     right: 20rpx;
 }
+
+.text-btn {
+    background-color: #fff;
+    color: green;
+    border: 1px solid green;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    position: absolute;
+    text-align: right;
+    margin-right: 10rpx;
+    border-radius: 10rpx;
+    font-size: 30rpx;
+    right: 20rpx;
+}
