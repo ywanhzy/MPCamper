@@ -136,8 +136,17 @@ const CONFIG = {
         //我的优惠券
         GET_MyCouponData: API_BASE + 'mydata/getMyCouponData.ashx',
 
+        //获取我的优惠券现金券
+        GET_MyCouponMoney: API_BASE + 'mydata/getMyCouponMoney.ashx',
+        //164、获取我的优惠券次数券
+        GET_MyCouponMoney: API_BASE + 'mydata/getMyCouponMoney.ashx',
+
+        //165、下单获取可使用的优惠券
+        GET_MyCouponUse: API_BASE + 'mydata/getMyCouponUse.ashx',
+
+
         //个人中心
-        GET_MyIndexData: API_BASE + 'mydata/getMyIndexData.ashx',
+        GET_MyCouponNum: API_BASE + 'mydata/getMyCouponNum.ashx',
 
         
         //租房车
@@ -148,6 +157,18 @@ const CONFIG = {
         Post_MotoHomesOrder: API_BASE + 'motorHomes/postMotoHomesOrder.ashx',
         //26、房车订单详情
         GET_MotoHomesOrder: API_BASE + 'motorHomes/getMotoHomesOrder.ashx',
+
+        //156、权益验证身份证
+        GET_VerificationIDCard: API_BASE + 'Investment/VerificationIDCard.ashx',
+
+        //158、权益绑定发送验证码
+        GET_sendPhoneCode: API_BASE + 'Investment/sendPhoneCode.ashx',
+
+       // 159、权益绑定
+        GET_bindAccount: API_BASE + 'Investment/bindAccount.ashx',
+
+       // 157、身份证照片上传验证
+        POST_IdCardData: API_BASE + 'Investment/postIdCardData.ashx',
 
     },
 
