@@ -1,19 +1,21 @@
 <import src="../../components/calendar/calendar.wxml" />
 <import src="../../components/toast/toast.wxml" />
+<import src="../../components/picker/picker.wxml" />
 
 <template is="toast" data="{{ ...$wux.toast }}" />
+<template is="picker" data="{{ ...$wux.picker.phone }}" />
 <template is="calendar" data="{{ ...$wux.calendar.start }}" />
 <template is="calendar" data="{{ ...$wux.calendar.end }}" />
 
 <view class="container">
     <view class="choice-bar">
-        <view bindtap="choiceItem" data-item="1" class="chioce-item chioce-item-first" hover-class="click-once-opaque">{{cityname}}长沙市
+        <view bindtap="onTapPhone" data-item="1" class="chioce-item chioce-item-first" hover-class="click-once-opaque">{{cityName}}
             <image class="icon-chioce" src="{{cityChioceIcon}}"></image>
         </view>
         <view bindtap="choiceItem" data-item="2" class="chioce-item" hover-class="click-once-opaque" bindtap="openCalendarS">{{ start || '选择入住日期' }}
             <text class='checkbox-count' wx:if='{{checkboxCounts!==0}}'>{{checkboxCounts}}</text>
         </view>
-        <view  class="chioce-item" hover-class="click-once-opaque">共2晚
+        <view class="chioce-item" hover-class="click-once-opaque">共{{day}}晚
             <text class='checkbox-count' wx:if='{{checkboxCounts!==0}}'>{{checkboxCounts}}</text>
         </view>
         <view bindtap="choiceItem" data-item="3" class="chioce-item chioce-item-last" hover-class="click-once-opaque" bindtap="openCalendarE">{{ end || '选择退房日期' }}
@@ -21,27 +23,27 @@
         </view>
 
     </view>
-
-    <view class="camps" wx:for-items="{{camperCar}}" wx:key="id" wx:for-item="item">
-        <view class="travel-notes">
-            <navigator url="/pages/camperCarDetail/index?carGuid={{item.CarGuid}}">
-                <view class="travel-img">
-                    <image class="main-img" src="{{item.Img}}" mode='widthFix' binderror="binderrorimg" data-err-img="camperCar[{{index}}].Img" data-errorimg="{{index}}"></image>
-                    <image class="room-img" src="../../images/index_room.png" mode='aspectFit' wx:if="{{item.yes}}"></image>
-                </view>
-
-                <view class="travel-title">
-                    <view class='camp-text-left'>
-                        <text class="title">{{item.CampShortName}}|{{item.CamperTypeName}}</text>
-                        <text class="info">{{item.BedNum}}张床 宜住{{item.FitCheckNum}}人</text>
+    <view class='camps-content'>
+        <view class="camps" wx:for-items="{{camperCar}}" wx:key="id" wx:for-item="item">
+            <view class="travel-notes">
+                <navigator url="/pages/camperCarDetail/index?carGuid={{item.CarGuid}}&startDay={{start}}&endDay={{end}}">
+                    <view class="travel-img">
+                        <image class="main-img" src="{{item.Img}}" mode='widthFix' binderror="binderrorimg" data-err-img="camperCar[{{index}}].Img" data-errorimg="{{index}}"></image>
+                        <image class="room-img" src="../../images/index_room.png" mode='aspectFit' wx:if="{{item.yes}}"></image>
                     </view>
-                    <view class='camp-text-right'>
-                        ￥{{item.DailyPrice}}起
+
+                    <view class="travel-title">
+                        <view class='camp-text-left'>
+                            <text class="title">{{item.CampShortName}}|{{item.CamperTypeName}}</text>
+                            <text class="info">{{item.BedNum}}张床 宜住{{item.FitCheckNum}}人</text>
+                        </view>
+                        <view class='camp-text-right'>
+                            ￥{{item.DailyPrice}}起
+                        </view>
                     </view>
-                </view>
-            </navigator>
+                </navigator>
+            </view>
+
         </view>
-
     </view>
-
 </view>

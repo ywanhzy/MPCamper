@@ -89,7 +89,7 @@ function dateDifference(sDate1, sDate2) {
 }
 //判断是否为空
 function isEmpty(value) {
-    if (typeof(value) === undefined || value === 'undefined' || value === null || value === '' || value === 'null' || value === '[]' || value === '{}') {
+    if (typeof (value) === 'undefined' || value === 'undefined' || value === null || value === '' || value === 'null' || value === '[]' || value === '{}') {
         return true
     }
     return false

@@ -66,8 +66,8 @@ Page({
 
         console.log("inviteId:" + inviteId)
         var shareObj = {
-            title: '房车行',
-            desc: '房车行',
+            title: '约你游',
+            desc: '约你游',
             path: '/pages/index/index?inviteId=' + inviteId,
             success: function (res) {
                 console.log('success')

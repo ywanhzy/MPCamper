@@ -214,7 +214,7 @@ Page({
             // app.wxAuthorize()
             wx.showModal({
                 title: '提示',
-                content: '请绑定房车行账号',
+                content: '请绑定约你游账号',
                 success: function (res) {
                     if (res.confirm) {
                         wx.switchTab({
@@ -296,7 +296,7 @@ Page({
         console.log("inviteId:" + inviteId)
         console.log('onShareAppMessage')
         var shareObj = {
-            title: '房车行',
+            title: '约你游',
             desc: '房车详情',
             path: '/pages/camperCarDetail/index?carGuid=' + carGuid + '&inviteId=' + inviteId,
             success: function (res) {

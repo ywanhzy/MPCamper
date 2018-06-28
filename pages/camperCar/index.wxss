@@ -5,9 +5,15 @@
     padding: 0;
 }
 
+.camps-content {
+    width: 92%;
+    height: auto;
+    margin-top: 90rpx;
+}
+
+
 .camps {
     margin-top: 20rpx;
-    width: 92%;
     height: auto;
 }
 

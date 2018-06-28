@@ -92,7 +92,7 @@ const CONFIG = {
         // flag: 0：微信网页版 1 小程序
         // unionid
 
-        //152、根据微信用户信息 获取unionid及判断微信用户是否已绑定房车行账号
+        //152、根据微信用户信息 获取unionid及判断微信用户是否已绑定约你游账号
         GET_WeChatLoginInfo: API_BASE + 'wechat/postWeChatLoginInfo.ashx',
         //传入参数： jsonData：微信返回的数据
 

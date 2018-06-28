@@ -1021,7 +1021,7 @@
         width:auto;
         height: auto;
        font-size: 30rpx; 
-       line-height: 30rpx;
+       /* line-height: 30rpx; */
 }
 .dayprice_text{
         width:auto;

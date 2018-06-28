@@ -23,7 +23,7 @@
             </block>
             <block wx:else>
                 <!-- <view class="username" bindtap="toLogin">点我授权</view> -->
-                <button open-type="getUserInfo" class="reButton" catchgetuserinfo="userInfoHandler">授权登录房车行</button>
+                <button open-type="getUserInfo" class="reButton" catchgetuserinfo="userInfoHandler">授权登录约你游</button>
             </block>
         </view>
         <view class="right_box">
@@ -99,7 +99,7 @@
     <view class="weui-footer ">
         <view class="weui-footer__links">
         </view>
-        <view class="weui-footer__text">© 房车行 客服：4000-155-105</view>
+        <view class="weui-footer__text">© 约你游 客服：4000-155-105</view>
     </view>
 
 </view>

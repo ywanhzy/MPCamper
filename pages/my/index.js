@@ -148,7 +148,7 @@ Page({
                 } else {
                     // app.wxAuthorize();
                     wx.showToast({
-                        title: '请绑定房车行账号',
+                        title: '请绑定约你游账号',
                     })
                 }
                 break

@@ -8,8 +8,8 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.90",
-	"appid": "wx64e0ed63ac933aaa",
+	"libVersion": "2.0.9",
+	"appid": "wx71d45d360f058180",
 	"projectname": "Campers",
 	"isGameTourist": false,
 	"condition": {

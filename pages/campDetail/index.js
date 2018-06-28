@@ -212,7 +212,7 @@ Page({
         console.log("campOwerGuid:" + campOwerGuid)
         console.log('onShareAppMessage')
         var shareObj = {
-            title: '房车行',
+            title: '约你游',
             desc: '营地详情',
             path: '/pages/campDetail/index?CampOwerGuid=' + campOwerGuid + '&inviteId=' + inviteId,
             success: function (res) {

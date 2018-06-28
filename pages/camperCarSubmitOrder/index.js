@@ -44,7 +44,7 @@ Page({
     successFun: function (id, res, selfObj) {
         switch (id) {
             case 100:
-                if (res.res_code == 100) {
+                if (res.res_code == 200) {
                     camperCarOrder = res.data;
                     console.log(camperCarOrder)
                     console.log(camperCarDetail)
@@ -108,11 +108,30 @@ Page({
         console.log('failFun', res)
     },
     onLoad: function (options) {
-        startDay = ""
-        endDay = ""
+        startDay = options.startDay;
+        endDay = options.endDay;
+
         moenyDesc = JSON.parse(options.moenyDesc);
         camperCarDetail = JSON.parse(options.camperCarDetail);
         foregift = camperCarDetail.Deposit;
+
+        dayNum = util.dateDifference(startDay, endDay)
+        console.error("相差：" + dayNum)
+        if (dayNum > 0) {
+            roomPrice = dayNum * camperCarDetail.DailyPrice
+            var totalPrice = roomPrice + foregift;
+            var otherTPrice = roomPrice + foregift;
+            if (showInvoiceAddress) {
+                totalPrice = totalPrice + postage;
+            }
+            this.setData({
+                day: dayNum,
+                totalPrice: totalPrice,
+                otherTPrice: otherTPrice,
+                roomPrice: roomPrice,
+            })
+        }
+
 
         var eUserInfo = wx.getStorageSync("eUserInfo")
 
@@ -122,13 +141,17 @@ Page({
             camperCarDetail: camperCarDetail,
             NickName: strNickName,
             Phone: strPhone,
-            foregift: camperCarDetail.Deposit
+            foregift: camperCarDetail.Deposit,
+            start: startDay,
+            end: endDay
         })
         if (options.camperCarDetail == null) {
             wx.showToast({
                 title: '数据为空',
             })
         }
+
+
     },
     modifyUserInfo: function (e) {
         wx.navigateTo({
@@ -279,7 +302,6 @@ Page({
             }
         })
 
-
         if (wx.chooseAddress) {
 
         } else {
@@ -363,7 +385,9 @@ Page({
         // currencyAmount-1 不用电子币支付抵扣
         // totalMoney 总金额
         // invoice  0 不需要邮费 1 需要邮费（不填默认为0）
-
+        // amountOfMoney 优惠券抵扣金额（）
+        // amountType 0 优惠券现金，1 优惠券次数
+        // profitOfMoney 运营收益抵扣金额
 
         var params = {
             bookingPersonName: this.data.NickName,
@@ -375,6 +399,8 @@ Page({
             totalMoney: this.data.otherTPrice,
             invoice: invoice
         }
+
+
         console.log(params)
         request.GET(url, params, 100, true, this, this.successFun, this.failFun)
     },

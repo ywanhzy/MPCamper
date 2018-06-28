@@ -17,6 +17,7 @@ var camperCarDetailObject = new Object();
 var result;
 var carGuid;
 let isCollection;
+let startDay,endDay;
 Page({
 
     /**
@@ -171,8 +172,13 @@ Page({
     onLoad: function (options) {
         width = app.globalData.width;
         height = app.globalData.height;
-        carGuid = options.carGuid
+        carGuid = options.carGuid;
+        startDay = options.startDay;
+        endDay = options.endDay;
 
+        console.error(startDay)
+        console.error(endDay)
+        console.error(options.inviteId)
         if (!util.isEmpty(options.inviteId)) {
             console.log("inviteId:" + options.inviteId)
             wx.setStorageSync('inviteId', options.inviteId)
@@ -241,7 +247,7 @@ Page({
 
                 // console.log(camperCarDetailObjects)
                 wx.navigateTo({
-                    url: '/pages/camperCarSubmitOrder/index?moenyDesc=' + camperCarDetail.MoenyDesc + '&camperCarDetail=' + camperCarDetailObjects,
+                    url: '/pages/camperCarSubmitOrder/index?startDay=' + startDay + '&endDay=' + endDay +'&moenyDesc=' + camperCarDetail.MoenyDesc + '&camperCarDetail=' + camperCarDetailObjects,
                 })
             }
         } else {
@@ -249,7 +255,7 @@ Page({
             // app.wxAuthorize()
             wx.showModal({
                 title: '提示',
-                content: '请绑定房车行账号',
+                content: '请绑定约你游账号',
                 success: function (res) {
                     if (res.confirm) {
                         wx.switchTab({
@@ -331,7 +337,7 @@ Page({
         console.log("inviteId:" + inviteId)
         console.log('onShareAppMessage')
         var shareObj = {
-            title: '房车行',
+            title: '约你游',
             desc: '房车详情',
             path: '/pages/camperCarDetail/index?carGuid=' + carGuid + '&inviteId=' + inviteId,
             success: function (res) {

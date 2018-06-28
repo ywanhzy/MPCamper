@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 import { $wuxCalendar } from '../../components/wux'
-
+import { $wuxToast } from '../../components/wux'
+import { $wuxPicker } from '../../components/wux'
 const app = getApp()
 
 const request = require('../../utils/request.js')
@@ -14,9 +15,10 @@ import * as util from '../../utils/util';
 
 let width, height;
 let citys;
-let startDay = "", foregift;
-let endDay = "";
+let startDay = '', foregift;
+let endDay = '';
 let dayNum = 0;
+let cityName = '长沙市';
 Page({
     data: {
         motto: 'Hello World',
@@ -26,6 +28,7 @@ Page({
         height: '',
         telstatus: true,
         hasUserInfo: false,
+        cityName: cityName,
         canIUse: wx.canIUse('button.open-type.getUserInfo')
     },
     //事件处理函数
@@ -89,6 +92,17 @@ Page({
                 selfObj.setData({
                     camperCar: camperCars
                 });
+            } else if (res.res_code === -100){
+                $wuxToast.show({
+                    type: 'text',
+                    timer: 2000,
+                    color: '#fff',
+                    text: res.res_msg,
+                    success: () => console.log('文本提示')
+                })
+                selfObj.setData({
+                    camperCar: []
+                });
             }
 
             wx.stopPullDownRefresh(); //停止下拉刷新
@@ -113,9 +127,9 @@ Page({
         //测试--
         function foo(x, y, ...rest) {
             console.error(`dddd--${rest[0]}`)
-         return ((x + y) * rest.length);
+            return ((x + y) * rest.length);
         }
-        let ss=foo(1, 2, 'hello', true, 7,333); // 9
+        let ss = foo(1, 2, 'hello', true, 7, 333); // 9
         console.error(`dddd--${ss}`)
 
         console.log("dfsffdsf" + util.formatDistance(50))
@@ -201,10 +215,10 @@ Page({
         let params = { type: '2' }
         request.GET(url, params, 101, true, that, that.successFun, that.failFun)
     },
-    getList: (that) => {
+    getList: function (that) {
         //获取住房车列表
         let url = CONFIG.API_URL.GET_CamperCarAll
-        let params = {}
+        let params = { 'cityName': cityName, 'startDate': startDay, 'endDate': endDay }
         request.GET(url, params, 100, true, that, that.successFun, that.failFun)
     },
     binderrorimg: function (e) {
@@ -219,7 +233,36 @@ Page({
         IMAGE.errImgFun(e, _that);
 
     },
+    onTapPhone() {
+        let that=this;
+        let cityValues=[];
+        for (let i = 0; i < citys.length; i++) {
+            cityValues.push(citys[i].CityName);
+        }
+        console.log(cityValues.findIndex((n) => n =='长沙市'))
+
+        $wuxPicker.init('phone', {
+            title: "请选择城市",
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: cityValues,
+                    // displayValues: [1, 2, 3, 4, 5, 6]
+                }
+            ],
+            value: [cityValues.findIndex((n) => n == '长沙市')],
+            onChange(p) {
+                console.log(p)
+                this.setData({
+                    cityName: p.value
+                })
+                cityName = p.value[0];
+                that.getList(that)
+            },
+        })
+    },
     openCalendarS() {
+        let that = this;
         if (this.start) {
             return this.start.show()
         }
@@ -232,19 +275,24 @@ Page({
                 if (!util.isEmpty(endDay) && !util.isEmpty(d)) {
                     dayNum = util.dateDifference(d, endDay)
                     console.error("相差：" + dayNum)
-                    if (dayNum <= 0) {
-                        $wuxToast.show({
-                            type: 'text',
-                            timer: 2000,
-                            color: '#fff',
-                            text: '退房日期不能小于等于入住日期',
-                            success: () => console.log('文本提示')
-                        })
-                    } else {
-                      
-                        this.setData({
-                            day: dayNum,
-                        })
+                    if (!isNaN(dayNum)) {
+                        if (dayNum <= 0) {
+                            $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '退房日期不能小于等于入住日期',
+                                success: () => console.log('文本提示')
+                            })
+                            return;
+                        } else {
+                            this.setData({
+                                day: dayNum,
+                            })
+                        }
+                        if (dayNum > 0) {
+                            that.getList(that);
+                        }
                     }
                 }
 
@@ -256,6 +304,7 @@ Page({
         })
     },
     openCalendarE() {
+        let that = this;
         if (this.end) {
             return this.end.show()
         }
@@ -265,26 +314,31 @@ Page({
                 if (!util.isEmpty(startDay) && !util.isEmpty(d)) {
                     dayNum = util.dateDifference(startDay, d)
                     console.error("相差：" + dayNum)
-                    if (dayNum <= 0) {
-                        $wuxToast.show({
-                            type: 'text',
-                            timer: 2000,
-                            color: '#fff',
-                            text: '退房日期不能小于等于入住日期',
-                            success: () => console.log('文本提示')
-                        })
-                    } else {
-                      
-                        this.setData({
-                            day: dayNum,
-                            
-                        })
+                    if (!isNaN(dayNum)){
+                        if (dayNum <= 0) {
+                            $wuxToast.show({
+                                type: 'text',
+                                timer: 2000,
+                                color: '#fff',
+                                text: '退房日期不能小于等于入住日期',
+                                success: () => console.log('文本提示')
+                            })
+                            return;
+                        } else {
+                            this.setData({
+                                day: dayNum,
+                            })
+                        }
+                        if (dayNum > 0) {
+                            that.getList(that);
+                        }
                     }
                 }
                 this.setData({
                     end: d.join(', ')
                 })
                 endDay = d.join(', ')
+
             }
         })
     },
@@ -297,8 +351,8 @@ Page({
         console.log("inviteId:" + inviteId)
         console.log('onShareAppMessage')
         let shareObj = {
-            title: '房车行',
-            desc: '房车行',
+            title: '约你游',
+            desc: '约你游',
             path: '/pages/index/index?inviteId=' + inviteId,
             success: function (res) {
                 console.log('success')
