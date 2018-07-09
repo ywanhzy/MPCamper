@@ -1,0 +1,10 @@
+<view class="page-body">
+  <view class="page-section page-section-gap">
+     <!-- <web-view src="https://fcx.ezagoo.com/#/"></web-view>  -->
+     <!-- <web-view src="http://192.168.0.12:801"></web-view> -->
+ <web-view src="{{url}}"></web-view> 
+<!-- <web-view src="http://cs.ezagoo.net:8002/#/pay_success"></web-view> -->
+
+     
+  </view>
+</view>

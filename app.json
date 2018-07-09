@@ -1,6 +1,9 @@
 {
     "pages": [
+        "pages/webviewIndex/index",
         "pages/index/index",
+        "pages/webview/index",
+        
         "pages/logs/logs",
         "pages/camp/index",
         "pages/my/index",
@@ -29,7 +32,9 @@
         "pages/myInfo/index",
         "pages/myCollection/index",
         "pages/rentCamperCar/index",
-        "pages/rentCamperCarDetail/index"
+        "pages/rentCamperCarDetail/index",
+        "pages/wxPay/wxPay",
+        "pages/meiqia/index"
     ],
     "window": {
         "backgroundTextStyle": "light",

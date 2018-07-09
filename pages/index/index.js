@@ -192,16 +192,19 @@ Page({
     },
     //房车活动
     goCamperCarActivity:()=>{
-        wx.showModal({
-            title: '提示',
-            content: '即将开通，敬请期待',
-            success: function (res) {
-                if (res.confirm) {
-                    console.log('用户点击确定')
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
-            }
+        // wx.showModal({
+        //     title: '提示',
+        //     content: '即将开通，敬请期待',
+        //     success: function (res) {
+        //         if (res.confirm) {
+        //             console.log('用户点击确定')
+        //         } else if (res.cancel) {
+        //             console.log('用户点击取消')
+        //         }
+        //     }
+        // })
+        wx.navigateTo({
+            url: '../webview/index',
         })
     },
     //住房车

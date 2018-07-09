@@ -1,0 +1,7 @@
+<view class="container">
+<button open-type="contact" class="contactButton" hover-class="btn-hover">
+    <image class="weui-grid__icon" style="width:35px; height: 35px;" src="../../images/my_kf.png" />
+    <view style="margin-top:5px;line-height:22px;height: 22px;text-align:center;color:#000;font-size:14px;">在线客服    </view>
+
+</button>
+</view>

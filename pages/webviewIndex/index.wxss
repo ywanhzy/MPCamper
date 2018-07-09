@@ -1,0 +1,22 @@
+
+.webview{
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo{
+     
+     margin-top: 100px;
+     width: 240px;
+     height: 200px;
+}
+
+.logo-text{
+    position: fixed;
+    bottom: 40rpx;
+    color: #999;
+    font-size: 14px;
+}

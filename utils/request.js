@@ -74,7 +74,7 @@ function requestApi(url, params, method, id, showloading, sourceObj, successFun,
         data: params,
         header: { 'Content-Type': contentType },
         success: function (res) {
-            //console.log("success:" + JSON.stringify(res.data))
+            console.log("success:" + JSON.stringify(res.data))
             typeof successFun == 'function' && successFun(id, res.data, sourceObj)
         },
         fail: function (res) {
@@ -82,6 +82,7 @@ function requestApi(url, params, method, id, showloading, sourceObj, successFun,
             typeof failFun == 'function' && failFun(id, res.data, sourceObj)
         },
         complete: function (res) {
+            console.log("complete:" + JSON.stringify(res.data))
             wx.hideLoading()
             typeof completeFun == 'function' && completeFun(id, res.data, sourceObj)
         }

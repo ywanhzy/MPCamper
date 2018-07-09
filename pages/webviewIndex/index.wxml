@@ -1,0 +1,4 @@
+<view class="webview">
+      <image class="logo" src="/images/xct.png" />
+      <text class='logo-text'>Copyright © 2018 伊宅购</text>
+</view>

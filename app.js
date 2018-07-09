@@ -1,6 +1,11 @@
 //app.js
 App({
-
+    onHide() {
+        this.data.webShowed = false;
+    },
+    data: {
+        webShowed: false //标记web-view页面是否已经显示过了
+    },
     onShow: function (options) {
 
         console.log(wx.canIUse('getUpdateManager'))
@@ -178,6 +183,7 @@ App({
             success: function (res) {
                 that.globalData.width = res.windowWidth
                 that.globalData.height = res.windowHeight
+                that.globalData.system = res.system
                 console.log('手机型号：' + res.model + '操作系统版本：' + res.system + '手机品牌：' + res.brand)
                 console.log('设备像素比：' + res.pixelRatio)
                 console.log('窗口宽度：' + res.windowWidth)
@@ -299,6 +305,7 @@ App({
         userInfo: null,
         eUserInfo: null,
         phoneNumber: '4000-155-105',
+        system:'',
         width: null,//屏幕宽
         height: null//屏幕高
     }

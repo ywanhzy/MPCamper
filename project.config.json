@@ -1,14 +1,14 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.9",
+	"libVersion": "2.1.1",
 	"appid": "wx71d45d360f058180",
 	"projectname": "Campers",
 	"isGameTourist": false,
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 8,
 			"list": [
 				{
 					"id": 0,
@@ -69,9 +69,9 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "wd订单",
-					"pathName": "pages/myOrder/index",
+					"id": 5,
+					"name": "客服",
+					"pathName": "pages/meiqia/index",
 					"query": ""
 				},
 				{
@@ -88,15 +88,21 @@
 					"scene": "1001"
 				},
 				{
-					"id": -1,
-					"name": "推荐",
-					"pathName": "pages/invitation/index",
+					"id": 8,
+					"name": "webview----ssss",
+					"pathName": "pages/webviewIndex/index",
 					"query": ""
 				},
 				{
 					"id": -1,
 					"name": "住房車",
 					"pathName": "pages/camperCar/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "webview",
+					"pathName": "pages/webview/index",
 					"query": ""
 				}
 			]

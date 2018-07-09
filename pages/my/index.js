@@ -118,10 +118,10 @@ Page({
     },
     goClean: function () {
         try {
-            // wx.clearStorageSync()
-            // wx.reLaunch({
-            //         url: '/pages/index/index',
-            // })
+            wx.clearStorageSync()
+            wx.reLaunch({
+                    url: '/pages/index/index',
+            })
         } catch (e) {
             // Do something when catch error
         }
@@ -241,6 +241,7 @@ Page({
                         data: {
                             jsonData: JSON.stringify(resData)
                         },
+                        header: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         success: function (res) {
                             console.log(res.data)
                             wx.hideLoading()
